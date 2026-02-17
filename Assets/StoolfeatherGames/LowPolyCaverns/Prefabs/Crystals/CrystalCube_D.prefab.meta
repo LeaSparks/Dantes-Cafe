@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 58aa561eb8e7cb749911b7a27c50fe52
+timeCreated: 1495897086
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 74148
+  packageName: 'Low Poly Series: Caverns'
+  packageVersion: 1.4
+  assetPath: Assets/StoolfeatherGames/LowPolyCaverns/Prefabs/Crystals/CrystalCube_D.prefab
+  uploadId: 601651
