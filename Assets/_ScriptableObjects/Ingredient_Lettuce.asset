@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Ingredient_Lettuce
   m_EditorClassIdentifier: Assembly-CSharp::IngredientCard
   cardName: Lettuce
-  cardImage: {fileID: 0}
+  cardImage: {fileID: 21300000, guid: 7628acaa570a9894fb6b73d9dd693b8e, type: 3}
   type: 0
   value: 1

@@ -52587,6 +52587,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 31b46fbcc89434c45abb1ca3d58b8893, type: 2}
   - {fileID: 11400000, guid: 59a12adf744c89a4d90ee682a38c0fce, type: 2}
   - {fileID: 11400000, guid: 8ba95ea031b82d748b5fb458af688f1f, type: 2}
+  - {fileID: 11400000, guid: c62c4a616fa76a248be6769093b57eee, type: 2}
   _ingredientCardPrefab: {fileID: 6963938351842314682, guid: 279f3be635e6b0246b59f32f7234eb01, type: 3}
   _cardsParentTransform: {fileID: 282930253}
   _handSizeLimit: 4
