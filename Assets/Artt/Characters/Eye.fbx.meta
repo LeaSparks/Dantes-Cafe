@@ -277,7 +277,7 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: pCylinder1
       parentName: Goober(Clone)
-      position: {x: -0, y: 0.30405262, z: -0.0751997}
+      position: {x: -0, y: 0.30405262, z: -0.07519969}
       rotation: {x: -0.59094566, y: 0, z: -0, w: 0.8067114}
       scale: {x: 0.09486295, y: 0.09486295, z: 0.09486295}
     - name: transform2
@@ -322,7 +322,7 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:RightUpLeg
       parentName: mixamorig:Hips
-      position: {x: 0.04350211, y: -0.024153134, z: -0.0055280463}
+      position: {x: 0.04350211, y: -0.024153134, z: -0.005528046}
       rotation: {x: 0.0007327528, y: 0.007417973, z: 0.99986714, w: -0.014499967}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:RightLeg
@@ -357,7 +357,7 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:Spine2
       parentName: mixamorig:Spine1
-      position: {x: -0, y: 0.05786068, z: 0}
+      position: {x: -0, y: 0.057860676, z: 0}
       rotation: {x: -0, y: 6.3108872e-30, z: 3.510431e-29, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:LeftShoulder
@@ -382,7 +382,7 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:Neck
       parentName: mixamorig:Spine2
-      position: {x: -0, y: 0.06509327, z: 8.8441626e-10}
+      position: {x: -0, y: 0.065093264, z: 8.8441626e-10}
       rotation: {x: 0.013863366, y: 3.947666e-14, z: 2.279429e-13, w: 0.9999039}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:Head

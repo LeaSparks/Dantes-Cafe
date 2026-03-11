@@ -307,7 +307,7 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: Boots
       parentName: GooberRefined(Clone)
-      position: {x: -0, y: 0, z: -0.00041449975}
+      position: {x: -0, y: 0, z: -0.00041449972}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Torso
@@ -347,7 +347,7 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:RightShoulder
       parentName: mixamorig:Spine2
-      position: {x: 0.027301002, y: 0.05667633, z: -0.00068437547}
+      position: {x: 0.027301002, y: 0.056676324, z: -0.00068437547}
       rotation: {x: -0.54569304, y: -0.44598237, z: 0.55796623, w: -0.4381695}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:RightArm
@@ -372,7 +372,7 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:Head
       parentName: mixamorig:Neck
-      position: {x: -0, y: 0.054070283, z: -0.0019378735}
+      position: {x: -0, y: 0.054070283, z: -0.0019378734}
       rotation: {x: 0, y: 6.3108872e-30, z: -4.6381067e-31, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:HeadTop_End
@@ -397,7 +397,7 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:LeftHand
       parentName: mixamorig:LeftForeArm
-      position: {x: -0, y: 0.09526696, z: 0}
+      position: {x: -0, y: 0.09526695, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:RightUpLeg
