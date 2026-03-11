@@ -1,7 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using System.Collections.Generic;
 /*
     This is so messy WTF. This is the controller for the card.

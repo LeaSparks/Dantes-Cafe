@@ -24,7 +24,7 @@ public class IngredientCardView : CardView
         _typeText.text = ingredient.Type.ToString();
         _valueText.text = ingredient.Value.ToString();
 
-        _flameIcon.SetActive(ingredient.Type == IngredientType.Fire);
+        _flameIcon.SetActive(ingredient.Type == CardType.Fire);
 
     }
 }
