@@ -12,12 +12,12 @@ public class BattleStateManager : Singleton<BattleStateManager>
 
 
     //States
-    private PreparationPhase _prepPhase = new PreparationPhase();
-    private ResolutionPhase _resolutionPhase = new ResolutionPhase();
+    //private PreparationPhase _prepPhase = new PreparationPhase();
+    //private ResolutionPhase _resolutionPhase = new ResolutionPhase();
 
     public IState CurrentState => _currentState;
-    public PreparationPhase PreparationPhase => _prepPhase;
-    public ResolutionPhase ResolutionPhase => _resolutionPhase;
+    //public PreparationPhase PreparationPhase => _prepPhase;
+    //public ResolutionPhase ResolutionPhase => _resolutionPhase;
 
     // ----------------------------------------------------
 
