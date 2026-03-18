@@ -2,6 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using UnityEngine.Events;
 /*
     This is so messy WTF. This is the controller for the card.
     It holds a reference to both the view and the data.
@@ -10,7 +11,7 @@ using System.Collections.Generic;
 [RequireComponent (typeof(IngredientCardView))]
 public class CardController : MonoBehaviour, 
     IPointerExitHandler, IPointerEnterHandler,
-    IBeginDragHandler, IDragHandler, IEndDragHandler
+    IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
     [SerializeField] private LayerMask _dropTargetMask;
 
@@ -26,22 +27,30 @@ public class CardController : MonoBehaviour,
     //Model and View References
     private IngredientCardData _data;
     private IngredientCardView _view;
-    public bool IsInteractable = true;
+    public bool IsDraggable = true;
+    public bool IsClickable = false;
 
-    
-    
+    public UnityEvent OnClicked;
+
+
+
     private void Awake()
     {
         _view = GetComponent<IngredientCardView>();
     }
 
+    private void OnDestroy()
+    {
+        OnClicked.RemoveAllListeners();
+    }
+
     // -----------------
     // Dragging Card
     // -----------------
-#region Card Drag
+    #region Card Drag
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if(IsInteractable == false) return;
+        if(IsDraggable == false) return;
 
         _IsHeld = true;
         HoverEndEvent?.Invoke();
@@ -49,7 +58,7 @@ public class CardController : MonoBehaviour,
 
     public void OnDrag(PointerEventData eventData)
     {
-        if(IsInteractable == false) return;
+        if(IsDraggable == false) return;
 
         gameObject.transform.position += (Vector3)eventData.delta;
         CheckCardTargeting(eventData); 
@@ -57,7 +66,7 @@ public class CardController : MonoBehaviour,
 
     public void OnEndDrag(PointerEventData eventData)
     {  
-        if(IsInteractable == false) return;
+        if(IsDraggable == false) return;
 
         _IsHeld = false;
         if (_currentTarget != null && _currentTarget.IsTargetable())
@@ -102,7 +111,7 @@ public class CardController : MonoBehaviour,
 #region Hovering Card
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (_IsHeld || IsInteractable == false)
+        if (_IsHeld || IsDraggable == false)
             return;
 
         HoverStartEvent?.Invoke(_data);
@@ -110,7 +119,7 @@ public class CardController : MonoBehaviour,
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (_IsHeld || IsInteractable == false)
+        if (_IsHeld || IsDraggable == false)
             return;
 
         gameObject.transform.DOLocalMove(_dockedLocalPosition, 0.5f);
@@ -123,6 +132,13 @@ public class CardController : MonoBehaviour,
     }
 #endregion
 
+#region OnClick
+    public void OnPointerClick(PointerEventData eventData)      //This should be in controller
+    {
+        if(IsClickable)
+            OnClicked?.Invoke();
+    }
+#endregion
 
 #region Getters and Setters
     public IngredientCardData GetCardData() => _data;

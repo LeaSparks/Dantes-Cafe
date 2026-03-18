@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class IngredientCardView : CardView
 {
@@ -10,7 +12,7 @@ public class IngredientCardView : CardView
 
     //-----------------------------------------------------
     //-----------------------------------------------------
-    
+
     public override void SetDisplayInformation(Card card)
     {
         base.SetDisplayInformation(card);

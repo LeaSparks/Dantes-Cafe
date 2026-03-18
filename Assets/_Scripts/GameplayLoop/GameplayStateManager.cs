@@ -1,23 +1,33 @@
-using System.Collections;
-using System.ComponentModel;
-using System.Linq;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class BattleStateManager : Singleton<BattleStateManager>
+public class GameplayStateManager : Singleton<GameplayStateManager>
 {
     public bool GameOver = false;
     private IState _currentState;
 
+    //Decks
+    [Header("Decks")]
+    [SerializeField] private List<IngredientCardData> _ingredientsDeck = new();
+    [SerializeField] private List<OrderCardData> _orderDeck = new();
+    private List<IngredientCardData> _ingredientsDiscard = new();
+
+    [Header("UI Elements")]
+    [SerializeField] private DrawnCardsPanel _drawPhaseController;
+
 
     //States
-    //private PreparationPhase _prepPhase = new PreparationPhase();
-    //private ResolutionPhase _resolutionPhase = new ResolutionPhase();
+    private DrawPhase _drawPhase = new DrawPhase();
+    private PlayerPhase _playerPhase = new PlayerPhase();
+    private EnemyPhase _enemyPhase = new EnemyPhase();
 
     public IState CurrentState => _currentState;
-    //public PreparationPhase PreparationPhase => _prepPhase;
-    //public ResolutionPhase ResolutionPhase => _resolutionPhase;
+    public DrawPhase DrawPhase => _drawPhase;
+    public PlayerPhase PlayerPhase => _playerPhase;
+    public EnemyPhase EnemyPhase => _enemyPhase;
+
+    public DrawnCardsPanel DrawController => _drawPhaseController;
+    public bool IsPlayerFirst = true;
 
     // ----------------------------------------------------
 
@@ -32,4 +42,39 @@ public class BattleStateManager : Singleton<BattleStateManager>
         _currentState = state;
         _currentState.Enter();
     }
+
+    // ----------------------------------------------------
+    #region Deck Controls
+    public IngredientCardData DrawNewIngredientCard()
+    {
+        if(_ingredientsDeck.Count > 0)
+        {
+            int i = Random.Range(0, _ingredientsDeck.Count);
+            IngredientCardData card = _ingredientsDeck[i];
+            _ingredientsDeck.RemoveAt(i);
+            
+            return card;
+        }
+
+        //if there are no more cards in the deck
+        if(_ingredientsDiscard.Count == 0)
+        {
+            Debug.LogError("There are no available ingredient cards to draw from!");
+            return null;
+        }
+
+        //add discarded ingredients back into deck and try again
+        _ingredientsDeck.AddRange(_ingredientsDiscard);
+        _ingredientsDiscard.Clear();
+        
+        return DrawNewIngredientCard();
+        
+    }
+
+    public void DiscardIngredient(IngredientCardData card)
+    {
+        _ingredientsDiscard.Add(card);
+    }
+
+    #endregion
 }

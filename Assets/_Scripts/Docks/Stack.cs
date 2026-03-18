@@ -34,7 +34,7 @@ public class Stack : CardDock
     protected override void AddCardToCollection(CardController card)
     {
         if(_cards.Count > 0)
-            _cards.Peek().IsInteractable = false;
+            _cards.Peek().IsDraggable = false;
         
         _cards.Push(card);
         card.SetLastDock(this);
@@ -51,7 +51,7 @@ public class Stack : CardDock
         {
             _cards.Pop();
             if(_cards.Count > 0)
-                _cards.Peek().IsInteractable = true;
+                _cards.Peek().IsDraggable = true;
             card.SetLastDock(null);
         }
         RefreshCardPositions();
