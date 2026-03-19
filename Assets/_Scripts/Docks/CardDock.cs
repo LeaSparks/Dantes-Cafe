@@ -7,12 +7,12 @@ public abstract class CardDock : MonoBehaviour
     [SerializeField] protected bool _isTargetable;
     protected RectTransform _rectTransform;
 
-    public abstract void OnDrop(CardController droppedCard, Vector3 cursorPosition);
+    public abstract void OnDrop(IngredientCardController droppedCard, Vector3 cursorPosition);
     public abstract void RefreshCardPositions();
-    public abstract void RemoveCardFromCollection(CardController card);
-    protected abstract void AddCardToCollection(CardController card);
+    public abstract void RemoveCardFromCollection(IngredientCardController card);
+    protected abstract void AddCardToCollection(IngredientCardController card);
     
-    public virtual void OnStartHoveringOver(CardController hoveringCard) {}       //For additional effects if we want them (like highlighting a hand or stack)
+    public virtual void OnStartHoveringOver(IngredientCardController hoveringCard) {}       //For additional effects if we want them (like highlighting a hand or stack)
     public virtual void OnEndHoveringOver() {}
     
     public void SetTargetable(bool targetable) { _isTargetable = targetable; }

@@ -1,22 +1,38 @@
+using NUnit.Framework.Internal;
+using UnityEngine;
+
 public class PlayerPhase : IState
 {
-    private int ACTION_LIMIT;
-    private int _actionCount;
+    private static int ACTIONS_LIMIT = 5;
+    private bool _cardChosen;
+
     public void Enter()
     {
-        _actionCount = 0;
-        //wait for player to choose an ingredient card
+        _cardChosen = false;
+        
+        GameplayManager.Instance.DrawPanel.gameObject.SetActive(true);
+        CardManager.Instance.OnCardReachedTarget.AddListener(ActionPhaseStart);
 
-        //show "Done" button
+        GameplayManager.Instance.Player.SetActionsCount(0);
     }
 
     public void Exit()
     {
-        throw new System.NotImplementedException();
+        CardManager.Instance.OnCardReachedTarget.RemoveListener(ActionPhaseStart);
     }
 
     public void Update()
     {
-        throw new System.NotImplementedException();
+        if(_cardChosen && GameplayManager.Instance.Player.ActionsCount >= ACTIONS_LIMIT)
+        {
+            GameplayManager.Instance.Player.SetDoneButtonVisibility(false);
+            GameplayManager.Instance.ProceedToNextPhase();
+        }
+    }
+
+    private void ActionPhaseStart()
+    {
+        _cardChosen = true;
+        GameplayManager.Instance.Player.SetDoneButtonVisibility(true);
     }
 }

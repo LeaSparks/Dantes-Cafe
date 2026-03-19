@@ -1,10 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameplayStateManager : Singleton<GameplayStateManager>
+[RequireComponent(typeof( TurnController))]
+public class GameplayManager : Singleton<GameplayManager>
 {
     public bool GameOver = false;
     private IState _currentState;
+    private TurnController _turnController;
+
+    [Header("Competitors")]
+    [SerializeField] Player _player;
+    [SerializeField] Enemy _enemy;
 
     //Decks
     [Header("Decks")]
@@ -13,7 +19,7 @@ public class GameplayStateManager : Singleton<GameplayStateManager>
     private List<IngredientCardData> _ingredientsDiscard = new();
 
     [Header("UI Elements")]
-    [SerializeField] private DrawnCardsPanel _drawPhaseController;
+    [SerializeField] private DrawnCardsPanel _drawPhasePanel;
 
 
     //States
@@ -22,14 +28,19 @@ public class GameplayStateManager : Singleton<GameplayStateManager>
     private EnemyPhase _enemyPhase = new EnemyPhase();
 
     public IState CurrentState => _currentState;
-    public DrawPhase DrawPhase => _drawPhase;
-    public PlayerPhase PlayerPhase => _playerPhase;
-    public EnemyPhase EnemyPhase => _enemyPhase;
 
-    public DrawnCardsPanel DrawController => _drawPhaseController;
-    public bool IsPlayerFirst = true;
+    public DrawnCardsPanel DrawPanel => _drawPhasePanel;
+    public TurnController TurnController => _turnController;
 
+    public Player Player => _player;
+    public Enemy Enemy => _enemy;
     // ----------------------------------------------------
+    void Start()
+    {
+        _turnController = gameObject.GetComponent<TurnController>();
+        _turnController.SetCompetitors(_player, _enemy);
+    }
+
 
     void Update()
     {
@@ -41,6 +52,25 @@ public class GameplayStateManager : Singleton<GameplayStateManager>
         _currentState?.Exit();
         _currentState = state;
         _currentState.Enter();
+    }
+
+    public void ProceedToNextPhase()
+    {
+        if(_turnController.IsFirstTurnInRound || _currentState is DrawPhase)
+        {
+            _turnController.IncrementTurn();
+            if(_turnController.ActiveCompetitor is Player)
+            {
+                ChangeState(_playerPhase);
+            } else
+            {
+                ChangeState(_enemyPhase);
+            } 
+        } 
+        else
+        {
+            ChangeState(_drawPhase);
+        }
     }
 
     // ----------------------------------------------------
@@ -77,4 +107,5 @@ public class GameplayStateManager : Singleton<GameplayStateManager>
     }
 
     #endregion
+
 }

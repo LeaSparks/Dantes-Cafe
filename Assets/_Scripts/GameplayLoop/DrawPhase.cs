@@ -1,29 +1,26 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public class DrawPhase : IState
 {
-    //Reference to ingredient card dock
-    DrawnCardsPanel drawController = GameplayStateManager.Instance.DrawController;
-    
+    //Reference to ingredient card dock    
     public void Enter()
     {
-
+        DrawnCardsPanel drawPanel = GameplayManager.Instance.DrawPanel;
+        
         //Draw new ingredient cards from the deck
         List<IngredientCardData> drawnCards = new();
-        for (int i = 0; i < drawController.DrawnCardsAmount; i++)
-            drawnCards.Add(GameplayStateManager.Instance.DrawNewIngredientCard());
+        for (int i = 0; i < drawPanel.DrawnCardsAmount; i++)
+            drawnCards.Add(GameplayManager.Instance.DrawNewIngredientCard());
 
-        drawController.UpdateCards(drawnCards, GameplayStateManager.Instance.IsPlayerFirst);
-        drawController.UpdateText(GameplayStateManager.Instance.IsPlayerFirst);
+        drawPanel.UpdateCards(drawnCards, GameplayManager.Instance.TurnController.IsPlayerTurn);
 
-
-        drawController.gameObject.SetActive(true);
+        drawPanel.gameObject.SetActive(true);
+        GameplayManager.Instance.ProceedToNextPhase();
     }
 
     public void Exit()
     {
-        drawController.gameObject.SetActive(false);
+        //drawPanel.gameObject.SetActive(false);
     }
 
     public void Update()

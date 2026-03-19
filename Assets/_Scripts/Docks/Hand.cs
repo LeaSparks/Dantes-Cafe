@@ -4,28 +4,34 @@ using UnityEngine;
 
 public class Hand : CardDock
 {
-    [SerializeField] List<IngredientCardData> _startingHand = new();
-    [SerializeField] GameObject _ingredientCardPrefab;
+    
     [SerializeField] Transform _cardsParentTransform;       //this has to be above everything for raycasting!
     
     [SerializeField] int _handSizeLimit = 4;
     [SerializeField] float _minimumSpacing = 30f;
-    private List<CardController> _cards = new();
+    private List<IngredientCardController> _cards = new();
+
+    [Header("Debugging")]
+    [SerializeField] List<IngredientCardData> _startingHand = new();
+    [SerializeField] GameObject _ingredientCardPrefab;
+    public bool EnableDebug;
 
 
     void Start()
     {
-        CardController temp;
+        if(EnableDebug == false) return;
+
+        IngredientCardController temp;
         foreach(var cardData in _startingHand)      //FOR TESTING PURPOSES
         {
-            temp = Instantiate(_ingredientCardPrefab, this.transform).GetOrAddComponent<CardController>();
+            temp = Instantiate(_ingredientCardPrefab, this.transform).GetOrAddComponent<IngredientCardController>();
             temp.SetCardData(cardData);
             AddCardToCollection(temp);
         }
     }
 
 
-    public override void OnDrop(CardController droppedCard, Vector3 cursorPosition)
+    public override void OnDrop(IngredientCardController droppedCard, Vector3 cursorPosition)
     {
         if(_cards.Count < _handSizeLimit)
         {
@@ -33,6 +39,11 @@ public class Hand : CardDock
 
             AddCardToCollection(droppedCard);
         } 
+    }
+
+    public void AddDrawnCardToHand(IngredientCardController card)       //doesnt care about hadn size for now
+    {
+        AddCardToCollection(card);
     }
     
     public override void RefreshCardPositions()
@@ -50,7 +61,7 @@ public class Hand : CardDock
         }
     }
     
-    protected override void AddCardToCollection(CardController card)
+    protected override void AddCardToCollection(IngredientCardController card)
     {
         _cards.Add(card);
         card.SetLastDock(this);
@@ -58,7 +69,7 @@ public class Hand : CardDock
         RefreshCardPositions();
     }
 
-    public override void RemoveCardFromCollection(CardController card)
+    public override void RemoveCardFromCollection(IngredientCardController card)
     {
         if(_cards.Contains(card))
             _cards.Remove(card);
@@ -67,5 +78,5 @@ public class Hand : CardDock
     }
 
 
-    public List<CardController> GetCards => _cards;
+    public List<IngredientCardController> GetCards => _cards;
 }

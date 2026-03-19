@@ -9,7 +9,7 @@ using UnityEngine.Events;
     This is what the player interacts with.
 */
 [RequireComponent (typeof(IngredientCardView))]
-public class CardController : MonoBehaviour, 
+public class IngredientCardController : MonoBehaviour, 
     IPointerExitHandler, IPointerEnterHandler,
     IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
@@ -47,7 +47,7 @@ public class CardController : MonoBehaviour,
     // -----------------
     // Dragging Card
     // -----------------
-    #region Card Drag
+#region Card Drag
     public void OnBeginDrag(PointerEventData eventData)
     {
         if(IsDraggable == false) return;

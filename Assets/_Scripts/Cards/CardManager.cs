@@ -33,4 +33,14 @@ public class CardManager : Singleton<CardManager>
         float duration = (card.transform.position - end.position).magnitude * _movementSpeed;
         card.transform.DOMove(end.position, duration).OnComplete(() => OnCardReachedTarget?.Invoke());
     }
+
+    public void AnimateMoveCardToHand(GameObject card, Hand hand)
+    {
+        float duration = (card.transform.position - hand.transform.position).magnitude * _movementSpeed;
+        card.transform.DOMove(hand.transform.position, duration).OnComplete(() => 
+        {
+            OnCardReachedTarget?.Invoke();
+            hand.AddDrawnCardToHand(card.GetComponent<IngredientCardController>());
+        });
+    }
 }

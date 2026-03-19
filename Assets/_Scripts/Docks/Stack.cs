@@ -4,10 +4,10 @@ using UnityEngine;
 public class Stack : CardDock
 {
     [SerializeField] float _minimumSpacing = 30f;
-    private Stack<CardController> _cards = new();
+    private Stack<IngredientCardController> _cards = new();
     private OrderCardData _associatedOrder;
 
-    public override void OnDrop(CardController droppedCard, Vector3 cursorPosition)
+    public override void OnDrop(IngredientCardController droppedCard, Vector3 cursorPosition)
     {
         droppedCard.LastDock?.RemoveCardFromCollection(droppedCard);
         AddCardToCollection(droppedCard);
@@ -20,7 +20,7 @@ public class Stack : CardDock
         float verticalSpacing = Mathf.Max(_minimumSpacing, _rectTransform.rect.height / _cards.Count);
 
         Vector3 newOrigin = Vector3.zero;
-        CardController[] cardArray = _cards.ToArray();
+        IngredientCardController[] cardArray = _cards.ToArray();
         int j = 0;
         for(int i = _cards.Count - 1; i >= 0; i--)
         {
@@ -31,7 +31,7 @@ public class Stack : CardDock
         }
     }
     
-    protected override void AddCardToCollection(CardController card)
+    protected override void AddCardToCollection(IngredientCardController card)
     {
         if(_cards.Count > 0)
             _cards.Peek().IsDraggable = false;
@@ -42,7 +42,7 @@ public class Stack : CardDock
         RefreshCardPositions();
     }
 
-    public override void RemoveCardFromCollection(CardController card)
+    public override void RemoveCardFromCollection(IngredientCardController card)
     {
         if(_cards.Peek() != card || _cards.Peek() == null)
         {
@@ -61,6 +61,6 @@ public class Stack : CardDock
     //Getters & Setters
     public void SetAssociatedOrder(OrderCardData card) {_associatedOrder = card;}
 
-    public Stack<CardController> GetCards() => _cards;
+    public Stack<IngredientCardController> GetCards() => _cards;
     public OrderCardData GetAssociatedOrder() => _associatedOrder;
 }
