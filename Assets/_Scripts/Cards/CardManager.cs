@@ -16,7 +16,7 @@ public class CardManager : Singleton<CardManager>
     [Header("Card Animations")]
     [SerializeField] float _movementSpeed;
 
-    public event UnityEvent OnCardReachedTarget = new();
+    public UnityEvent OnCardReachedTarget = new();
 
     private void Start()
     {
