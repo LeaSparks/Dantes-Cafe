@@ -14,14 +14,15 @@ public class CardManager : Singleton<CardManager>
     ObjectPool _orderPool;
 
     [Header("Card Animations")]
-    [SerializeField] float _movementSpeed;
+    [SerializeField] float _timeToMove;
+    [SerializeField] GameObject _cardParent;
 
     public UnityEvent OnCardReachedTarget = new();
 
     private void Start()
     {
-        _ingredientPool = new ObjectPool(_ingredientPrefab, _ingredentPoolAmt, gameObject);
-        _orderPool = new ObjectPool(_orderPrefab, _orderPoolAmt, gameObject);
+        _ingredientPool = new ObjectPool(_ingredientPrefab, _ingredentPoolAmt, _cardParent);
+        _orderPool = new ObjectPool(_orderPrefab, _orderPoolAmt, _cardParent);
     }
 
     public GameObject GetPooledIngredient() => _ingredientPool.GetActivePooledObject();
@@ -30,14 +31,16 @@ public class CardManager : Singleton<CardManager>
 
     public void AnimateMoveCard(GameObject card, Transform end)
     {
-        float duration = (card.transform.position - end.position).magnitude * _movementSpeed;
-        card.transform.DOMove(end.position, duration).OnComplete(() => OnCardReachedTarget?.Invoke());
+        //float duration = (card.transform.position - end.position).magnitude / _movementSpeed;
+        card.transform.DOMove(end.position, _timeToMove).OnComplete(() => OnCardReachedTarget?.Invoke());
     }
 
     public void AnimateMoveCardToHand(GameObject card, Hand hand)
     {
-        float duration = (card.transform.position - hand.transform.position).magnitude * _movementSpeed;
-        card.transform.DOMove(hand.transform.position, duration).OnComplete(() => 
+        card.transform.SetParent(hand.transform);
+        //float duration =  card.transform.localPosition.magnitude / _movementSpeed;
+        
+        card.transform.DOLocalMove(Vector3.zero, _timeToMove).OnComplete(() => 
         {
             OnCardReachedTarget?.Invoke();
             hand.AddDrawnCardToHand(card.GetComponent<IngredientCardController>());
