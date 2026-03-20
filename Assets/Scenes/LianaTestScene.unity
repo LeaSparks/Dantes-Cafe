@@ -47632,6 +47632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347647dc61f91f945ad9b93ed2b6eb63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TurnController
+  _turnCounter: 0
   IsPlayerFirst: 1
 --- !u!114 &1635379981
 MonoBehaviour:
@@ -54165,7 +54166,7 @@ RectTransform:
   m_GameObject: {fileID: 1854816145}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.85, y: 0.85, z: 0.85}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1939563943}

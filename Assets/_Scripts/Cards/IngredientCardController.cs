@@ -150,6 +150,7 @@ public class IngredientCardController : MonoBehaviour,
     public CardDock LastDock => _lastDock;
     public void SetLastDock(CardDock dock) {_lastDock = dock;}
     public void SetCardView(IngredientCardView view) {_view = view;}
+    public IngredientCardData Data => _data;
 #endregion
 
 }

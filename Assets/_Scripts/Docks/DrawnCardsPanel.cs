@@ -67,6 +67,8 @@ public class DrawnCardsPanel : MonoBehaviour
         newCard.transform.rotation = card.transform.rotation;
         newCard.transform.localScale = card.transform.localScale;
 
+        newCard.GetComponent<IngredientCardController>().SetCardData(card.Data);
+
         card.gameObject.SetActive(false);   //So that the player/enemy cannot select this one until it resets
         gameObject.SetActive(false);
 

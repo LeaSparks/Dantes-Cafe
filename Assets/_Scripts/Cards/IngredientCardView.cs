@@ -1,7 +1,5 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.EventSystems;
-using UnityEngine.Events;
 
 public class IngredientCardView : CardView
 {
@@ -23,7 +21,7 @@ public class IngredientCardView : CardView
         }
         
         IngredientCardData ingredient = card as IngredientCardData;
-        _typeText.text = ingredient.ToString();
+        _typeText.text = ingredient.Type.ToString();
         _valueText.text = ingredient.Value.ToString();
 
         _flameIcon.SetActive(ingredient.Type == CardType.Burning);
