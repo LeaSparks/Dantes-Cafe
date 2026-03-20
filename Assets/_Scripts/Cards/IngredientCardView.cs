@@ -23,10 +23,10 @@ public class IngredientCardView : CardView
         }
         
         IngredientCardData ingredient = card as IngredientCardData;
-        _typeText.text = ingredient.Type.ToString();
+        _typeText.text = ingredient.ToString();
         _valueText.text = ingredient.Value.ToString();
 
-        _flameIcon.SetActive(ingredient.Type == CardType.Fire);
+        _flameIcon.SetActive(ingredient.Type == CardType.Burning);
 
     }
 }
