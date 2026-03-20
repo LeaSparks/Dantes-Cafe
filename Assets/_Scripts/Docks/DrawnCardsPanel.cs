@@ -1,16 +1,14 @@
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.Build.Content;
 using UnityEngine;
 
 public class DrawnCardsPanel : MonoBehaviour
 {
     [SerializeField] List<IngredientCardController> _ingredientCards = new();
     [SerializeField] TextMeshProUGUI _displayText;
-    [SerializeField] int _drawnCardsAmount = 4;
+    //[SerializeField] int _drawnCardsAmount = 4;
 
-    public int DrawnCardsAmount => _drawnCardsAmount;
+    public int DrawnCardsAmount => _ingredientCards.Count;
 
     private void Start()
     {
@@ -27,6 +25,17 @@ public class DrawnCardsPanel : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        if(GameplayManager.Instance == null) return;    //skip first call only
+
+        bool playerTurn = GameplayManager.Instance.TurnController.IsPlayerTurn;
+        foreach(var card in _ingredientCards)
+            card.IsClickable = playerTurn;
+        
+        UpdateText(playerTurn);
+    }
+
     public void UpdateText(bool isPlayersTurn)
     {
         if (isPlayersTurn)
@@ -35,18 +44,16 @@ public class DrawnCardsPanel : MonoBehaviour
             _displayText.text = "Enemy is choosing an ingredient...";
     }
 
-    public void UpdateCards(List<IngredientCardData> newCards, bool isPlayersTurn)
+    public void SetNewCards(List<IngredientCardData> newCards, bool isPlayersTurn)
     {
-        if(newCards.Count < _drawnCardsAmount)
+        if(newCards.Count < _ingredientCards.Count)
         {
             Debug.LogError("There are not enough cards to update!");
             return;
         }
-
         for (int i = 0; i < newCards.Count; i++)
         {
             _ingredientCards[i].SetCardData(newCards[i]);
-            _ingredientCards[i].IsClickable = isPlayersTurn;
             _ingredientCards[i].gameObject.SetActive(true);
         }
 
@@ -60,8 +67,21 @@ public class DrawnCardsPanel : MonoBehaviour
         newCard.transform.rotation = card.transform.rotation;
         newCard.transform.localScale = card.transform.localScale;
 
+        card.gameObject.SetActive(false);   //So that the player/enemy cannot select this one until it resets
         gameObject.SetActive(false);
 
         CardManager.Instance.AnimateMoveCardToHand(newCard, targetHand);
+    }
+
+    public List<IngredientCardController> GetSelectableCards()
+    {
+        List<IngredientCardController> cards = new();
+
+        foreach(var card in _ingredientCards)
+        {
+            if(card.gameObject.activeInHierarchy)
+                cards.Add(card);
+        }
+        return cards;
     }
 }

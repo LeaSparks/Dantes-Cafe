@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class EnemyPhase : IState
@@ -17,34 +17,28 @@ public class EnemyPhase : IState
              - make random actions (with random delay between them)
              - move to next phase
         */
-
-        //StartCoroutine(EnemyTurnRoutine());     //CANT START A COROUTINE ON A NON_MONOBEHAVIOUR - either move to mono or try async?
+        _ = EnemyTurnRoutine();     //asynch since I cant call coroutine from a non-Monobehaviour class
     }
 
-    public void Exit()
-    {
-     
-    }
+    public void Exit(){}
 
-    public void Update()
-    {
+    public void Update(){}
 
-    }
-
-    private IEnumerator EnemyTurnRoutine()
+    private async Task EnemyTurnRoutine()
     {
-        yield return new WaitForSeconds(GetRandomDelay());
+        await Awaitable.WaitForSecondsAsync(GetRandomDelay());
         GameplayManager.Instance.Enemy.ChooseCard();
         
         int _actionCount  = Random.Range(0, ACTIONS_LIMIT + 1);
         
         for(int i = 0; i < _actionCount; i++)
         {
-            yield return new WaitForSeconds(GetRandomDelay());
+            await Awaitable.WaitForSecondsAsync(GetRandomDelay());
             GameplayManager.Instance.Enemy.MakeValidAction();
         }
 
-        yield return new WaitForSeconds(0.5f);
+        await Awaitable.WaitForSecondsAsync(1);
+        GameplayManager.Instance.ProceedToNextPhase();
     }
 
     private float GetRandomDelay()

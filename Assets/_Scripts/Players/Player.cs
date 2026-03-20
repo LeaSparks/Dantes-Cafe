@@ -14,6 +14,7 @@ public class Player : Competitor
     {
         base.Start();
         _doneButton.onClick.AddListener(OnDoneButtonClick);
+        SetDoneButtonVisibility(false);
     }
 
     void OnDestroy()

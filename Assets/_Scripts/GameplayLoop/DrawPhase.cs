@@ -9,22 +9,16 @@ public class DrawPhase : IState
         
         //Draw new ingredient cards from the deck
         List<IngredientCardData> drawnCards = new();
+        
         for (int i = 0; i < drawPanel.DrawnCardsAmount; i++)
             drawnCards.Add(GameplayManager.Instance.DrawNewIngredientCard());
 
-        drawPanel.UpdateCards(drawnCards, GameplayManager.Instance.TurnController.IsPlayerTurn);
+        drawPanel.SetNewCards(drawnCards, GameplayManager.Instance.TurnController.IsPlayerTurn);
 
-        drawPanel.gameObject.SetActive(true);
         GameplayManager.Instance.ProceedToNextPhase();
     }
 
-    public void Exit()
-    {
-        //drawPanel.gameObject.SetActive(false);
-    }
+    public void Exit(){}
 
-    public void Update()
-    {
-        //nothing
-    }
+    public void Update(){}
 }

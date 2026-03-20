@@ -15,6 +15,7 @@ public class GameplayManager : Singleton<GameplayManager>
     //Decks
     [Header("Decks")]
     [SerializeField] private List<IngredientCardData> _ingredientsDeck = new();
+    private List<IngredientCardData> _backupDeck;         //THIS IS FOR TESTING
     [SerializeField] private List<OrderCardData> _orderDeck = new();
     private List<IngredientCardData> _ingredientsDiscard = new();
 
@@ -38,9 +39,12 @@ public class GameplayManager : Singleton<GameplayManager>
     void Start()
     {
         _turnController = gameObject.GetComponent<TurnController>();
-        _turnController.SetCompetitors(_player, _enemy);
-    }
+        _drawPhasePanel.gameObject.SetActive(false);
 
+        _backupDeck = new List<IngredientCardData>(_ingredientsDeck);
+
+        ChangeState(_drawPhase);
+    }
 
     void Update()
     {
@@ -49,6 +53,7 @@ public class GameplayManager : Singleton<GameplayManager>
 
     public void ChangeState(IState state)
     {
+        Debug.Log($"Changing to phase: {state}");
         _currentState?.Exit();
         _currentState = state;
         _currentState.Enter();
@@ -87,10 +92,10 @@ public class GameplayManager : Singleton<GameplayManager>
         }
 
         //if there are no more cards in the deck
-        if(_ingredientsDiscard.Count == 0)
+        if(_ingredientsDiscard.Count == 0 && _ingredientsDiscard.Count == 0)
         {
-            Debug.LogError("There are no available ingredient cards to draw from!");
-            return null;
+            Debug.LogWarning("There are no available ingredient cards to draw from! Using random card from backup deck");
+            return _backupDeck[Random.Range(0, _backupDeck.Count)];
         }
 
         //add discarded ingredients back into deck and try again

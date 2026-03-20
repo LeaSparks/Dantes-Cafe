@@ -3,19 +3,16 @@ using UnityEngine;
 
 public class Enemy : Competitor
 {
-    public IngredientCardData ChooseCard()
+    public void ChooseCard()
     {
-        throw new System.NotImplementedException();
-    }
-
-    public void TakeTurn()
-    {
-        
+        int i = Random.Range(0, GameplayManager.Instance.DrawPanel.GetSelectableCards().Count);
+        var card = GameplayManager.Instance.DrawPanel.GetSelectableCards()[i];
+        GameplayManager.Instance.DrawPanel.MoveToHand(card, _hand);
     }
 
     public void MakeValidAction()
     {
-        
+        Debug.Log("Taking some action....");
     }
 
 }
