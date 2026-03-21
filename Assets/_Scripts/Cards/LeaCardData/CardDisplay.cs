@@ -1,51 +1,79 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
+[ExecuteAlways]
 public class CardDisplay : MonoBehaviour
 {
-    [Header("References")]
-    public Image typeImage;
-    public Image ingredientIcon;
-    public Image panelImage;
+    [Header("Sprite Renderers")]
+    public SpriteRenderer borderRenderer;   
+    public SpriteRenderer keyArtRenderer;   
+    public SpriteRenderer colourPanel;
 
-    public TextMeshProUGUI typeText;
+    [Header("UI Text (World Space Canvas)")]
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI descriptionText;
-    public TextMeshProUGUI valueTextA;
-    public TextMeshProUGUI valueTextB;
-
-    public Renderer cardRenderer;
 
     [Header("Data")]
     public CardDatabase database;
 
+    [Header("Card")]
+    public CardData cardData;
+
+    void OnValidate()
+    {
+        if (!Application.isPlaying)
+        {
+            ApplyCardSafe();
+        }
+    }
+
+    void Start()
+    {
+        ApplyCardSafe();
+    }
+
+    public void SetCard(CardData newCard)
+    {
+        cardData = newCard;
+        ApplyCardSafe();
+    }
+
+    void ApplyCardSafe()
+    {
+        if (cardData == null || database == null) return;
+
+        ApplyCard(cardData);
+    }
+
     public void ApplyCard(CardData card)
     {
-        // --- TYPE (formerly rarity) ---
+        // ===== TYPE =====
         var typeData = database.GetTypeData(card.type);
 
-        typeImage.sprite = typeData.typeSprite;
-        typeText.text = typeData.typeLabel;
-
-        if (cardRenderer != null && typeData.typeMaterial != null)
-            cardRenderer.material = typeData.typeMaterial;
-
-        if (typeData.isBurning)
+        if (typeData != null)
         {
-            Debug.Log("Special Card!");
+            if (typeData.typeSprite != null)
+                borderRenderer.sprite = typeData.typeSprite;
+
+            keyArtRenderer.color = typeData.spriteTint;
+
+            if (typeData.isBurning)
+                Debug.Log("Special Card!");
         }
 
-        // --- INGREDIENT (formerly type) ---
+        // ===== INGREDIENT =====
         var ingredientData = database.GetIngredientData(card.ingredient);
 
-        ingredientIcon.sprite = ingredientData.icon;
-        panelImage.color = ingredientData.panelColor;
+        if (ingredientData != null)
+        {
+            if (ingredientData.icon != null)
+                keyArtRenderer.sprite = ingredientData.icon;
 
-        titleText.text = ingredientData.title;
-        descriptionText.text = ingredientData.description;
+         
+            colourPanel.color = ingredientData.panelColor;
 
-        valueTextA.text = ingredientData.valueTextA;
-        valueTextB.text = ingredientData.valueTextB;
+            titleText.text = ingredientData.title;
+            descriptionText.text = ingredientData.description;
+        }
     }
 }

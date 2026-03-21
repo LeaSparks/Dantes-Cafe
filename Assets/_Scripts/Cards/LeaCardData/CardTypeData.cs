@@ -7,9 +7,10 @@ public class CardTypeData : ScriptableObject
 
     [Header("Visuals")]
     public Sprite typeSprite;
-    public Material typeMaterial;
+    public Color spriteTint = Color.white;
 
-    [Header("Info")]
-    public string typeLabel;
+    [Header("Gameplay")]
+    public int pointValue;
+
     public bool isBurning;
 }
