@@ -27,6 +27,7 @@ public class IngredientCardController : MonoBehaviour,
     //Model and View References
     private IngredientCardData _data;
     private IngredientCardView _view;
+    private CardOutLineVisual outlineVisual;
     public bool IsDraggable = true;
     public bool IsClickable = false;
 
@@ -37,6 +38,7 @@ public class IngredientCardController : MonoBehaviour,
     private void Awake()
     {
         _view = GetComponent<IngredientCardView>();
+        outlineVisual = GetComponentInChildren<CardOutLineVisual>(true); 
     }
 
     private void OnDestroy()
@@ -53,6 +55,7 @@ public class IngredientCardController : MonoBehaviour,
         if(IsDraggable == false) return;
 
         _IsHeld = true;
+        outlineVisual?.Hide();
         HoverEndEvent?.Invoke();
     }
 
@@ -113,7 +116,7 @@ public class IngredientCardController : MonoBehaviour,
     {
         if (_IsHeld || IsDraggable == false)
             return;
-
+       // outlineVisual?.ShowHover();//Outline visual 
         HoverStartEvent?.Invoke(_data);
     }
 
@@ -123,6 +126,7 @@ public class IngredientCardController : MonoBehaviour,
             return;
 
         gameObject.transform.DOLocalMove(_dockedLocalPosition, 0.5f);
+      //  outlineVisual?.Hide(); //Outline visual 
         HoverEndEvent?.Invoke();
     }
 

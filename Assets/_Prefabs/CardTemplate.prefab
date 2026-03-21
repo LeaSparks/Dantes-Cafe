@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1494733694358524433}
+  - component: {fileID: 970420029469542152}
+  - component: {fileID: 7109855790840154768}
   m_Layer: 0
   m_Name: CardTemplate
   m_TagString: Untagged
@@ -36,6 +38,43 @@ Transform:
   - {fileID: 6454462201513850090}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &970420029469542152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163263022818247457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4ebe5e7d9fad9e4b87a41418808a00d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IngredientCardController
+  _dropTargetMask:
+    serializedVersion: 2
+    m_Bits: 0
+  IsDraggable: 1
+  IsClickable: 0
+  OnClicked:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7109855790840154768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163263022818247457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c58346571d1b284abe32e1ae5413d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IngredientCardView
+  _nameText: {fileID: 0}
+  _image: {fileID: 0}
+  _typeText: {fileID: 0}
+  _valueText: {fileID: 0}
+  _flameIcon: {fileID: 0}
 --- !u!1 &350351531040733613
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,7 +692,7 @@ MonoBehaviour:
   mode: {fileID: 11400000, guid: 9ec74d7166cc5754f9659b539b7a8fc5, type: 2}
   usePulse: 1
   pulseSpeed: 3
-  pulseAmount: 0.08
+  pulseAmount: 0.03
 --- !u!1 &7791324760806296854
 GameObject:
   m_ObjectHideFlags: 0
