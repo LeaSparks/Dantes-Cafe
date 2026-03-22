@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b653f2ce7a01a24fb88a3d905e9a9b4, type: 3}
+  m_Name: Pepper
+  m_EditorClassIdentifier: Assembly-CSharp::CardIngredientData
+  ingredient: 7
+  icon: {fileID: 21300000, guid: 77eeb70711fdcfa4c96dd650fdc1f773, type: 3}
+  panelColor: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 1}
+  title: Pepper
+  description: 
+  valueTextA: 
+  valueTextB: 
