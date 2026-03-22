@@ -8,7 +8,7 @@ using UnityEngine.Events;
     It holds a reference to both the view and the data.
     This is what the player interacts with.
 */
-[RequireComponent (typeof(IngredientCardView))]
+[RequireComponent (typeof(CardDisplay))]
 public class IngredientCardController : MonoBehaviour, 
     IPointerExitHandler, IPointerEnterHandler,
     IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
