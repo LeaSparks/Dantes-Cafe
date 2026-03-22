@@ -21,12 +21,15 @@ public class IngredientCardController : MonoBehaviour,
     private CardDock _currentTarget, _newTarget, _lastDock;
     
     //Hover        
-    public event System.Action<IngredientCardData> HoverStartEvent;
+    public event System.Action<CardData> HoverStartEvent;
     public event System.Action HoverEndEvent;
 
     //Model and View References
-    private IngredientCardData _data;
-    private IngredientCardView _view;
+    // private IngredientCardData _data;
+    // private IngredientCardView _view;
+    private CardData _data;
+    private CardDisplay _view;
+
     private CardOutLineVisual outlineVisual;
     public bool IsDraggable = true;
     public bool IsClickable = false;
@@ -37,7 +40,7 @@ public class IngredientCardController : MonoBehaviour,
 
     private void Awake()
     {
-        _view = GetComponent<IngredientCardView>();
+        _view = GetComponent<CardDisplay>();
         outlineVisual = GetComponentInChildren<CardOutLineVisual>(true); 
     }
 
@@ -145,16 +148,16 @@ public class IngredientCardController : MonoBehaviour,
 #endregion
 
 #region Getters and Setters
-    public IngredientCardData GetCardData() => _data;
-    public void SetCardData(IngredientCardData data)
+    public CardData GetCardData() => _data;
+    public void SetCardData(CardData data)
     {
-        _view.SetDisplayInformation(data);
+        _view.ApplyCard(data);
         _data = data;
     }
     public CardDock LastDock => _lastDock;
     public void SetLastDock(CardDock dock) {_lastDock = dock;}
-    public void SetCardView(IngredientCardView view) {_view = view;}
-    public IngredientCardData Data => _data;
+    public void SetCardView(CardDisplay view) {_view = view;}
+    public CardData Data => _data;
 #endregion
 
 }

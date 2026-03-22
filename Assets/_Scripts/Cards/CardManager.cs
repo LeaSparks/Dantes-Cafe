@@ -29,6 +29,11 @@ public class CardManager : Singleton<CardManager>
     public GameObject GetPooledIngredient() => _ingredientPool.GetActivePooledObject();
     public GameObject GetPooledOrder() => _orderPool.GetActivePooledObject(); 
 
+    public CardDisplay GetPooledIngredientDisplay()
+    {
+        return GetPooledIngredient().GetComponent<CardDisplay>();
+    }
+
     public void AnimateMoveCardToDock(GameObject card, CardDock dock, Action onCompleteDelegate)
     {
         card.transform.SetParent(dock.transform);   //jsut in case

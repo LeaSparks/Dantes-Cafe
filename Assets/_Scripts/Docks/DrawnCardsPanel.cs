@@ -44,7 +44,7 @@ public class DrawnCardsPanel : MonoBehaviour
             _displayText.text = "Enemy is choosing an ingredient...";
     }
 
-    public void SetNewCards(List<IngredientCardData> newCards, bool isPlayersTurn)
+    public void SetNewCards(List<CardData> newCards, bool isPlayersTurn)
     {
         if(newCards.Count < _ingredientCards.Count)
         {

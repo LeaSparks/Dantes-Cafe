@@ -1,11 +1,13 @@
 using UnityEngine;
 
-[RequireComponent(typeof(RectTransform))]
+//[RequireComponent(typeof(RectTransform))]
+[RequireComponent(typeof(BoxCollider))]
 public abstract class CardDock : MonoBehaviour
 {
     //Make sure the GameObject that applies this interface is on the "DragTarget" layer. This is just to help with raycasting for the target
     [SerializeField] protected bool _isTargetable;
-    protected RectTransform _rectTransform;
+    //protected RectTransform _rectTransform;
+    protected BoxCollider _boxCollider;
 
     public abstract void OnDrop(IngredientCardController droppedCard, Vector3 cursorPosition);
     public abstract void RefreshCardPositions();
@@ -23,6 +25,6 @@ public abstract class CardDock : MonoBehaviour
 
     void Awake()
     {
-        _rectTransform = GetComponent<RectTransform>();
+        _boxCollider = GetComponent<BoxCollider>();
     }
 }
