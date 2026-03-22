@@ -58,7 +58,7 @@ public class Hand : CardDock
         for(int i = 0; i < _cards.Count; i++)
         {
             newOrigin.x = i*horizontalSpacing + (horizontalSpacing / 2f);   //because the pivot is on the middle on the bottom
-            newOrigin.y += 0.05f;
+            newOrigin.z -= 0.05f;
             _cards[i].gameObject.transform.position = newOrigin;
             _cards[i].SetDockedPosition(transform.InverseTransformPoint(newOrigin));
         }
@@ -66,7 +66,7 @@ public class Hand : CardDock
         //spacing for next card:
         horizontalSpacing = Mathf.Max(_minimumSpacing, _boxCollider.size.x / (_cards.Count+1));
         newOrigin.x =  (_cards.Count - 1) * horizontalSpacing + (horizontalSpacing / 2f);
-        newOrigin.y += 0.05f;
+        newOrigin.z -= 0.05f;
         
         NextLocalDock = newOrigin;
     }
