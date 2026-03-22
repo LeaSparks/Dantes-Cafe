@@ -18,6 +18,9 @@ public abstract class CardDock : MonoBehaviour
     public void SetTargetable(bool targetable) { _isTargetable = targetable; }
     public bool IsTargetable() { return _isTargetable; }
 
+    public Vector3 NextLocalDock = Vector3.zero;
+
+
     void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();

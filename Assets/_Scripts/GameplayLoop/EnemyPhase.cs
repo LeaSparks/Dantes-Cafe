@@ -27,22 +27,23 @@ public class EnemyPhase : IState
     private async Task EnemyTurnRoutine()
     {
         await Awaitable.WaitForSecondsAsync(GetRandomDelay());
-        GameplayManager.Instance.Enemy.ChooseCard();
+        var card = GameplayManager.Instance.Enemy.ChooseCard();
         
-        int _actionCount  = Random.Range(0, ACTIONS_LIMIT + 1);
-        
-        for(int i = 0; i < _actionCount; i++)
-        {
-            await Awaitable.WaitForSecondsAsync(GetRandomDelay());
-            GameplayManager.Instance.Enemy.MakeValidAction();
-        }
+        CardManager.Instance.OnCardReachedTarget.AddListener(OnCardReachedHand);
 
-        await Awaitable.WaitForSecondsAsync(1);
-        GameplayManager.Instance.ProceedToNextPhase();
+        GameplayManager.Instance.DrawPanel.MoveToHand(card, GameplayManager.Instance.Enemy.Hand);
+
     }
 
     private float GetRandomDelay()
     {
         return Random.Range(MIN_CHOOSE_DELAY, MAX_CHOOSE_DELAY);
+    }
+    private async void OnCardReachedHand()
+    {
+        CardManager.Instance.OnCardReachedTarget.RemoveListener(OnCardReachedHand);
+        
+        await Awaitable.WaitForSecondsAsync(0.2f);
+        GameplayManager.Instance.Enemy.ChooseActionSequence(ACTIONS_LIMIT);
     }
 }

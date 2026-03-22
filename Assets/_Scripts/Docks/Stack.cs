@@ -1,12 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Stack : CardDock
 {
     [SerializeField] float _minimumSpacing = 30f;
     private Stack<IngredientCardController> _cards = new();
     private OrderCardData _associatedOrder;
+    private List<IngredientCardData> _requiredIngredients = new();
 
+    public UnityEvent<Stack, IngredientCardController> NewIngredientAdded;
+
+#region Dock Controls 
     public override void OnDrop(IngredientCardController droppedCard, Vector3 cursorPosition)
     {
         droppedCard.LastDock?.RemoveCardFromCollection(droppedCard);
@@ -17,6 +22,7 @@ public class Stack : CardDock
     {
         if(_cards.Count <= 0) return;
 
+        //actual spacing
         float verticalSpacing = Mathf.Max(_minimumSpacing, _rectTransform.rect.height / _cards.Count);
 
         Vector3 newOrigin = Vector3.zero;
@@ -29,6 +35,11 @@ public class Stack : CardDock
             cardArray[i].gameObject.transform.localPosition = newOrigin;
             cardArray[i].SetDockedPosition(newOrigin);
         }
+        //spacing for next card:
+        verticalSpacing = Mathf.Max(_minimumSpacing, _rectTransform.rect.height / (_cards.Count+1));
+        newOrigin.y =  (_cards.Count - 1) * verticalSpacing;
+        
+        NextLocalDock = newOrigin;
     }
     
     protected override void AddCardToCollection(IngredientCardController card)
@@ -40,6 +51,11 @@ public class Stack : CardDock
         card.SetLastDock(this);
         card.transform.SetParent(transform);
         RefreshCardPositions();
+
+        if(_requiredIngredients.Contains(card.GetCardData()))
+            _requiredIngredients.Remove(card.GetCardData());
+        
+        NewIngredientAdded?.Invoke(this, card);
     }
 
     public override void RemoveCardFromCollection(IngredientCardController card)
@@ -55,12 +71,19 @@ public class Stack : CardDock
             card.SetLastDock(null);
         }
         RefreshCardPositions();
+        _requiredIngredients.Remove(card.GetCardData());
+    }
+#endregion
+    
+    //Getters & Setters
+    public void SetAssociatedOrderCard(OrderCardData card) {
+        _associatedOrder = card;
+        if(card == null) return;
+        _requiredIngredients.Clear();
+        _requiredIngredients.AddRange(card.IngredientList);
     }
 
-
-    //Getters & Setters
-    public void SetAssociatedOrder(OrderCardData card) {_associatedOrder = card;}
-
-    public Stack<IngredientCardController> GetCards() => _cards;
+    public Stack<IngredientCardController> Cards => _cards;
+    public List<IngredientCardData> RequiredIngredients => _requiredIngredients;
     public OrderCardData GetAssociatedOrder() => _associatedOrder;
 }

@@ -4,7 +4,10 @@ using UnityEngine;
 [RequireComponent(typeof( TurnController))]
 public class GameplayManager : Singleton<GameplayManager>
 {
-    public bool GameOver = false;
+    public static int IN_ORDER_MODIFIER = 3;
+    public static int WINNING_SCORE = 2;
+    public int RemainingOrders;
+
     private IState _currentState;
     private TurnController _turnController;
 
@@ -42,6 +45,10 @@ public class GameplayManager : Singleton<GameplayManager>
         _drawPhasePanel.gameObject.SetActive(false);
 
         _backupDeck = new List<IngredientCardData>(_ingredientsDeck);
+        RemainingOrders = _orderDeck.Count;
+
+        for(int i = 0; i < 3; i++)
+            AssignOrderToStacks(i);
 
         ChangeState(_drawPhase);
     }
@@ -77,7 +84,6 @@ public class GameplayManager : Singleton<GameplayManager>
             ChangeState(_drawPhase);
         }
     }
-
     // ----------------------------------------------------
     #region Deck Controls
     public IngredientCardData DrawNewIngredientCard()
@@ -111,6 +117,41 @@ public class GameplayManager : Singleton<GameplayManager>
         _ingredientsDiscard.Add(card);
     }
 
+    public void AssignOrderToStacks(int stackIndex)
+    {
+        if(stackIndex > 2 || stackIndex < 0)
+        {
+            Debug.LogError("Stack index needs to be btwn 0 and 2");
+            stackIndex = 0; //by default for now
+        }
+
+        if(_orderDeck.Count == 0)
+        {
+            _player.GetStackAtIndex(stackIndex).SetAssociatedOrderCard(null);
+            _enemy.GetStackAtIndex(stackIndex).SetAssociatedOrderCard(null);
+            return;
+        }
+        
+        int i = Random.Range(0, _orderDeck.Count);
+
+        _player.GetStackAtIndex(stackIndex).SetAssociatedOrderCard(_orderDeck[i]);
+        _enemy.GetStackAtIndex(stackIndex).SetAssociatedOrderCard(_orderDeck[i]);
+
+        _orderDeck.RemoveAt(i);
+    }
+
     #endregion
 
+    public void GameOver()
+    {
+        if(Player.Score > Enemy.Score)
+        {
+            //PLayer wins, show win screen
+            Debug.Log("CONGRATULATIONS, YOU WON!");
+        } else
+        {
+            //Enemy wins, show lose screen
+            Debug.Log("YOU LOST!");
+        }
+    }
 }

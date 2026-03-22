@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Hand : CardDock
 {
@@ -16,6 +17,7 @@ public class Hand : CardDock
     [SerializeField] GameObject _ingredientCardPrefab;
     public bool EnableDebug;
 
+    public UnityEvent<IngredientCardController> NewIngredientAdded;
 
     void Start()
     {
@@ -30,7 +32,12 @@ public class Hand : CardDock
         }
     }
 
+    public void AddDrawnCardToHand(IngredientCardController card)       //doesnt care about hadn size for now
+    {
+        AddCardToCollection(card);
+    }
 
+#region Dock Controls 
     public override void OnDrop(IngredientCardController droppedCard, Vector3 cursorPosition)
     {
         if(_cards.Count < _handSizeLimit)
@@ -39,11 +46,6 @@ public class Hand : CardDock
 
             AddCardToCollection(droppedCard);
         } 
-    }
-
-    public void AddDrawnCardToHand(IngredientCardController card)       //doesnt care about hadn size for now
-    {
-        AddCardToCollection(card);
     }
     
     public override void RefreshCardPositions()
@@ -59,14 +61,23 @@ public class Hand : CardDock
             _cards[i].gameObject.transform.localPosition = newOrigin;
             _cards[i].SetDockedPosition(newOrigin);
         }
+
+                //spacing for next card:
+        horizontalSpacing = Mathf.Max(_minimumSpacing, _rectTransform.rect.height / (_cards.Count+1));
+        newOrigin.x =  (_cards.Count - 1) * horizontalSpacing + (horizontalSpacing / 2f);
+        
+        NextLocalDock = newOrigin;
     }
     
     protected override void AddCardToCollection(IngredientCardController card)
     {
+        card.transform.SetParent(transform);
+        
         _cards.Add(card);
         card.SetLastDock(this);
-        card.transform.SetParent(transform);
         RefreshCardPositions();
+
+        NewIngredientAdded?.Invoke(card);
     }
 
     public override void RemoveCardFromCollection(IngredientCardController card)
@@ -76,7 +87,7 @@ public class Hand : CardDock
         card.SetLastDock(null);
         RefreshCardPositions();
     }
-
+#endregion
 
     public List<IngredientCardController> GetCards => _cards;
 }

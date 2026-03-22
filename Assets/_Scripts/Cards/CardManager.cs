@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Events;
+using System;
 
 public class CardManager : Singleton<CardManager>
 {
@@ -28,22 +29,15 @@ public class CardManager : Singleton<CardManager>
     public GameObject GetPooledIngredient() => _ingredientPool.GetActivePooledObject();
     public GameObject GetPooledOrder() => _orderPool.GetActivePooledObject(); 
 
-
-    public void AnimateMoveCard(GameObject card, Transform end)
+    public void AnimateMoveCardToDock(GameObject card, CardDock dock, Action onCompleteDelegate)
     {
-        //float duration = (card.transform.position - end.position).magnitude / _movementSpeed;
-        card.transform.DOMove(end.position, _timeToMove).OnComplete(() => OnCardReachedTarget?.Invoke());
-    }
+        card.transform.SetParent(dock.transform);   //jsut in case
 
-    public void AnimateMoveCardToHand(GameObject card, Hand hand)
-    {
-        card.transform.SetParent(hand.transform);
-        //float duration =  card.transform.localPosition.magnitude / _movementSpeed;
-        
-        card.transform.DOLocalMove(Vector3.zero, _timeToMove).OnComplete(() => 
+        card.transform.DOLocalMove(dock.NextLocalDock, _timeToMove).OnComplete(() => 
         {
-            OnCardReachedTarget?.Invoke();
-            hand.AddDrawnCardToHand(card.GetComponent<IngredientCardController>());
+            dock.OnDrop(card.GetComponent<IngredientCardController>(), Vector3.zero);
+            OnCardReachedTarget?.Invoke(); 
+            onCompleteDelegate();
         });
     }
 }

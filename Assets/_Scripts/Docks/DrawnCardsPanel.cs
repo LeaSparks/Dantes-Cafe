@@ -72,7 +72,7 @@ public class DrawnCardsPanel : MonoBehaviour
         card.gameObject.SetActive(false);   //So that the player/enemy cannot select this one until it resets
         gameObject.SetActive(false);
 
-        CardManager.Instance.AnimateMoveCardToHand(newCard, targetHand);
+        CardManager.Instance.AnimateMoveCardToDock(newCard, targetHand, null);
     }
 
     public List<IngredientCardController> GetSelectableCards()
