@@ -657,6 +657,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3705209067921050054}
   - component: {fileID: 8463509555767474855}
+  - component: {fileID: 3982614426836962408}
   m_Layer: 0
   m_Name: IngredientCard_World
   m_TagString: Untagged
@@ -702,8 +703,27 @@ MonoBehaviour:
   colourPanel: {fileID: 4060813537204068424}
   titleText: {fileID: 2331903085787083459}
   descriptionText: {fileID: 2281512694457672361}
-  database: {fileID: 11400000, guid: 8a1538511adc61d459e7b9fbafd9e46d, type: 2}
   cardData: {fileID: 11400000, guid: 4f344945788dd8346a55002ca5624214, type: 2}
+--- !u!114 &3982614426836962408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5603572069581696092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4ebe5e7d9fad9e4b87a41418808a00d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IngredientCardController
+  _dropTargetMask:
+    serializedVersion: 2
+    m_Bits: 0
+  IsDraggable: 1
+  IsClickable: 0
+  OnClicked:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5847615437462793876
 GameObject:
   m_ObjectHideFlags: 0

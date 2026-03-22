@@ -4,7 +4,6 @@ using System.Linq;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 
 public abstract class Competitor : MonoBehaviour
 {
@@ -21,6 +20,8 @@ public abstract class Competitor : MonoBehaviour
     protected virtual void Start()
     {
         _hand = GetComponentInChildren<Hand>();
+        if(_hand == null)
+            Debug.Log("NO HAND");
         foreach(var stack in _stacks)
         {
             stack.NewIngredientAdded.AddListener((s, ing) => CheckStackForScore(s));

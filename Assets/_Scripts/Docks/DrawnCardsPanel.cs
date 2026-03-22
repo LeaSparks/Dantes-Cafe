@@ -12,6 +12,10 @@ public class DrawnCardsPanel : MonoBehaviour
 
     private void Start()
     {
+        if(_displayText != null)
+            _displayText.gameObject.SetActive(false);
+        
+        gameObject.SetActive(false);
         foreach (var card in _ingredientCards)
         {
             card.OnClicked.AddListener(() =>  MoveToHand(card, GameplayManager.Instance.Player.Hand));
@@ -36,8 +40,17 @@ public class DrawnCardsPanel : MonoBehaviour
         UpdateText(playerTurn);
     }
 
+    private void OnDisable()
+    {
+        if(_displayText != null)
+            _displayText.gameObject.SetActive(false);
+    }
+
     public void UpdateText(bool isPlayersTurn)
     {
+        if(_displayText == null) return;
+
+        _displayText.gameObject.SetActive(true);
         if (isPlayersTurn)
             _displayText.text = "Choose an ingredient:";
         else
