@@ -23,23 +23,23 @@ public class Stack : CardDock
         if(_cards.Count <= 0) return;
 
         //actual spacing
-        float verticalSpacing = Mathf.Max(_minimumSpacing, _boxCollider.size.z / _cards.Count);
+        float verticalSpacing = Mathf.Max(_minimumSpacing, _boxCollider.size.y / _cards.Count);
 
         Vector3 newOrigin = _boxCollider.bounds.min;    //might be getting wring corner here, will have to check
         IngredientCardController[] cardArray = _cards.ToArray();
         int j = 0;
         for(int i = _cards.Count - 1; i >= 0; i--)
         {
-            newOrigin.z = j*verticalSpacing;
-            newOrigin.y += 0.05f;
+            newOrigin.y = j*verticalSpacing;
+            newOrigin.z -= 0.05f;
             j++;
             cardArray[i].gameObject.transform.position = newOrigin;
             cardArray[i].SetDockedPosition(transform.InverseTransformPoint(newOrigin));
         }
         //spacing for next card:
         verticalSpacing = Mathf.Max(_minimumSpacing, _boxCollider.size.z / (_cards.Count+1));
-        newOrigin.z =  (_cards.Count - 1) * verticalSpacing;
-        newOrigin.y += 0.05f;
+        newOrigin.y =  (_cards.Count - 1) * verticalSpacing;
+        newOrigin.z -= 0.05f;
         
         NextLocalDock = newOrigin;
     }
