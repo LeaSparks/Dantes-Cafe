@@ -41,7 +41,7 @@ public abstract class Competitor : MonoBehaviour
         int score = 0;
 
         var comparisonList = new List<IngredientCardData>();
-        comparisonList.AddRange(stack.GetAssociatedOrder().IngredientList);
+        //comparisonList.AddRange(stack.GetAssociatedOrder().IngredientList);
         var stackList = stack.Cards.ToList();
 
         for(int i = 0; i < stack.Cards.Count; i++)

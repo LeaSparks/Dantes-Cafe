@@ -658,7 +658,7 @@ GameObject:
   - component: {fileID: 3705209067921050054}
   - component: {fileID: 8463509555767474855}
   m_Layer: 0
-  m_Name: CardTemplateNEW
+  m_Name: IngredientCard_World
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -673,9 +673,9 @@ Transform:
   m_GameObject: {fileID: 5603572069581696092}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -116.88013, y: 0.7125807, z: 81.796074}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 212506700401629836}
   - {fileID: 1980235109767669883}

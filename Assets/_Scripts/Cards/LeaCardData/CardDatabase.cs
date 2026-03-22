@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(menuName = "Cards/Card Database")]
-public class CardDatabase : ScriptableObject
+//[CreateAssetMenu(menuName = "Cards/Card Database")]
+public class CardDatabase : Singleton<CardDatabase>
 {
     public List<CardTypeData> typeData;
     public List<CardIngredientData> ingredientData;

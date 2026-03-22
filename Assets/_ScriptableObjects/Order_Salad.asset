@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e037831191cd5746bf0bf751861cb8e, type: 3}
-  m_Name: Order_Test2
+  m_Name: Order_Salad
   m_EditorClassIdentifier: Assembly-CSharp::OrderCardData
-  cardName: 
-  cardImage: {fileID: 0}
+  cardName: Salad
+  cardImage: {fileID: 21300000, guid: 1fd59d2e0741c5b4b85266254e80730d, type: 3}
   ingredientList:
-  - {fileID: 11400000, guid: 59a12adf744c89a4d90ee682a38c0fce, type: 2}
+  - {fileID: 11400000, guid: c6b0a481c60aba248ab7ddc0488464c0, type: 2}
+  - {fileID: 11400000, guid: 496965ade2ac8904bac946b85b749f36, type: 2}
+  - {fileID: 11400000, guid: 8316662363663684bb6c85e4a7e81944, type: 2}
+  - {fileID: 11400000, guid: 39857ac5b46bd4c4589d7b83636a2e89, type: 2}

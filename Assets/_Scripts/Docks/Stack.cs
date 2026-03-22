@@ -80,7 +80,7 @@ public class Stack : CardDock
         _associatedOrder = card;
         if(card == null) return;
         _requiredIngredients.Clear();
-        _requiredIngredients.AddRange(card.IngredientList);
+        //_requiredIngredients.AddRange(card.IngredientList);
     }
 
     public Stack<IngredientCardController> Cards => _cards;

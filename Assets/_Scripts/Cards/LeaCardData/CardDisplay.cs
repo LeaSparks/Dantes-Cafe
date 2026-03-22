@@ -13,8 +13,8 @@ public class CardDisplay : MonoBehaviour
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI descriptionText;
 
-    [Header("Data")]
-    public CardDatabase database;
+    //[Header("Data")]
+    //public CardDatabase database;
 
     [Header("Card")]
     public CardData cardData;
@@ -40,7 +40,7 @@ public class CardDisplay : MonoBehaviour
 
     void ApplyCardSafe()
     {
-        if (cardData == null || database == null) return;
+        if (cardData == null || CardDatabase.Instance == null) return;
 
         ApplyCard(cardData);
     }
@@ -48,7 +48,7 @@ public class CardDisplay : MonoBehaviour
     public void ApplyCard(CardData card)
     {
         // ===== TYPE =====
-        var typeData = database.GetTypeData(card.type);
+        var typeData = CardDatabase.Instance.GetTypeData(card.type);
 
         if (typeData != null)
         {
@@ -62,7 +62,7 @@ public class CardDisplay : MonoBehaviour
         }
 
         // ===== INGREDIENT =====
-        var ingredientData = database.GetIngredientData(card.ingredient);
+        var ingredientData = CardDatabase.Instance.GetIngredientData(card.ingredient);
 
         if (ingredientData != null)
         {

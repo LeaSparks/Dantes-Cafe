@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e037831191cd5746bf0bf751861cb8e, type: 3}
-  m_Name: Order_Test3
+  m_Name: Order_Marinara
   m_EditorClassIdentifier: Assembly-CSharp::OrderCardData
-  cardName: 
-  cardImage: {fileID: 0}
+  cardName: Marinara
+  cardImage: {fileID: 21300000, guid: bc20688dceb6ef04b89e2a0e00e1eb37, type: 3}
   ingredientList:
-  - {fileID: 11400000, guid: 31b46fbcc89434c45abb1ca3d58b8893, type: 2}
+  - {fileID: 11400000, guid: 496965ade2ac8904bac946b85b749f36, type: 2}
+  - {fileID: 11400000, guid: d08a9b48ef48eef4a8fa3aa00ba87cbb, type: 2}

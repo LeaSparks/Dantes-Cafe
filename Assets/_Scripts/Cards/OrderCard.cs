@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Order", menuName = "ScriptableObjects/Cards/Order")]
 public class OrderCardData : Card
 {
-    [SerializeField] List<IngredientCardData> ingredientList = new();
+    [SerializeField] List<CardIngredientData> ingredientList = new();
 
-    public List<IngredientCardData> IngredientList => ingredientList;
+    public List<CardIngredientData> IngredientList => ingredientList;
 }
