@@ -7,7 +7,7 @@ public class Stack : CardDock
     [SerializeField] float _minimumSpacing = 30f;
     private Stack<IngredientCardController> _cards = new();
     private OrderCardData _associatedOrder;
-    private List<IngredientCardData> _requiredIngredients = new();
+    private List<CardIngredient> _requiredIngredients = new();
 
     public UnityEvent<Stack, IngredientCardController> NewIngredientAdded;
 
@@ -23,21 +23,23 @@ public class Stack : CardDock
         if(_cards.Count <= 0) return;
 
         //actual spacing
-        float verticalSpacing = Mathf.Max(_minimumSpacing, _rectTransform.rect.height / _cards.Count);
+        float verticalSpacing = Mathf.Max(_minimumSpacing, _boxCollider.size.z / _cards.Count);
 
-        Vector3 newOrigin = Vector3.zero;
+        Vector3 newOrigin = _boxCollider.bounds.min;    //might be getting wring corner here, will have to check
         IngredientCardController[] cardArray = _cards.ToArray();
         int j = 0;
         for(int i = _cards.Count - 1; i >= 0; i--)
         {
-            newOrigin.y = j*verticalSpacing;
+            newOrigin.z = j*verticalSpacing;
+            newOrigin.y += 0.05f;
             j++;
-            cardArray[i].gameObject.transform.localPosition = newOrigin;
-            cardArray[i].SetDockedPosition(newOrigin);
+            cardArray[i].gameObject.transform.position = newOrigin;
+            cardArray[i].SetDockedPosition(transform.InverseTransformPoint(newOrigin));
         }
         //spacing for next card:
-        verticalSpacing = Mathf.Max(_minimumSpacing, _rectTransform.rect.height / (_cards.Count+1));
-        newOrigin.y =  (_cards.Count - 1) * verticalSpacing;
+        verticalSpacing = Mathf.Max(_minimumSpacing, _boxCollider.size.z / (_cards.Count+1));
+        newOrigin.z =  (_cards.Count - 1) * verticalSpacing;
+        newOrigin.y += 0.05f;
         
         NextLocalDock = newOrigin;
     }
@@ -52,8 +54,8 @@ public class Stack : CardDock
         card.transform.SetParent(transform);
         RefreshCardPositions();
 
-        if(_requiredIngredients.Contains(card.GetCardData()))
-            _requiredIngredients.Remove(card.GetCardData());
+        if(_requiredIngredients.Contains(card.GetCardData().ingredient))
+            _requiredIngredients.Remove(card.GetCardData().ingredient);
         
         NewIngredientAdded?.Invoke(this, card);
     }
@@ -71,7 +73,7 @@ public class Stack : CardDock
             card.SetLastDock(null);
         }
         RefreshCardPositions();
-        _requiredIngredients.Remove(card.GetCardData());
+        _requiredIngredients.Remove(card.GetCardData().ingredient);
     }
 #endregion
     
@@ -80,10 +82,10 @@ public class Stack : CardDock
         _associatedOrder = card;
         if(card == null) return;
         _requiredIngredients.Clear();
-        //_requiredIngredients.AddRange(card.IngredientList);
+        _requiredIngredients.AddRange(card.IngredientList);
     }
 
     public Stack<IngredientCardController> Cards => _cards;
-    public List<IngredientCardData> RequiredIngredients => _requiredIngredients;
+    public List<CardIngredient> RequiredIngredients => _requiredIngredients;
     public OrderCardData GetAssociatedOrder() => _associatedOrder;
 }

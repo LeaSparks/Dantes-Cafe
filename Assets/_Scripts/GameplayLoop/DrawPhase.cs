@@ -8,7 +8,7 @@ public class DrawPhase : IState
         DrawnCardsPanel drawPanel = GameplayManager.Instance.DrawPanel;
         
         //Draw new ingredient cards from the deck
-        List<IngredientCardData> drawnCards = new();
+        List<CardData> drawnCards = new();
         
         for (int i = 0; i < drawPanel.DrawnCardsAmount; i++)
             drawnCards.Add(GameplayManager.Instance.DrawNewIngredientCard());

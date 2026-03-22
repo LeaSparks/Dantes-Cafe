@@ -12,24 +12,24 @@ public class Hand : CardDock
     [SerializeField] float _minimumSpacing = 30f;
     private List<IngredientCardController> _cards = new();
 
-    [Header("Debugging")]
-    [SerializeField] List<IngredientCardData> _startingHand = new();
-    [SerializeField] GameObject _ingredientCardPrefab;
-    public bool EnableDebug;
+    // [Header("Debugging")]
+    // [SerializeField] List<IngredientCardData> _startingHand = new();
+    // [SerializeField] GameObject _ingredientCardPrefab;
+    // public bool EnableDebug;
 
     public UnityEvent<IngredientCardController> NewIngredientAdded;
 
     void Start()
     {
-        if(EnableDebug == false) return;
+        // if(EnableDebug == false) return;
 
-        IngredientCardController temp;
-        foreach(var cardData in _startingHand)      //FOR TESTING PURPOSES
-        {
-            temp = Instantiate(_ingredientCardPrefab, this.transform).GetOrAddComponent<IngredientCardController>();
-            temp.SetCardData(cardData);
-            AddCardToCollection(temp);
-        }
+        // IngredientCardController temp;
+        // foreach(var cardData in _startingHand)      //FOR TESTING PURPOSES
+        // {
+        //     temp = Instantiate(_ingredientCardPrefab, this.transform).GetOrAddComponent<IngredientCardController>();
+        //     temp.SetCardData(cardData);
+        //     AddCardToCollection(temp);
+        // }
     }
 
     public void AddDrawnCardToHand(IngredientCardController card)       //doesnt care about hadn size for now
@@ -52,19 +52,21 @@ public class Hand : CardDock
     {
         if(_cards.Count <= 0) return;
 
-        float horizontalSpacing = Mathf.Max(_minimumSpacing, _rectTransform.rect.width / _cards.Count);
+        float horizontalSpacing = Mathf.Max(_minimumSpacing, _boxCollider.size.x / _cards.Count);
 
-        Vector3 newOrigin = Vector3.zero;
+        Vector3 newOrigin = _boxCollider.bounds.min;
         for(int i = 0; i < _cards.Count; i++)
         {
             newOrigin.x = i*horizontalSpacing + (horizontalSpacing / 2f);   //because the pivot is on the middle on the bottom
-            _cards[i].gameObject.transform.localPosition = newOrigin;
-            _cards[i].SetDockedPosition(newOrigin);
+            newOrigin.y += 0.05f;
+            _cards[i].gameObject.transform.position = newOrigin;
+            _cards[i].SetDockedPosition(transform.InverseTransformPoint(newOrigin));
         }
 
-                //spacing for next card:
-        horizontalSpacing = Mathf.Max(_minimumSpacing, _rectTransform.rect.height / (_cards.Count+1));
+        //spacing for next card:
+        horizontalSpacing = Mathf.Max(_minimumSpacing, _boxCollider.size.x / (_cards.Count+1));
         newOrigin.x =  (_cards.Count - 1) * horizontalSpacing + (horizontalSpacing / 2f);
+        newOrigin.y += 0.05f;
         
         NextLocalDock = newOrigin;
     }

@@ -57,8 +57,8 @@ public class CardDisplay : MonoBehaviour
 
             keyArtRenderer.color = typeData.spriteTint;
 
-            if (typeData.isBurning)
-                Debug.Log("Special Card!");
+            // if (typeData.isBurning)
+            //     Debug.Log("Special Card!");
         }
 
         // ===== INGREDIENT =====
