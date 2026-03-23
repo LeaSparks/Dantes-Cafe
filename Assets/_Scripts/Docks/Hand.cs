@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -61,18 +60,16 @@ public class Hand : CardDock
         {
             _cards[i].gameObject.transform.localRotation = Quaternion.identity;
             newOrigin.x = (i*horizontalSpacing + (horizontalSpacing / 2f)) - (_boxCollider.size.x/2f); 
-            newOrigin.z -= 0.05f;
+            newOrigin.z -= 0.02f;       //Needs to float above box collider!!
             
             _cards[i].gameObject.transform.localPosition = newOrigin;
             _cards[i].SetDockedPosition(newOrigin);
         }
 
-        Debug.Log($"horizontalSpacing: {horizontalSpacing}");
-
         //spacing for next card:
         horizontalSpacing = _boxCollider.size.x / (_cards.Count+1);
         newOrigin.x =  (_cards.Count - 1) * horizontalSpacing + (horizontalSpacing / 2f) - (_boxCollider.size.x/2f);
-        newOrigin.z -= 0.05f;
+        newOrigin.z -= 0.02f;
         
         NextLocalDock = newOrigin;
     }

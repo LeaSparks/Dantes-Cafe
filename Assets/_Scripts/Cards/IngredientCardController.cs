@@ -88,6 +88,7 @@ public class IngredientCardController : MonoBehaviour,
         if (_currentTarget != null && _currentTarget.IsTargetable())
         {
             _currentTarget.OnDrop(this, eventData.position);
+            _currentTarget?.OnEndHoveringOver();
         }
         else
         {
