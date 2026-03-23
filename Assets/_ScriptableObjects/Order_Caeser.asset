@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e037831191cd5746bf0bf751861cb8e, type: 3}
-  m_Name: Order_Marinara
+  m_Name: Order_Caeser
   m_EditorClassIdentifier: Assembly-CSharp::OrderCardData
-  cardName: Cursed Marinara
-  cardImage: {fileID: 21300000, guid: bc20688dceb6ef04b89e2a0e00e1eb37, type: 3}
-  ingredientList: 0000000007000000
+  cardName: Bloody Caeser
+  cardImage: {fileID: 21300000, guid: 01ca948c18ac4104c85e6868cba514a1, type: 3}
+  ingredientList: 080000000000000007000000030000000b000000
