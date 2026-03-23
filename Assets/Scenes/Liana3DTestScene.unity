@@ -12054,6 +12054,7 @@ GameObject:
   m_Component:
   - component: {fileID: 773869841}
   - component: {fileID: 773869842}
+  - component: {fileID: 773869843}
   m_Layer: 0
   m_Name: CameraLocationNeutral
   m_TagString: Untagged
@@ -12070,7 +12071,7 @@ Transform:
   m_GameObject: {fileID: 773869840}
   serializedVersion: 2
   m_LocalRotation: {x: 0.15304591, y: -0.6903456, z: 0.15304591, w: 0.6903456}
-  m_LocalPosition: {x: 3.6978455, y: 1.6022997, z: 0.23033905}
+  m_LocalPosition: {x: 2.844, y: 1.204, z: 0.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12089,6 +12090,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArrowGizmo
   gizmoType: 0
+  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+  lineThickness: 5
+  arrowLength: 2
+  headLength: 0.5
+  headAngle: 20
+  sphereRadius: 0.5
+--- !u!114 &773869843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773869840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 389ca77ea639bca4c83a3da2c082afec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArrowGizmo
+  gizmoType: 1
   gizmoColor: {r: 1, g: 0, b: 0, a: 1}
   lineThickness: 5
   arrowLength: 2
@@ -14217,7 +14237,7 @@ Transform:
   m_GameObject: {fileID: 889671452}
   serializedVersion: 2
   m_LocalRotation: {x: -0.22490875, y: 0.6682766, z: -0.22330767, w: -0.6730201}
-  m_LocalPosition: {x: 0.39444733, y: 1.3547287, z: 0.09674072}
+  m_LocalPosition: {x: -0.153, y: 0.943, z: 0.101}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20994,17 +21014,31 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c94cbd02776d40c4abce9ef0cc2bac6d, type: 2}
   - {fileID: 11400000, guid: 14b9c25146a4353469ac45872cb264ef, type: 2}
   - {fileID: 11400000, guid: 4f344945788dd8346a55002ca5624214, type: 2}
-  - {fileID: 11400000, guid: 3368ff8a1418b9644afc3ce686075d62, type: 2}
   - {fileID: 11400000, guid: d9c88ae7a5915cc439c0a0c7b9bddb0f, type: 2}
   - {fileID: 11400000, guid: 4bb48592722b26446bad0d3de838822f, type: 2}
   - {fileID: 11400000, guid: 7be69929bd6bdf2429efcfb3bad20d3f, type: 2}
+  - {fileID: 11400000, guid: 3368ff8a1418b9644afc3ce686075d62, type: 2}
+  - {fileID: 11400000, guid: 86459eea9f7333840ac8a0387e286c74, type: 2}
+  - {fileID: 11400000, guid: 86459eea9f7333840ac8a0387e286c74, type: 2}
+  - {fileID: 11400000, guid: 86459eea9f7333840ac8a0387e286c74, type: 2}
+  - {fileID: 11400000, guid: 26d38901680d02549a1682bbdf85475b, type: 2}
+  - {fileID: 11400000, guid: 26d38901680d02549a1682bbdf85475b, type: 2}
+  - {fileID: 11400000, guid: 26d38901680d02549a1682bbdf85475b, type: 2}
+  - {fileID: 11400000, guid: 37fdf9b14e2cd254b8b179561e3c6179, type: 2}
+  - {fileID: 11400000, guid: 37fdf9b14e2cd254b8b179561e3c6179, type: 2}
+  - {fileID: 11400000, guid: 37fdf9b14e2cd254b8b179561e3c6179, type: 2}
+  - {fileID: 11400000, guid: 4f490d1a78997be479e7083aea49db80, type: 2}
+  - {fileID: 11400000, guid: 4f490d1a78997be479e7083aea49db80, type: 2}
+  - {fileID: 11400000, guid: 76b6cc43f92a62e42bef06555571f894, type: 2}
+  - {fileID: 11400000, guid: 76b6cc43f92a62e42bef06555571f894, type: 2}
+  - {fileID: 11400000, guid: 4f39bfaa143d62e438de728d104af158, type: 2}
   _orderDeck:
   - {fileID: 11400000, guid: 1724ccd4d38bd2b49a319a29dea46b42, type: 2}
   - {fileID: 11400000, guid: c509bae800000514e8efedd75938f07d, type: 2}
-  - {fileID: 11400000, guid: 48e0aa82e09fc6046be46e9561ee7086, type: 2}
-  - {fileID: 11400000, guid: 48e0aa82e09fc6046be46e9561ee7086, type: 2}
-  - {fileID: 11400000, guid: 48e0aa82e09fc6046be46e9561ee7086, type: 2}
-  - {fileID: 11400000, guid: 48e0aa82e09fc6046be46e9561ee7086, type: 2}
+  - {fileID: 11400000, guid: 8716298607f15ea4d89f3a07b82c0c73, type: 2}
+  - {fileID: 11400000, guid: 8716298607f15ea4d89f3a07b82c0c73, type: 2}
+  - {fileID: 11400000, guid: 8716298607f15ea4d89f3a07b82c0c73, type: 2}
+  - {fileID: 11400000, guid: 8716298607f15ea4d89f3a07b82c0c73, type: 2}
   _drawPhasePanel: {fileID: 1902625384}
   _orderPanel: {fileID: 1348773466}
   Camera: {fileID: 1899992117}
@@ -21628,6 +21662,7 @@ MonoBehaviour:
   - {fileID: 623585657}
   - {fileID: 794703372}
   - {fileID: 1647961687}
+  _cardParent: {fileID: 1300500986}
   _heightOffset: 0.5
   _timeToMove: 1
 --- !u!4 &1353541915 stripped
@@ -27632,8 +27667,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1718021964}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.28057075, y: 0.22096562, z: -0.06651459, w: -0.93168133}
-  m_LocalPosition: {x: 1.4296265, y: 0.88340473, z: -0.023406982}
+  m_LocalRotation: {x: -0.3777716, y: 0.5127134, z: -0.26787844, w: -0.72294873}
+  m_LocalPosition: {x: 0.97619694, y: 1.2210464, z: 0.7516089}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -13,7 +13,7 @@ public class ObjectPool
         _parent = parent.transform;
         _objectType = objectType;
 
-        GameObject tmp;
+        //GameObject tmp;
 
         for (int i = 0; i < amount; i++)
         {

@@ -110,9 +110,11 @@ public abstract class Competitor : MonoBehaviour
         {
             card.transform.DOLocalMove(card.transform.localPosition + offset, DISCARD_DELAY);
             yield return new WaitForSeconds(DISCARD_DELAY);
-            stack.RemoveCardFromCollection(card);
 
             GameplayManager.Instance.DiscardIngredient(card.GetCardData());
         }
+
+        while (stack.Cards.Count > 0)
+            stack.RemoveCardFromCollection(stack.Cards.Peek());
     }
 }

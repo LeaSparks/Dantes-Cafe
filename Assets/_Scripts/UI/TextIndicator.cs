@@ -42,8 +42,9 @@ public class TextIndicator : MonoBehaviour
         
         if(GetComponentInParent<Canvas>().renderMode == RenderMode.WorldSpace)
         {
-            transform.rotation = Quaternion.LookRotation(gameObject.transform.position - Camera.main.transform.position);   //spacial UI needs to face camera
-            transform.position = Camera.main.ScreenToWorldPoint(target);
+            Camera cam = GameplayManager.Instance.Camera;
+            transform.rotation = Quaternion.LookRotation(gameObject.transform.position - cam.transform.position);   //spacial UI needs to face camera
+            transform.position = cam.ScreenToWorldPoint(target);
         } 
         
         transform.Translate(0f, _heightOffset, 0f);

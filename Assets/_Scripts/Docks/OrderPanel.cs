@@ -6,6 +6,7 @@ using UnityEngine;
 public class OrderPanel : MonoBehaviour
 {
     [SerializeField] List<Transform> _cardDocks = new();
+    [SerializeField] Transform _cardParent;
     [SerializeField] float _heightOffset = 0.5f;
     [SerializeField] float _timeToMove = 1f;
     OrderView[] _orders = new OrderView[3];
@@ -34,7 +35,10 @@ public class OrderPanel : MonoBehaviour
 
         var orderView = CardManager.Instance.GetPooledOrder().GetComponent<OrderView>();
         orderView.UpdateView(data);
-        
+
+        orderView.transform.SetParent(_cardParent);
+        orderView.transform.localRotation = Quaternion.identity;
+
         orderView.transform.position = _cardDocks[index].position - (Vector3.up * _heightOffset);
         _orders[index] = orderView;
 

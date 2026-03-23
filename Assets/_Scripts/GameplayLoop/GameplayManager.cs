@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameplayManager : Singleton<GameplayManager>
 {
     public static int IN_ORDER_MODIFIER = 3;
-    public static int WINNING_SCORE = 2;
+    public static int WINNING_SCORE = 10;
     public int RemainingOrders;
 
     private IState _currentState;
