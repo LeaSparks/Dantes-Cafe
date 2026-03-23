@@ -14,8 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OrderCardData
   cardName: Salad
   cardImage: {fileID: 21300000, guid: 1fd59d2e0741c5b4b85266254e80730d, type: 3}
-  ingredientList:
-  - {fileID: 11400000, guid: c6b0a481c60aba248ab7ddc0488464c0, type: 2}
-  - {fileID: 11400000, guid: 496965ade2ac8904bac946b85b749f36, type: 2}
-  - {fileID: 11400000, guid: 8316662363663684bb6c85e4a7e81944, type: 2}
-  - {fileID: 11400000, guid: 39857ac5b46bd4c4589d7b83636a2e89, type: 2}
+  ingredientList: 06000000000000000300000005000000

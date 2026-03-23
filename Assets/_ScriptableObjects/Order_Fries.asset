@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e037831191cd5746bf0bf751861cb8e, type: 3}
   m_Name: Order_Fries
   m_EditorClassIdentifier: Assembly-CSharp::OrderCardData
-  cardName: Fries
+  cardName: Tormented Fries
   cardImage: {fileID: 21300000, guid: d0b20a70472255a4791b4e2df4cf7458, type: 3}
-  ingredientList:
-  - {fileID: 11400000, guid: 720af8aee9dbbd74a8a214550cd9f4cb, type: 2}
-  - {fileID: 11400000, guid: 39857ac5b46bd4c4589d7b83636a2e89, type: 2}
-  - {fileID: 11400000, guid: b6d45338f62f11949ad7e16a8a1cbd82, type: 2}
+  ingredientList: 090000000500000004000000

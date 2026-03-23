@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e037831191cd5746bf0bf751861cb8e, type: 3}
-  m_Name: Order_Marinara
+  m_Name: Order_Pasta
   m_EditorClassIdentifier: Assembly-CSharp::OrderCardData
-  cardName: Cursed Marinara
-  cardImage: {fileID: 21300000, guid: bc20688dceb6ef04b89e2a0e00e1eb37, type: 3}
-  ingredientList: 0000000007000000
+  cardName: 'Living Pasta '
+  cardImage: {fileID: 21300000, guid: 24fa9ff36d39bd44e992f284f92ae1f0, type: 3}
+  ingredientList: 02000000080000000500000004000000

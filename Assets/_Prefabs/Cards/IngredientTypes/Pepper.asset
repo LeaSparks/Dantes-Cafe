@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pepper
   m_EditorClassIdentifier: Assembly-CSharp::CardIngredientData
   ingredient: 7
-  icon: {fileID: 21300000, guid: 77eeb70711fdcfa4c96dd650fdc1f773, type: 3}
+  icon: {fileID: 21300000, guid: 5ffc534f65e408d4bbbacf75bc214685, type: 3}
   panelColor: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 1}
   title: Pepper
   description: 
