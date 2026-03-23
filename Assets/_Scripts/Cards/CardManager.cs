@@ -23,7 +23,7 @@ public class CardManager : Singleton<CardManager>
     private void Start()
     {
         _ingredientPool = new ObjectPool(_ingredientPrefab, _ingredentPoolAmt, _cardParent);
-        //_orderPool = new ObjectPool(_orderPrefab, _orderPoolAmt, _cardParent);
+        _orderPool = new ObjectPool(_orderPrefab, _orderPoolAmt, _cardParent);
     }
 
     public GameObject GetPooledIngredient() => _ingredientPool.GetActivePooledObject();

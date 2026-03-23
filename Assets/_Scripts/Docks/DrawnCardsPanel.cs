@@ -6,6 +6,8 @@ public class DrawnCardsPanel : MonoBehaviour
 {
     [SerializeField] List<IngredientCardController> _ingredientCards = new();
     [SerializeField] TextMeshProUGUI _displayText;
+    [SerializeField]  SoundEffect _onDrawSFX;
+    [SerializeField]  SoundEffect _onShuffleSFX;
     //[SerializeField] int _drawnCardsAmount = 4;
 
     public int DrawnCardsAmount => _ingredientCards.Count;
@@ -19,6 +21,7 @@ public class DrawnCardsPanel : MonoBehaviour
         foreach (var card in _ingredientCards)
         {
             card.OnClicked.AddListener(() =>  MoveToHand(card, GameplayManager.Instance.Player.Hand));
+           
         }
     }
     private void OnDestroy()
@@ -69,9 +72,10 @@ public class DrawnCardsPanel : MonoBehaviour
             _ingredientCards[i].SetCardData(newCards[i]);
             _ingredientCards[i].gameObject.SetActive(true);
         }
-
         //Todo: Dotween animation of cards being drawn? (start vs end position?)
+        AudioManager.Instance.PlaySFX(_onShuffleSFX);
     }
+    
 
     public void MoveToHand(IngredientCardController card, Hand targetHand)
     {
@@ -85,8 +89,8 @@ public class DrawnCardsPanel : MonoBehaviour
 
         card.gameObject.SetActive(false);   //So that the player/enemy cannot select this one until it resets
         gameObject.SetActive(false);
-
         CardManager.Instance.AnimateMoveCardToDock(newCard, targetHand, null);
+        AudioManager.Instance.PlaySFX(_onDrawSFX);
     }
 
     public List<IngredientCardController> GetSelectableCards()

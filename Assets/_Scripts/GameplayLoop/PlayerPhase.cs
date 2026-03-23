@@ -1,7 +1,10 @@
+using UnityEngine;
+
 public class PlayerPhase : IState
 {
     private static int ACTIONS_LIMIT = 5;
     private bool _cardChosen;
+    [SerializeField] SoundEffect _onDoneSFX;
 
     public void Enter()
     {
@@ -31,5 +34,6 @@ public class PlayerPhase : IState
     {
         _cardChosen = true;
         GameplayManager.Instance.Player.SetDoneButtonVisibility(true);
+           
     }
 }

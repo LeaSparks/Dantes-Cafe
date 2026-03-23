@@ -64,6 +64,7 @@ public abstract class Competitor : MonoBehaviour
             }
         }
 
+        //Then an order is fulfilled
         GameplayManager.Instance.RemainingOrders--;
 
 
@@ -74,6 +75,8 @@ public abstract class Competitor : MonoBehaviour
         AddToScore(score, stack.transform.position);
         //animate cards being discarded
         StartCoroutine(AnimateDiscard(stack));
+        
+        GameplayManager.Instance.OrderPanel.RemoveOrderFromSpot(_stacks.IndexOf(stack));
 
 
         if(_score > GameplayManager.WINNING_SCORE || GameplayManager.Instance.RemainingOrders <= 0)
