@@ -9,7 +9,7 @@ public class Hand : CardDock
     [SerializeField] Transform _cardsParentTransform;       //this has to be above everything for raycasting!
     
     [SerializeField] int _handSizeLimit = 4;
-    [SerializeField] float _minimumSpacing = 30f;
+    [SerializeField] float _minimumSpacing = 0.01f;
     private List<IngredientCardController> _cards = new();
 
     // [Header("Debugging")]
@@ -52,20 +52,26 @@ public class Hand : CardDock
     {
         if(_cards.Count <= 0) return;
 
-        float horizontalSpacing = Mathf.Max(_minimumSpacing, _boxCollider.size.x / _cards.Count);
+        float horizontalSpacing = _boxCollider.size.x/ _cards.Count;
 
-        Vector3 newOrigin = _boxCollider.bounds.min;
+        Vector3 newOrigin = transform.InverseTransformPoint(_boxCollider.bounds.min);
+        newOrigin.y =  transform.InverseTransformPoint(_boxCollider.bounds.center).y;
+        
         for(int i = 0; i < _cards.Count; i++)
         {
-            newOrigin.x = i*horizontalSpacing + (horizontalSpacing / 2f);   //because the pivot is on the middle on the bottom
+            _cards[i].gameObject.transform.localRotation = Quaternion.identity;
+            newOrigin.x = (i*horizontalSpacing + (horizontalSpacing / 2f)) - (_boxCollider.size.x/2f); 
             newOrigin.z -= 0.05f;
-            _cards[i].gameObject.transform.position = newOrigin;
-            _cards[i].SetDockedPosition(transform.InverseTransformPoint(newOrigin));
+            
+            _cards[i].gameObject.transform.localPosition = newOrigin;
+            _cards[i].SetDockedPosition(newOrigin);
         }
 
+        Debug.Log($"horizontalSpacing: {horizontalSpacing}");
+
         //spacing for next card:
-        horizontalSpacing = Mathf.Max(_minimumSpacing, _boxCollider.size.x / (_cards.Count+1));
-        newOrigin.x =  (_cards.Count - 1) * horizontalSpacing + (horizontalSpacing / 2f);
+        horizontalSpacing = _boxCollider.size.x / (_cards.Count+1);
+        newOrigin.x =  (_cards.Count - 1) * horizontalSpacing + (horizontalSpacing / 2f) - (_boxCollider.size.x/2f);
         newOrigin.z -= 0.05f;
         
         NextLocalDock = newOrigin;

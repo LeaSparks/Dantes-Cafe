@@ -25,6 +25,9 @@ public class GameplayManager : Singleton<GameplayManager>
     [Header("UI Elements")]
     [SerializeField] private DrawnCardsPanel _drawPhasePanel;
 
+    [Header("Other stuff that really shouldnt be in here")]
+    public Camera Camera;
+
 
     //States
     private DrawPhase _drawPhase = new DrawPhase();
