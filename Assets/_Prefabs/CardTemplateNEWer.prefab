@@ -393,7 +393,8 @@ MonoBehaviour:
   colourPanel: {fileID: 5920747424734705915}
   titleText: {fileID: 3165291460030737161}
   descriptionText: {fileID: 5908011140836677219}
-  cardData: {fileID: 11400000, guid: 14b9c25146a4353469ac45872cb264ef, type: 2}
+  database: {fileID: 11400000, guid: 8a1538511adc61d459e7b9fbafd9e46d, type: 2}
+  cardData: {fileID: 11400000, guid: c94cbd02776d40c4abce9ef0cc2bac6d, type: 2}
 --- !u!114 &5949215588733164653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -536,7 +537,7 @@ GameObject:
   - component: {fileID: 613842363675962462}
   - component: {fileID: 5804949081341561740}
   m_Layer: 0
-  m_Name: FrontOfCard
+  m_Name: CardFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -729,7 +730,7 @@ GameObject:
   - component: {fileID: 3829635305067851846}
   - component: {fileID: 5920747424734705915}
   m_Layer: 0
-  m_Name: Panel
+  m_Name: ColourPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

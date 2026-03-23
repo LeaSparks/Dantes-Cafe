@@ -22713,7 +22713,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 1
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -25073,16 +25073,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 777139496021673102, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
-      propertyPath: cardData
+      propertyPath: database
       value: 
-      objectReference: {fileID: 11400000, guid: 3368ff8a1418b9644afc3ce686075d62, type: 2}
+      objectReference: {fileID: 11400000, guid: 8a1538511adc61d459e7b9fbafd9e46d, type: 2}
     - target: {fileID: 3768626631487975096, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_Name
       value: CardTemplateNEWer
-      objectReference: {fileID: 0}
-    - target: {fileID: 5050367818340442251, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
-      propertyPath: m_Name
-      value: CardFront
       objectReference: {fileID: 0}
     - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -25123,10 +25119,6 @@ PrefabInstance:
     - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5927068825506002107, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
-      propertyPath: m_Name
-      value: ColourPanel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
