@@ -18,6 +18,6 @@ public class EffectsController : Singleton<EffectsController>
     {
         string text = ((amount >= 0) ? "+" : "-") + Math.Abs(amount).ToString();
         _scoreIndicator.ShowIndicatorAtCanvasTarget(text, target);      //change it to the other one when we move away from convas stuff
-        //AudioManager.Instance.PlaySFX(_onScoreSFX);
+        AudioManager.Instance.PlaySFX(_onScoreSFX);
     }
 }

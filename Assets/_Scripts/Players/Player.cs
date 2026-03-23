@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class Player : Competitor
 {
     [SerializeField] Button _doneButton;
+    [SerializeField] SoundEffect _onDoneSFX;
 
     public void SetDoneButtonVisibility(bool isVisible)
     {
@@ -24,6 +25,7 @@ public class Player : Competitor
 
     public void OnDoneButtonClick()
     {
+        AudioManager.Instance.PlaySFX(_onDoneSFX); 
         SetDoneButtonVisibility(false);
         GameplayManager.Instance.ProceedToNextPhase();
     }
