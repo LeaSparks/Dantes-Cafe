@@ -15,7 +15,7 @@ public class DrawnCardsPanel : MonoBehaviour
         if(_displayText != null)
             _displayText.gameObject.SetActive(false);
         
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
         foreach (var card in _ingredientCards)
         {
             card.OnClicked.AddListener(() =>  MoveToHand(card, GameplayManager.Instance.Player.Hand));
@@ -31,7 +31,7 @@ public class DrawnCardsPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        if(GameplayManager.Instance == null) return;    //skip first call only
+        if(GameplayManager.Instance.TurnController == null) return;    //skip first call only
 
         bool playerTurn = GameplayManager.Instance.TurnController.IsPlayerTurn;
         foreach(var card in _ingredientCards)
@@ -81,6 +81,7 @@ public class DrawnCardsPanel : MonoBehaviour
         newCard.transform.localScale = card.transform.localScale;
 
         newCard.GetComponent<IngredientCardController>().SetCardData(card.Data);
+        newCard.GetComponent<CardDisplay>().ApplyCard(card.Data);
 
         card.gameObject.SetActive(false);   //So that the player/enemy cannot select this one until it resets
         gameObject.SetActive(false);

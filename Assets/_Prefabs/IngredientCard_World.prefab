@@ -658,6 +658,7 @@ GameObject:
   - component: {fileID: 3705209067921050054}
   - component: {fileID: 8463509555767474855}
   - component: {fileID: 3982614426836962408}
+  - component: {fileID: 1196207390718834713}
   m_Layer: 0
   m_Name: IngredientCard_World
   m_TagString: Untagged
@@ -724,6 +725,27 @@ MonoBehaviour:
   OnClicked:
     m_PersistentCalls:
       m_Calls: []
+--- !u!65 &1196207390718834713
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5603572069581696092}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.6220531, y: 4.9728703, z: 0.16580535}
+  m_Center: {x: -0.029494464, y: 0.03717892, z: 0.042682998}
 --- !u!1 &5847615437462793876
 GameObject:
   m_ObjectHideFlags: 0
