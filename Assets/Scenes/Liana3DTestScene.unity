@@ -4938,6 +4938,7 @@ MonoBehaviour:
   - {fileID: 288771480}
   _scoreText: {fileID: 2037226197}
   _doneButton: {fileID: 1363928}
+  _onDoneSFX: {fileID: 11400000, guid: 0ac7ebd398cb42841bc10a692afaf97f, type: 2}
 --- !u!4 &272942691 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000011668802970, guid: 1da0f560f9d4f264496521be0b49155a, type: 3}
