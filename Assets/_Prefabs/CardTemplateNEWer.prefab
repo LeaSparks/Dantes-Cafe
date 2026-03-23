@@ -364,7 +364,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -129.2, y: 0.5799999, z: 85}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2411270237761981646}
@@ -393,7 +393,6 @@ MonoBehaviour:
   colourPanel: {fileID: 5920747424734705915}
   titleText: {fileID: 3165291460030737161}
   descriptionText: {fileID: 5908011140836677219}
-  database: {fileID: 11400000, guid: 8a1538511adc61d459e7b9fbafd9e46d, type: 2}
   cardData: {fileID: 11400000, guid: c94cbd02776d40c4abce9ef0cc2bac6d, type: 2}
 --- !u!114 &5949215588733164653
 MonoBehaviour:
