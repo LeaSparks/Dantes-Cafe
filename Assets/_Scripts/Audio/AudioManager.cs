@@ -45,6 +45,17 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlaySFX(SoundEffect sound)
     {
+        if (sound == null)
+        {
+            Debug.LogError("SoundEffect is NULL");
+            return;
+        }
+
+        if (sound.Clip == null)
+        {
+            Debug.LogError($"SoundEffect {sound.name} has NO AudioClip assigned!");
+            return;
+        }
         AudioSource source = GetAudioSource();
         AssignSource(sound, source);
         source.Play();
