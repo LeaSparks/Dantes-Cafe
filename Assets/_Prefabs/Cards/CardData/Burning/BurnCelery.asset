@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BurnCelery
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   type: 4
-  ingredient: 0
+  ingredient: 11

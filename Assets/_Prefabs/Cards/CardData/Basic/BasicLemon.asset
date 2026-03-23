@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86ce717305b35d94d960ecb4571d8b6b, type: 3}
   m_Name: BasicLemon
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  type: 1
+  type: 0
   ingredient: 3

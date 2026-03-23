@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: RotCelery
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   type: 5
-  ingredient: 0
+  ingredient: 11

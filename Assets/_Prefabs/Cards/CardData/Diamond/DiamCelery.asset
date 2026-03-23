@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DiamCelery
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   type: 3
-  ingredient: 0
+  ingredient: 11
