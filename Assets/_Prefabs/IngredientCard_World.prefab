@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6935508170354404167}
   - component: {fileID: 4060813537204068424}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ColourPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 2905304189734696679}
   - component: {fileID: 8700487560141203898}
   - component: {fileID: 2281512694457672361}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Flavourtext
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 5228982249770933266}
   - component: {fileID: 5422678277744892663}
   - component: {fileID: 9005548840424925877}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: TextHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,7 +340,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1980235109767669883}
   - component: {fileID: 7364172154807442077}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CardFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -431,7 +431,7 @@ GameObject:
   - component: {fileID: 1950798944059641944}
   - component: {fileID: 1080588636154122701}
   - component: {fileID: 2331903085787083459}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -567,7 +567,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6240660907265312188}
   - component: {fileID: 4265628122847559354}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CardBacking
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -659,7 +659,7 @@ GameObject:
   - component: {fileID: 8463509555767474855}
   - component: {fileID: 3982614426836962408}
   - component: {fileID: 1196207390718834713}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: IngredientCard_World
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -719,7 +719,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientCardController
   _dropTargetMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   IsDraggable: 1
   IsClickable: 0
   OnClicked:
@@ -757,7 +757,7 @@ GameObject:
   - component: {fileID: 7217879318075424086}
   - component: {fileID: 1692465964112248678}
   - component: {fileID: 8447007171577983800}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GlowOutLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -864,7 +864,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3096240376183828156}
   - component: {fileID: 1993785989449244587}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Keyart
   m_TagString: Untagged
   m_Icon: {fileID: 0}

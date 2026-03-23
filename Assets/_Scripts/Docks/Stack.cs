@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine.Events;
 
 public class Stack : CardDock
 {
-    [SerializeField] float _minimumSpacing = 30f;
+    [SerializeField] float _minimumSpacing = 0.1f;
     [SerializeField] SpriteRenderer _spriteRenderer;
     private Coroutine _oscillationRoutine;
     private Stack<IngredientCardController> _cards = new();
@@ -28,7 +29,6 @@ public class Stack : CardDock
     {
         droppedCard.LastDock?.RemoveCardFromCollection(droppedCard);
         AddCardToCollection(droppedCard);
-        Debug.Log("yuh");
     }
 
     public override void RefreshCardPositions()
@@ -36,26 +36,29 @@ public class Stack : CardDock
         if(_cards.Count <= 0) return;
 
         //actual spacing
-        float verticalSpacing = Mathf.Max(_minimumSpacing, _boxCollider.size.y / _cards.Count);
+        float verticalSpacing =  Mathf.Max(_minimumSpacing, _boxCollider.bounds.size.y / _cards.Count);
 
-        Vector3 newOrigin = _boxCollider.bounds.min;    //might be getting wring corner here, will have to check
+
+        Vector3 newOrigin = transform.InverseTransformPoint(_boxCollider.bounds.min);
+        newOrigin.x =  transform.InverseTransformPoint(_boxCollider.bounds.center).x;
+        
         IngredientCardController[] cardArray = _cards.ToArray();
         int j = 0;
         for(int i = _cards.Count - 1; i >= 0; i--)
         {
+            cardArray[i].gameObject.transform.localRotation = Quaternion.identity;
+            
             newOrigin.y = j*verticalSpacing;
-            newOrigin.z -= 0.05f;
+            newOrigin.z -= 0.02f;
             j++;
-            cardArray[i].gameObject.transform.position = newOrigin;
-            cardArray[i].SetDockedPosition(transform.InverseTransformPoint(newOrigin));
+            cardArray[i].gameObject.transform.localPosition = newOrigin;
+            cardArray[i].SetDockedPosition(newOrigin);
         }
 
-        Debug.Log($"Set dock to: {newOrigin}, min bounds are: {_boxCollider.bounds.min}");
-
         //spacing for next card:
-        verticalSpacing = Mathf.Max(_minimumSpacing, _boxCollider.size.z / (_cards.Count+1));
+        verticalSpacing = _boxCollider.size.z / (_cards.Count+1) ;
         newOrigin.y =  (_cards.Count - 1) * verticalSpacing;
-        newOrigin.z -= 0.05f;
+        newOrigin.z -= 0.02f;
         
         NextLocalDock = newOrigin;
     }
@@ -106,22 +109,27 @@ public class Stack : CardDock
         {
             StopCoroutine(_oscillationRoutine);
             _oscillationRoutine = null;
+             
+            var color = _spriteRenderer.color;
+            color.a = 0.1f;
+            _spriteRenderer.color = color;
         }
     }
 
     private IEnumerator OscillateBorder()
     {
         float time = 0;     //all these bad magic numbers hehehe
-        float min = 10;
-        float max = 200;
-        float frequency = 2f;
+        float min = 0.1f;
+        float max = 0.9f;
+        float frequency = 0.5f;
         float value = 0;
 
         Color color = _spriteRenderer.color;
-        while(_oscillationRoutine != null && gameObject.activeInHierarchy)
+        while(gameObject.activeInHierarchy)
         {
            value = Mathf.Sin(time * frequency * 2f * Mathf.PI);
            color.a = Mathf.Lerp(min, max, value);
+           _spriteRenderer.color = color;
            
            yield return null;
            time += Time.deltaTime;

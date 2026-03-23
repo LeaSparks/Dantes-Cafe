@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2648425676336344205}
   - component: {fileID: 8647795973879397671}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,8 +51,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 0.19314744}
+  m_Center: {x: 0, y: -0.0000000020234845, z: 0.40342656}
 --- !u!1 &5430406893319838135
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9125384377940671794}
   - component: {fileID: 6957380216375577910}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
