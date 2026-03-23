@@ -704,7 +704,7 @@ MonoBehaviour:
   colourPanel: {fileID: 4060813537204068424}
   titleText: {fileID: 2331903085787083459}
   descriptionText: {fileID: 2281512694457672361}
-  cardData: {fileID: 11400000, guid: 4f344945788dd8346a55002ca5624214, type: 2}
+  cardData: {fileID: 0}
 --- !u!114 &3982614426836962408
 MonoBehaviour:
   m_ObjectHideFlags: 0
