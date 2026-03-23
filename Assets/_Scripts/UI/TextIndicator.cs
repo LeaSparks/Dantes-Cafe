@@ -21,14 +21,14 @@ public class TextIndicator : MonoBehaviour
         _text.SetText(str);
 
         transform.position = target;//.position;
+        var cam = GameplayManager.Instance.Camera;
         
-        if(GetComponentInParent<Canvas>().renderMode == RenderMode.WorldSpace) 
-            transform.rotation = Quaternion.LookRotation(gameObject.transform.position - Camera.main.transform.position);   //spacial UI needs to face camera
-        else
-            transform.position = Camera.main.WorldToScreenPoint(transform.position);            //non-spatial UI has to be converted to screen coordinates
+        if (GetComponentInParent<Canvas>().renderMode == RenderMode.WorldSpace) 
+            transform.rotation = Quaternion.LookRotation(gameObject.transform.position - cam.transform.position);   //spacial UI needs to face camera
+         else
+            transform.position = cam.WorldToScreenPoint(transform.position);            //non-spatial UI has to be converted to screen coordinates
         
         transform.Translate(0f, _heightOffset, 0f);
-
         transform.DOMoveY(transform.position.y + _heightTravelled, _activeTime).OnComplete(() => gameObject.SetActive(false));
     }
 

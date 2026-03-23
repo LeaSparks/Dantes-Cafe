@@ -21467,11 +21467,11 @@ PrefabInstance:
       objectReference: {fileID: 1345823974}
     - target: {fileID: 2860862779751149958, guid: 17d085534821a7f408b8d212569a9f90, type: 3}
       propertyPath: _heightOffset
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2860862779751149958, guid: 17d085534821a7f408b8d212569a9f90, type: 3}
       propertyPath: _heightTravelled
-      value: 150
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 5774659254498629244, guid: 17d085534821a7f408b8d212569a9f90, type: 3}
       propertyPath: m_SizeDelta.x

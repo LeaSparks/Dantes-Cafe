@@ -64,21 +64,20 @@ public abstract class Competitor : MonoBehaviour
             }
         }
 
-        //Then an order is fulfilled
         GameplayManager.Instance.RemainingOrders--;
 
-
+        //update score
         if(isInOrder)
             score += GameplayManager.IN_ORDER_MODIFIER;
 
         
         AddToScore(score, stack.transform.position);
+        
         //animate cards being discarded
         StartCoroutine(AnimateDiscard(stack));
-        
         GameplayManager.Instance.OrderPanel.RemoveOrderFromSpot(_stacks.IndexOf(stack));
 
-
+        //check for win
         if(_score > GameplayManager.WINNING_SCORE || GameplayManager.Instance.RemainingOrders <= 0)
         {
             GameplayManager.Instance.GameOver();
@@ -115,6 +114,11 @@ public abstract class Competitor : MonoBehaviour
         }
 
         while (stack.Cards.Count > 0)
-            stack.RemoveCardFromCollection(stack.Cards.Peek());
+        {
+            var c = stack.Cards.Peek();
+            stack.RemoveCardFromCollection(c);
+            CardManager.Instance.ReturnIngredientCardToPool(c);
+        }
+
     }
 }

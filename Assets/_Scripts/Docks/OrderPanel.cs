@@ -64,7 +64,7 @@ public class OrderPanel : MonoBehaviour
             Debug.LogError($"Trying to remove an order card to an invalid index {index}");
             return;
         }
-        var card = _orders[index].gameObject;
+        var card = _orders[index];
 
         if (_orders[index] != null && _orders[index] == this)
             _orders[index] = null;
@@ -72,7 +72,7 @@ public class OrderPanel : MonoBehaviour
         _canAnimateNewCard[index] = false;
         card.transform.DOMove(card.transform.position - (Vector3.up *_heightOffset), _timeToMove).OnComplete(() =>
         {
-            card.gameObject.SetActive(false);
+            CardManager.Instance.ReturnOrderCardToPool(card);
             _canAnimateNewCard[index] = true;
         });
     }

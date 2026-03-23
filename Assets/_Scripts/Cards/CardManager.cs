@@ -29,6 +29,18 @@ public class CardManager : Singleton<CardManager>
     public GameObject GetPooledIngredient() => _ingredientPool.GetActivePooledObject();
     public GameObject GetPooledOrder() => _orderPool.GetActivePooledObject(); 
 
+    public void ReturnIngredientCardToPool(IngredientCardController card)
+    {
+        card.gameObject.SetActive(false);
+        card.transform.SetParent(_cardParent.transform);
+    }
+
+    public void ReturnOrderCardToPool(OrderView card)
+    {
+        card.gameObject.SetActive(false);
+        card.transform.SetParent(_cardParent.transform);
+    }
+
     public CardDisplay GetPooledIngredientDisplay()
     {
         return GetPooledIngredient().GetComponent<CardDisplay>();

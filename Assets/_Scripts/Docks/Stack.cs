@@ -9,7 +9,7 @@ public class Stack : CardDock
     [SerializeField] float _minimumSpacing = 0.1f;
     [SerializeField] SpriteRenderer _spriteRenderer;
     private Coroutine _oscillationRoutine;
-    private Stack<IngredientCardController> _cards = new();
+    [SerializeField] private Stack<IngredientCardController> _cards = new();
     private OrderCardData _associatedOrder;
     private List<CardIngredient> _requiredIngredients = new();
 
@@ -81,7 +81,7 @@ public class Stack : CardDock
 
     public override void RemoveCardFromCollection(IngredientCardController card)
     {
-        if(_cards.Peek() != card || _cards.Peek() == null)
+        if (_cards.Peek() != card || _cards.Peek() == null)
         {
             Debug.LogError("Trying to remove a card that is not at the top of the stack!");
         } else

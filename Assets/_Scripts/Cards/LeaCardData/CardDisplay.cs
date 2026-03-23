@@ -59,7 +59,6 @@ public class CardDisplay : MonoBehaviour
 
             // if (typeData.isBurning)
             //     Debug.Log("Special Card!");
-            Debug.Log($"Applied type: {card.type}");
         }
 
         // ===== INGREDIENT =====
@@ -75,8 +74,6 @@ public class CardDisplay : MonoBehaviour
 
             titleText.text = ingredientData.title;
             descriptionText.text = ingredientData.description;
-
-            Debug.Log($"Applied ingredient: {card.ingredient}");
         }
     }
 }
