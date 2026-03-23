@@ -9,7 +9,7 @@ using UnityEngine.Events;
     This is what the player interacts with.
 */
 [RequireComponent (typeof(CardDisplay))]
-public class IngredientCardController : MonoBehaviour, 
+public class IngredientCardController_UI : MonoBehaviour, 
     IPointerExitHandler, IPointerEnterHandler,
     IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
@@ -42,7 +42,6 @@ public class IngredientCardController : MonoBehaviour,
     {
         _view = GetComponent<CardDisplay>();
         outlineVisual = GetComponentInChildren<CardOutLineVisual>(true); 
-        _dockedLocalPosition = transform.localPosition;
     }
 
     private void OnDestroy()
@@ -67,28 +66,18 @@ public class IngredientCardController : MonoBehaviour,
     {
         if(IsDraggable == false) return;
 
-        //gameObject.transform.position += (Vector3)eventData.delta;
-        Ray ray = GameplayManager.Instance.Camera.ScreenPointToRay(eventData.position);
-
-        Plane plane = new Plane(Vector3.up, transform.position);
-
-        if (plane.Raycast(ray, out float dist))
-        {
-            transform.position = ray.GetPoint(dist);
-        }
-
+        gameObject.transform.position += (Vector3)eventData.delta;
         CheckCardTargeting(eventData); 
     }
 
     public void OnEndDrag(PointerEventData eventData)
-    {          
+    {  
         if(IsDraggable == false) return;
 
         _IsHeld = false;
         if (_currentTarget != null && _currentTarget.IsTargetable())
         {
-            _currentTarget.OnDrop(this, eventData.position);
-            _currentTarget?.OnEndHoveringOver();
+            //_currentTarget.OnDrop(this, eventData.position);
         }
         else
         {
@@ -111,7 +100,7 @@ public class IngredientCardController : MonoBehaviour,
                 {
                     _currentTarget?.OnEndHoveringOver();
                     _currentTarget = _newTarget;
-                    _currentTarget.OnStartHoveringOver(this);
+                    //_currentTarget.OnStartHoveringOver(this);
                 }
                 return;
             }
@@ -128,20 +117,19 @@ public class IngredientCardController : MonoBehaviour,
 #region Hovering Card
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (_IsHeld || (IsDraggable == false && IsClickable == false))
+        if (_IsHeld || IsDraggable == false)
             return;
-        
-        outlineVisual?.ShowHover(); //Outline visual 
+       // outlineVisual?.ShowHover();//Outline visual 
         HoverStartEvent?.Invoke(_data);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (_IsHeld || (IsDraggable == false && IsClickable == false))
+        if (_IsHeld || IsDraggable == false)
             return;
 
-        //gameObject.transform.DOLocalMove(_dockedLocalPosition, 0.5f);
-        outlineVisual?.Hide(); //Outline visual 
+        gameObject.transform.DOLocalMove(_dockedLocalPosition, 0.5f);
+      //  outlineVisual?.Hide(); //Outline visual 
         HoverEndEvent?.Invoke();
     }
 

@@ -17,13 +17,16 @@ public class GameplayManager : Singleton<GameplayManager>
 
     //Decks
     [Header("Decks")]
-    [SerializeField] private List<IngredientCardData> _ingredientsDeck = new();
-    private List<IngredientCardData> _backupDeck;         //THIS IS FOR TESTING
+    [SerializeField] private List<CardData> _ingredientsDeck = new();
+    private List<CardData> _backupDeck;         //THIS IS FOR TESTING
     [SerializeField] private List<OrderCardData> _orderDeck = new();
-    private List<IngredientCardData> _ingredientsDiscard = new();
+    private List<CardData> _ingredientsDiscard = new();
 
     [Header("UI Elements")]
     [SerializeField] private DrawnCardsPanel _drawPhasePanel;
+
+    [Header("Other stuff that really shouldnt be in here")]
+    public Camera Camera;
 
 
     //States
@@ -44,7 +47,7 @@ public class GameplayManager : Singleton<GameplayManager>
         _turnController = gameObject.GetComponent<TurnController>();
         _drawPhasePanel.gameObject.SetActive(false);
 
-        _backupDeck = new List<IngredientCardData>(_ingredientsDeck);
+        _backupDeck = new List<CardData>(_ingredientsDeck);
         RemainingOrders = _orderDeck.Count;
 
         for(int i = 0; i < 3; i++)
@@ -86,12 +89,12 @@ public class GameplayManager : Singleton<GameplayManager>
     }
     // ----------------------------------------------------
     #region Deck Controls
-    public IngredientCardData DrawNewIngredientCard()
+    public CardData DrawNewIngredientCard()
     {
         if(_ingredientsDeck.Count > 0)
         {
             int i = Random.Range(0, _ingredientsDeck.Count);
-            IngredientCardData card = _ingredientsDeck[i];
+            CardData card = _ingredientsDeck[i];
             _ingredientsDeck.RemoveAt(i);
             
             return card;
@@ -112,7 +115,7 @@ public class GameplayManager : Singleton<GameplayManager>
         
     }
 
-    public void DiscardIngredient(IngredientCardData card)
+    public void DiscardIngredient(CardData card)
     {
         _ingredientsDiscard.Add(card);
     }

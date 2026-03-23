@@ -57,8 +57,9 @@ public class CardDisplay : MonoBehaviour
 
             keyArtRenderer.color = typeData.spriteTint;
 
-            if (typeData.isBurning)
-                Debug.Log("Special Card!");
+            // if (typeData.isBurning)
+            //     Debug.Log("Special Card!");
+            Debug.Log($"Applied type: {card.type}");
         }
 
         // ===== INGREDIENT =====
@@ -74,6 +75,8 @@ public class CardDisplay : MonoBehaviour
 
             titleText.text = ingredientData.title;
             descriptionText.text = ingredientData.description;
+
+            Debug.Log($"Applied ingredient: {card.ingredient}");
         }
     }
 }

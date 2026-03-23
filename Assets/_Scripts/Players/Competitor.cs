@@ -4,7 +4,6 @@ using System.Linq;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 
 public abstract class Competitor : MonoBehaviour
 {
@@ -21,6 +20,8 @@ public abstract class Competitor : MonoBehaviour
     protected virtual void Start()
     {
         _hand = GetComponentInChildren<Hand>();
+        if(_hand == null)
+            Debug.Log("NO HAND");
         foreach(var stack in _stacks)
         {
             stack.NewIngredientAdded.AddListener((s, ing) => CheckStackForScore(s));
@@ -40,22 +41,22 @@ public abstract class Competitor : MonoBehaviour
         bool isInOrder = true;
         int score = 0;
 
-        var comparisonList = new List<IngredientCardData>();
-        //comparisonList.AddRange(stack.GetAssociatedOrder().IngredientList);
+        var comparisonList = new List<CardIngredient>();
+        comparisonList.AddRange(stack.GetAssociatedOrder().IngredientList);
         var stackList = stack.Cards.ToList();
 
         for(int i = 0; i < stack.Cards.Count; i++)
         {
             var card = stackList[i].GetCardData();
             
-            if (comparisonList.Contains(card))
+            if (comparisonList.Contains(card.ingredient))
             {
-                if(isInOrder && comparisonList[i] != stackList[stackList.Count - (i+1)])
+                if(isInOrder && stack.GetAssociatedOrder().IngredientList[i] != stackList[stackList.Count - (i+1)].GetCardData().ingredient)
                     isInOrder = false;
                 
-                comparisonList.Remove(card);
+                comparisonList.Remove(card.ingredient);
              
-                score += card.Value;
+                score += CardDatabase.Instance.GetTypeData(card.type).pointValue;
             } 
             else
             {

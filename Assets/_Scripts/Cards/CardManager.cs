@@ -23,11 +23,16 @@ public class CardManager : Singleton<CardManager>
     private void Start()
     {
         _ingredientPool = new ObjectPool(_ingredientPrefab, _ingredentPoolAmt, _cardParent);
-        _orderPool = new ObjectPool(_orderPrefab, _orderPoolAmt, _cardParent);
+        //_orderPool = new ObjectPool(_orderPrefab, _orderPoolAmt, _cardParent);
     }
 
     public GameObject GetPooledIngredient() => _ingredientPool.GetActivePooledObject();
     public GameObject GetPooledOrder() => _orderPool.GetActivePooledObject(); 
+
+    public CardDisplay GetPooledIngredientDisplay()
+    {
+        return GetPooledIngredient().GetComponent<CardDisplay>();
+    }
 
     public void AnimateMoveCardToDock(GameObject card, CardDock dock, Action onCompleteDelegate)
     {

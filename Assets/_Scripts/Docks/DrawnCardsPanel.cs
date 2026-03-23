@@ -12,6 +12,10 @@ public class DrawnCardsPanel : MonoBehaviour
 
     private void Start()
     {
+        if(_displayText != null)
+            _displayText.gameObject.SetActive(false);
+        
+        //gameObject.SetActive(false);
         foreach (var card in _ingredientCards)
         {
             card.OnClicked.AddListener(() =>  MoveToHand(card, GameplayManager.Instance.Player.Hand));
@@ -27,7 +31,7 @@ public class DrawnCardsPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        if(GameplayManager.Instance == null) return;    //skip first call only
+        if(GameplayManager.Instance.TurnController == null) return;    //skip first call only
 
         bool playerTurn = GameplayManager.Instance.TurnController.IsPlayerTurn;
         foreach(var card in _ingredientCards)
@@ -36,15 +40,24 @@ public class DrawnCardsPanel : MonoBehaviour
         UpdateText(playerTurn);
     }
 
+    private void OnDisable()
+    {
+        if(_displayText != null)
+            _displayText.gameObject.SetActive(false);
+    }
+
     public void UpdateText(bool isPlayersTurn)
     {
+        if(_displayText == null) return;
+
+        _displayText.gameObject.SetActive(true);
         if (isPlayersTurn)
             _displayText.text = "Choose an ingredient:";
         else
             _displayText.text = "Enemy is choosing an ingredient...";
     }
 
-    public void SetNewCards(List<IngredientCardData> newCards, bool isPlayersTurn)
+    public void SetNewCards(List<CardData> newCards, bool isPlayersTurn)
     {
         if(newCards.Count < _ingredientCards.Count)
         {
@@ -67,6 +80,7 @@ public class DrawnCardsPanel : MonoBehaviour
         newCard.transform.rotation = card.transform.rotation;
         newCard.transform.localScale = card.transform.localScale;
 
+        //var data = newCard.GetComponent<>
         newCard.GetComponent<IngredientCardController>().SetCardData(card.Data);
 
         card.gameObject.SetActive(false);   //So that the player/enemy cannot select this one until it resets

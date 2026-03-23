@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : Competitor
@@ -57,7 +55,7 @@ public class Enemy : Competitor
 
         int actionIndex = UnityEngine.Random.Range(0, _validActions.Count);
         var tuple = _validActions[actionIndex];
-        Debug.Log($"Chose Action: {tuple.Item1.GetCardData().Name} from {tuple.Item1.LastDock} to {tuple.Item2}");
+        Debug.Log($"Chose Action: {tuple.Item1.GetCardData().ingredient} from {tuple.Item1.LastDock} to {tuple.Item2}");
 
         _validActions.Remove(tuple);
 
@@ -90,7 +88,7 @@ public class Enemy : Competitor
         foreach(Stack s in _stacks)
         {
 
-            if (s.RequiredIngredients.Contains(ing.GetCardData()))
+            if (s.RequiredIngredients.Contains(ing.GetCardData().ingredient))
             {
                 _validActions.Add(new Tuple<IngredientCardController, CardDock>(ing, s));
             }
