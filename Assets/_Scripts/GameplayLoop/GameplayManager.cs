@@ -24,6 +24,7 @@ public class GameplayManager : Singleton<GameplayManager>
 
     [Header("UI Elements")]
     [SerializeField] private DrawnCardsPanel _drawPhasePanel;
+    [SerializeField] private OrderPanel _orderPanel;
 
     [Header("Other stuff that really shouldnt be in here")]
     public Camera Camera;
@@ -37,6 +38,7 @@ public class GameplayManager : Singleton<GameplayManager>
     public IState CurrentState => _currentState;
 
     public DrawnCardsPanel DrawPanel => _drawPhasePanel;
+    public OrderPanel OrderPanel => _orderPanel;
     public TurnController TurnController => _turnController;
 
     public Player Player => _player;
@@ -139,6 +141,7 @@ public class GameplayManager : Singleton<GameplayManager>
 
         _player.GetStackAtIndex(stackIndex).SetAssociatedOrderCard(_orderDeck[i]);
         _enemy.GetStackAtIndex(stackIndex).SetAssociatedOrderCard(_orderDeck[i]);
+        _orderPanel.AssignOrderToSpot(_orderDeck[i], stackIndex);
 
         _orderDeck.RemoveAt(i);
     }
