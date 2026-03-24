@@ -10,7 +10,7 @@ public class DrawnCardsPanel : MonoBehaviour
     [SerializeField] List<IngredientCardController> _ingredientCards = new();
     [SerializeField] Transform _drawOrigin;
     private List<Vector3> _cardPositions = new();
-    [SerializeField] TextMeshProUGUI _displayText;
+    //[SerializeField] TextMeshProUGUI _displayText;
     [SerializeField]  SoundEffect _onDrawSFX;
     [SerializeField]  SoundEffect _onShuffleSFX;
     //[SerializeField] int _drawnCardsAmount = 4;
@@ -27,13 +27,11 @@ public class DrawnCardsPanel : MonoBehaviour
 
     private void Start()
     {
-        if(_displayText != null)
-            _displayText.gameObject.SetActive(false);
-        
         //gameObject.SetActive(false);
         foreach (var card in _ingredientCards)
         {
-            card.OnClicked.AddListener(() =>  MoveToHand(card, GameplayManager.Instance.Player.Hand));
+            card.OnClicked.AddListener(() =>  MoveToHand(card, GameplayManager.Instance.Player.Hand, 1f));
+            card.OnClicked.AddListener(() =>  GameplayManager.Instance.ChangeCameraToView(0));
         }
     }
     private void OnDestroy()
@@ -53,21 +51,15 @@ public class DrawnCardsPanel : MonoBehaviour
         UpdateText(playerTurn);
     }
 
-    private void OnDisable()
-    {
-        if(_displayText != null)
-            _displayText.gameObject.SetActive(false);
-    }
-
     public void UpdateText(bool isPlayersTurn)
     {
-        if(_displayText == null) return;
+        //if(_displayText == null) return;
 
-        _displayText.gameObject.SetActive(true);
+        //_displayText.gameObject.SetActive(true);
         if (isPlayersTurn)
-            _displayText.text = "Choose an ingredient:";
+            GameplayManager.Instance.InfoText.text = "Choose an ingredient:";
         else
-            _displayText.text = "Enemy is choosing an ingredient...";
+            GameplayManager.Instance.InfoText.text = "Enemy is choosing an ingredient...";
     }
 
     public void SetNewCards(List<CardData> newCards, bool isPlayersTurn)
@@ -90,7 +82,7 @@ public class DrawnCardsPanel : MonoBehaviour
     }
     
 
-    public void MoveToHand(IngredientCardController card, Hand targetHand)
+    public void MoveToHand(IngredientCardController card, Hand targetHand, float duration)
     {
         var newCard = CardManager.Instance.GetPooledIngredient();
         newCard.transform.position = card.transform.position;
@@ -102,7 +94,7 @@ public class DrawnCardsPanel : MonoBehaviour
 
         card.gameObject.SetActive(false);   //So that the player/enemy cannot select this one until it resets
         
-        CardManager.Instance.AnimateMoveCardToDock(newCard, targetHand, null);
+        CardManager.Instance.AnimateMoveCardToDock(newCard, targetHand, null, duration);
         AudioManager.Instance.PlaySFX(_onDrawSFX);
     }
 

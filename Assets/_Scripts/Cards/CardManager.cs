@@ -15,7 +15,7 @@ public class CardManager : Singleton<CardManager>
     ObjectPool _orderPool;
 
     [Header("Card Animations")]
-    [SerializeField] float _timeToMove;
+    //[SerializeField] float _timeToMove;
     [SerializeField] GameObject _cardParent;
 
     public UnityEvent OnCardReachedTarget = new();
@@ -46,11 +46,11 @@ public class CardManager : Singleton<CardManager>
         return GetPooledIngredient().GetComponent<CardDisplay>();
     }
 
-    public void AnimateMoveCardToDock(GameObject card, CardDock dock, Action onCompleteDelegate)
+    public void AnimateMoveCardToDock(GameObject card, CardDock dock, Action onCompleteDelegate, float time = 0.5f)
     {
         card.transform.SetParent(dock.transform);   //jsut in case
 
-        card.transform.DOLocalMove(dock.NextLocalDock, _timeToMove).OnComplete(() => 
+        card.transform.DOLocalMove(dock.NextLocalDock, time).OnComplete(() => 
         {
             dock.OnDrop(card.GetComponent<IngredientCardController>(), Vector3.zero);
             OnCardReachedTarget?.Invoke(); 
@@ -58,9 +58,9 @@ public class CardManager : Singleton<CardManager>
         });
     }
 
-    public void AnimateMoveCardToPosition(GameObject card, Vector3 target, Action onCompleteDelegate)
+    public void AnimateMoveCardToPosition(GameObject card, Vector3 target, Action onCompleteDelegate, float time = 0.5f)
     {
-        card.transform.DOMove(target, _timeToMove).OnComplete(() =>
+        card.transform.DOMove(target, time).OnComplete(() =>
         {
             OnCardReachedTarget?.Invoke();
             onCompleteDelegate();

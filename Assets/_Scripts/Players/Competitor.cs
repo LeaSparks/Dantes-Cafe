@@ -72,7 +72,9 @@ public abstract class Competitor : MonoBehaviour
 
         
         AddToScore(score, stack.transform.position);
-        
+        GameplayManager.Instance.TurnController.SwapSelfToLast(this);
+
+
         //animate cards being discarded
         StartCoroutine(AnimateDiscard(stack));
         GameplayManager.Instance.OrderPanel.RemoveOrderFromSpot(_stacks.IndexOf(stack));

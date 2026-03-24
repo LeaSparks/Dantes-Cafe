@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof( TurnController))]
@@ -28,6 +29,7 @@ public class GameplayManager : Singleton<GameplayManager>
 
     [Header("Other stuff that really shouldnt be in here")]
     public Camera Camera;
+    [SerializeField] TextMeshProUGUI _infoText;
 
 
     //States
@@ -40,6 +42,7 @@ public class GameplayManager : Singleton<GameplayManager>
     public DrawnCardsPanel DrawPanel => _drawPhasePanel;
     public OrderPanel OrderPanel => _orderPanel;
     public TurnController TurnController => _turnController;
+    public TextMeshProUGUI InfoText => _infoText;
 
     public Player Player => _player;
     public Enemy Enemy => _enemy;
@@ -158,5 +161,10 @@ public class GameplayManager : Singleton<GameplayManager>
             //Enemy wins, show lose screen
             Debug.Log("YOU LOST!");
         }
+    }
+
+    public void ChangeCameraToView(int viewIndex)
+    {
+        Camera.GetComponent<MultiStateCameraController>().SwitchState(viewIndex);
     }
 }

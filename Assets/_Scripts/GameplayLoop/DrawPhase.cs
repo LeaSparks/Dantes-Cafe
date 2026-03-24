@@ -6,7 +6,9 @@ public class DrawPhase : IState
     public void Enter()
     {
         DrawnCardsPanel drawPanel = GameplayManager.Instance.DrawPanel;
-        
+        GameplayManager.Instance.ChangeCameraToView(3);
+        GameplayManager.Instance.InfoText.text = "";
+
         //Draw new ingredient cards from the deck
         List<CardData> drawnCards = new();
         

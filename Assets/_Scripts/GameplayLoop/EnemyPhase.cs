@@ -11,6 +11,8 @@ public class EnemyPhase : IState
     public void Enter()
     {
         GameplayManager.Instance.DrawPanel.UpdateDrawPanel();
+        GameplayManager.Instance.ChangeCameraToView(3);
+       
 
         /*
             Start coroutine:
@@ -32,7 +34,7 @@ public class EnemyPhase : IState
         
         CardManager.Instance.OnCardReachedTarget.AddListener(OnCardReachedHand);
 
-        GameplayManager.Instance.DrawPanel.MoveToHand(card, GameplayManager.Instance.Enemy.Hand);
+        GameplayManager.Instance.DrawPanel.MoveToHand(card, GameplayManager.Instance.Enemy.Hand, 1f);
 
     }
 
@@ -43,7 +45,11 @@ public class EnemyPhase : IState
     private async void OnCardReachedHand()
     {
         CardManager.Instance.OnCardReachedTarget.RemoveListener(OnCardReachedHand);
-        
+
+        GameplayManager.Instance.ChangeCameraToView(2);
+        GameplayManager.Instance.InfoText.text = "Enemy is making actions...";
+
+
         await Awaitable.WaitForSecondsAsync(0.2f);
         GameplayManager.Instance.Enemy.ChooseActionSequence(ACTIONS_LIMIT);
     }

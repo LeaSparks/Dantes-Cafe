@@ -64,7 +64,7 @@ public class Enemy : Competitor
             tuple.Item2.RefreshCardPositions();
             await Awaitable.WaitForSecondsAsync(0.3f);
             ChooseNewActionAndAnimate(counter-1);
-        });
+        }, 0.7f);
     }
 
     private void ReviewAddedStackCard(Stack stack, IngredientCardController ing)

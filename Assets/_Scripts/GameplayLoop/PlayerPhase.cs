@@ -11,6 +11,8 @@ public class PlayerPhase : IState
         _cardChosen = false;
        
         GameplayManager.Instance.DrawPanel.UpdateDrawPanel();
+        GameplayManager.Instance.ChangeCameraToView(3);
+
         CardManager.Instance.OnCardReachedTarget.AddListener(ActionPhaseStart);
 
         GameplayManager.Instance.Player.SetActionsCount(0);
@@ -34,6 +36,8 @@ public class PlayerPhase : IState
     {
         _cardChosen = true;
         GameplayManager.Instance.Player.SetDoneButtonVisibility(true);
-           
+        GameplayManager.Instance.InfoText.text = "Make your actions.";
+
+
     }
 }
