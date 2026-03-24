@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BackgroundMusic
   m_EditorClassIdentifier: Assembly-CSharp::SoundEffect
   <Clip>k__BackingField: {fileID: 8300000, guid: 249845fa77628cf41a4f9d93d2f34dcd, type: 3}
-  <Volume>k__BackingField: 0.9
+  <Volume>k__BackingField: 0.7
   <Pitch>k__BackingField: 1
   <Loop>k__BackingField: 1

@@ -21086,7 +21086,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1724ccd4d38bd2b49a319a29dea46b42, type: 2}
   - {fileID: 11400000, guid: 1e5f7798d57ed024f84210a1ca5756b5, type: 2}
   - {fileID: 11400000, guid: 48e0aa82e09fc6046be46e9561ee7086, type: 2}
-  - {fileID: 11400000, guid: 8716298607f15ea4d89f3a07b82c0c73, type: 2}
   _drawPhasePanel: {fileID: 1902625384}
   _orderPanel: {fileID: 1348773466}
   Camera: {fileID: 1899992117}
