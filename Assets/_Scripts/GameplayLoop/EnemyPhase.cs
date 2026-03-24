@@ -35,6 +35,7 @@ public class EnemyPhase : IState
         CardManager.Instance.OnCardReachedTarget.AddListener(OnCardReachedHand);
 
         GameplayManager.Instance.DrawPanel.MoveToHand(card, GameplayManager.Instance.Enemy.Hand, 1f);
+        GameplayManager.Instance.ChangeCameraToView(2);
 
     }
 
@@ -45,8 +46,6 @@ public class EnemyPhase : IState
     private async void OnCardReachedHand()
     {
         CardManager.Instance.OnCardReachedTarget.RemoveListener(OnCardReachedHand);
-
-        GameplayManager.Instance.ChangeCameraToView(2);
         GameplayManager.Instance.InfoText.text = "Enemy is making actions...";
 
 

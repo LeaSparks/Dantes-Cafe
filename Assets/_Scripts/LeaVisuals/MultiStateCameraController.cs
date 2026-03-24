@@ -94,7 +94,7 @@ public class MultiStateCameraController : MonoBehaviour
         if (index < 0 || index >= states.Length) return;
         if (states[index] == null || states[index].cameraPoint == null) return;
         if (isTransitioning || index == currentStateIndex) return;
-
+        Debug.Log($"Camera Mode: {index}");
         StartCoroutine(TransitionToState(index));
     }
 
