@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94077c553eac4144a9a0905f02fa185b, type: 3}
   m_Name: BackgroundMusic
   m_EditorClassIdentifier: Assembly-CSharp::SoundEffect
-  <Clip>k__BackingField: {fileID: 0}
-  <Volume>k__BackingField: 1
+  <Clip>k__BackingField: {fileID: 8300000, guid: 249845fa77628cf41a4f9d93d2f34dcd, type: 3}
+  <Volume>k__BackingField: 0.9
   <Pitch>k__BackingField: 1
-  <Loop>k__BackingField: 0
+  <Loop>k__BackingField: 1
