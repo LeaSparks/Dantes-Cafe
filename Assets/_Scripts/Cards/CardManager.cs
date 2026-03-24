@@ -57,4 +57,13 @@ public class CardManager : Singleton<CardManager>
             onCompleteDelegate();
         });
     }
+
+    public void AnimateMoveCardToPosition(GameObject card, Vector3 target, Action onCompleteDelegate)
+    {
+        card.transform.DOMove(target, _timeToMove).OnComplete(() =>
+        {
+            OnCardReachedTarget?.Invoke();
+            onCompleteDelegate();
+        });
+    }
 }

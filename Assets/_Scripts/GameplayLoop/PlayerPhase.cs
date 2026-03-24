@@ -9,8 +9,8 @@ public class PlayerPhase : IState
     public void Enter()
     {
         _cardChosen = false;
-        
-        GameplayManager.Instance.DrawPanel.gameObject.SetActive(true);
+       
+        GameplayManager.Instance.DrawPanel.UpdateDrawPanel();
         CardManager.Instance.OnCardReachedTarget.AddListener(ActionPhaseStart);
 
         GameplayManager.Instance.Player.SetActionsCount(0);

@@ -15,7 +15,7 @@ public class DrawPhase : IState
 
         drawPanel.SetNewCards(drawnCards, GameplayManager.Instance.TurnController.IsPlayerTurn);
 
-        GameplayManager.Instance.ProceedToNextPhase();
+        //GameplayManager.Instance.ProceedToNextPhase();
     }
 
     public void Exit(){}

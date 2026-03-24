@@ -47,7 +47,6 @@ public class GameplayManager : Singleton<GameplayManager>
     void Start()
     {
         _turnController = gameObject.GetComponent<TurnController>();
-        _drawPhasePanel.gameObject.SetActive(false);
 
         _backupDeck = new List<CardData>(_ingredientsDeck);
         RemainingOrders = _orderDeck.Count;

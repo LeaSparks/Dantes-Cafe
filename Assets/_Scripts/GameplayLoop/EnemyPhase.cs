@@ -10,7 +10,8 @@ public class EnemyPhase : IState
 
     public void Enter()
     {
-        GameplayManager.Instance.DrawPanel.gameObject.SetActive(true);
+        GameplayManager.Instance.DrawPanel.UpdateDrawPanel();
+
         /*
             Start coroutine:
              - choose random card (with delay)

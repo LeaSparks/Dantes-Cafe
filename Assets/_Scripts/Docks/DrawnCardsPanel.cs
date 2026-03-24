@@ -1,16 +1,29 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class DrawnCardsPanel : MonoBehaviour
 {
     [SerializeField] List<IngredientCardController> _ingredientCards = new();
+    [SerializeField] Transform _drawOrigin;
+    private List<Vector3> _cardPositions = new();
     [SerializeField] TextMeshProUGUI _displayText;
     [SerializeField]  SoundEffect _onDrawSFX;
     [SerializeField]  SoundEffect _onShuffleSFX;
     //[SerializeField] int _drawnCardsAmount = 4;
 
     public int DrawnCardsAmount => _ingredientCards.Count;
+
+    private void Awake()
+    {
+        foreach (var card in _ingredientCards)
+        {
+            _cardPositions.Add(card.transform.position);
+        }
+    }
 
     private void Start()
     {
@@ -21,7 +34,6 @@ public class DrawnCardsPanel : MonoBehaviour
         foreach (var card in _ingredientCards)
         {
             card.OnClicked.AddListener(() =>  MoveToHand(card, GameplayManager.Instance.Player.Hand));
-           
         }
     }
     private void OnDestroy()
@@ -32,14 +44,12 @@ public class DrawnCardsPanel : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    public void UpdateDrawPanel()
     {
-        if(GameplayManager.Instance.TurnController == null) return;    //skip first call only
-
-        bool playerTurn = GameplayManager.Instance.TurnController.IsPlayerTurn;
-        foreach(var card in _ingredientCards)
+        bool playerTurn = GameplayManager.Instance.TurnController.IsPlayerTurn || (GameplayManager.Instance.TurnController.ActiveCompetitor == null && GameplayManager.Instance.TurnController.IsPlayerFirst);
+        foreach (var card in _ingredientCards)
             card.IsClickable = playerTurn;
-        
+
         UpdateText(playerTurn);
     }
 
@@ -70,10 +80,13 @@ public class DrawnCardsPanel : MonoBehaviour
         for (int i = 0; i < newCards.Count; i++)
         {
             _ingredientCards[i].SetCardData(newCards[i]);
+            _ingredientCards[i].transform.position = _drawOrigin.position;
             _ingredientCards[i].gameObject.SetActive(true);
         }
-        //Todo: Dotween animation of cards being drawn? (start vs end position?)
+
         AudioManager.Instance.PlaySFX(_onShuffleSFX);
+
+        StartCoroutine(AnimateCardDraw());
     }
     
 
@@ -88,7 +101,7 @@ public class DrawnCardsPanel : MonoBehaviour
         newCard.GetComponent<IngredientCardController>().SetCardData(card.Data);
 
         card.gameObject.SetActive(false);   //So that the player/enemy cannot select this one until it resets
-        gameObject.SetActive(false);
+        
         CardManager.Instance.AnimateMoveCardToDock(newCard, targetHand, null);
         AudioManager.Instance.PlaySFX(_onDrawSFX);
     }
@@ -103,5 +116,17 @@ public class DrawnCardsPanel : MonoBehaviour
                 cards.Add(card);
         }
         return cards;
+    }
+
+    public IEnumerator AnimateCardDraw()
+    {
+        for(int i = 0; i < _ingredientCards.Count; i++)
+        {
+            _ingredientCards[i].transform.position = _drawOrigin.position;
+            Action del = (i < _ingredientCards.Count - 1) ? null : () => GameplayManager.Instance.ProceedToNextPhase();
+            
+            CardManager.Instance.AnimateMoveCardToPosition(_ingredientCards[i].gameObject, _cardPositions[i], del);
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }
