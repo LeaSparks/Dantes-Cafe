@@ -60,6 +60,7 @@ public class DrawnCardsPanel : MonoBehaviour
             GameplayManager.Instance.InfoText.text = "Choose an ingredient:";
         else
             GameplayManager.Instance.InfoText.text = "Enemy is choosing an ingredient...";
+        GameplayManager.Instance.ChangeCameraToView(3);
     }
 
     public void SetNewCards(List<CardData> newCards, bool isPlayersTurn)

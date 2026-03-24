@@ -38,19 +38,18 @@ public class Stack : CardDock
         //actual spacing
         float verticalSpacing =  Mathf.Max(_minimumSpacing, _boxCollider.bounds.size.y / _cards.Count);
 
-
         Vector3 newOrigin = transform.InverseTransformPoint(_boxCollider.bounds.min);
         newOrigin.x =  transform.InverseTransformPoint(_boxCollider.bounds.center).x;
         
         IngredientCardController[] cardArray = _cards.ToArray();
-        int j = 0;
+        int j = _cards.Count-1;
         for(int i = _cards.Count - 1; i >= 0; i--)
         {
             cardArray[i].gameObject.transform.localRotation = Quaternion.identity;
             
             newOrigin.y = j*verticalSpacing;
             newOrigin.z -= 0.02f;
-            j++;
+            j--;
             cardArray[i].gameObject.transform.localPosition = newOrigin;
             cardArray[i].SetDockedPosition(newOrigin);
         }
