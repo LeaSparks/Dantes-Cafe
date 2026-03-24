@@ -75,9 +75,7 @@ public class DrawnCardsPanel : MonoBehaviour
             _ingredientCards[i].transform.position = _drawOrigin.position;
             _ingredientCards[i].gameObject.SetActive(true);
         }
-
-        AudioManager.Instance.PlaySFX(_onShuffleSFX);
-
+        
         StartCoroutine(AnimateCardDraw());
     }
     
@@ -112,6 +110,9 @@ public class DrawnCardsPanel : MonoBehaviour
 
     public IEnumerator AnimateCardDraw()
     {
+        if (AudioManager.Instance != null && _onShuffleSFX != null)
+            AudioManager.Instance.PlaySFX(_onShuffleSFX);
+
         for(int i = 0; i < _ingredientCards.Count; i++)
         {
             _ingredientCards[i].transform.position = _drawOrigin.position;
