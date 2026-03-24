@@ -14,6 +14,8 @@ public class CardOutLineVisual : MonoBehaviour
     private Vector3 _baseScale;
     private bool _isVisible;
 
+    public bool IsValid;
+
     private void Awake()
     {
         if (outlineRenderer == null)
@@ -48,6 +50,8 @@ public class CardOutLineVisual : MonoBehaviour
         if (mode == null || outlineRenderer == null)
             return;
 
+        IsValid = true;
+
         _isVisible = true;
         outlineRenderer.color = mode.validColor;
         outlineRenderer.enabled = true;
@@ -59,6 +63,7 @@ public class CardOutLineVisual : MonoBehaviour
         if (mode == null || outlineRenderer == null)
             return;
 
+        IsValid = false;
         _isVisible = true;
         outlineRenderer.color = mode.invalidColor;
         outlineRenderer.enabled = true;
@@ -79,6 +84,7 @@ public class CardOutLineVisual : MonoBehaviour
     public void Hide()
     {
         _isVisible = false;
+        IsValid = false;
 
         if (outlineRenderer != null)
             outlineRenderer.enabled = false;

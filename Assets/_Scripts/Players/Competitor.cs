@@ -31,12 +31,11 @@ public abstract class Competitor : MonoBehaviour
     public int ActionsCount => _actionsCount;
     public void SetActionsCount(int amount) => _actionsCount = amount;
     public Stack GetStackAtIndex(int index) => _stacks[index];
+    private bool _isStackOrdered = false;
 
     public void CheckStackForScore(Stack stack)
     {
         if(stack.GetAssociatedOrder() == null) return;
-
-        if(stack.Cards.Count != stack.GetAssociatedOrder().IngredientList.Count) return;
 
         bool isInOrder = true;
         int score = 0;
@@ -45,14 +44,23 @@ public abstract class Competitor : MonoBehaviour
         comparisonList.AddRange(stack.GetAssociatedOrder().IngredientList);
         var stackList = stack.Cards.ToList();
 
-        for(int i = 0; i < stack.Cards.Count; i++)
+        for(int i = 0; i < stackList.Count && i < stack.GetAssociatedOrder().IngredientList.Count; i++)
         {
             var card = stackList[i].GetCardData();
             
             if (comparisonList.Contains(card.ingredient))
             {
-                if(isInOrder && stack.GetAssociatedOrder().IngredientList[i] != stackList[stackList.Count - (i+1)].GetCardData().ingredient)
+
+                if(isInOrder && stack.GetAssociatedOrder().IngredientList[i] != stackList[stackList.Count - (i + 1)].GetCardData().ingredient)
+                {
                     isInOrder = false;
+                    HideAllHighlights(stack);
+
+
+                } else
+                {
+                    stackList[i].OutlineVisual.ShowValid();
+                }
                 
                 comparisonList.Remove(card.ingredient);
              
@@ -60,9 +68,12 @@ public abstract class Competitor : MonoBehaviour
             } 
             else
             {
+                HideAllHighlights(stack);
                 return;
             }
         }
+
+         if(stack.Cards.Count != stack.GetAssociatedOrder().IngredientList.Count) return;
 
         GameplayManager.Instance.RemainingOrders--;
 
@@ -76,6 +87,14 @@ public abstract class Competitor : MonoBehaviour
 
 
         //animate cards being discarded
+        if(this is Player)
+        {
+            StartCoroutine(GameplayManager.Instance.Enemy.AnimateDiscard(_stacks.IndexOf(stack)));      //get rid of opposing players stacks too!
+        } else
+        {
+            StartCoroutine(GameplayManager.Instance.Player.AnimateDiscard(_stacks.IndexOf(stack)));
+        }
+
         StartCoroutine(AnimateDiscard(stack));
         GameplayManager.Instance.OrderPanel.RemoveOrderFromSpot(_stacks.IndexOf(stack));
 
@@ -122,5 +141,19 @@ public abstract class Competitor : MonoBehaviour
             CardManager.Instance.ReturnIngredientCardToPool(c);
         }
 
+    }
+
+    public IEnumerator AnimateDiscard(int stackIndex)
+    {
+        yield return AnimateDiscard(_stacks[stackIndex]);
+    }
+
+    private void HideAllHighlights(Stack stack)
+    {
+        var stackList = stack.Cards.ToList();
+        for(int i = 0; i < stack.Cards.Count; i++)
+        {
+            stackList[i].OutlineVisual.Hide();
+        }
     }
 }

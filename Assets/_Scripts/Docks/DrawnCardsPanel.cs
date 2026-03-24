@@ -46,7 +46,10 @@ public class DrawnCardsPanel : MonoBehaviour
     {
         bool playerTurn = GameplayManager.Instance.TurnController.IsPlayerTurn || (GameplayManager.Instance.TurnController.ActiveCompetitor == null && GameplayManager.Instance.TurnController.IsPlayerFirst);
         foreach (var card in _ingredientCards)
+        {
+            card.OutlineVisual.Hide();
             card.IsClickable = playerTurn;
+        }
 
         UpdateText(playerTurn);
     }

@@ -59,7 +59,10 @@ public class IngredientCardController : MonoBehaviour,
         if(IsDraggable == false) return;
 
         _IsHeld = true;
-        outlineVisual?.Hide();
+        if(outlineVisual?.IsValid == false)
+            outlineVisual?.Hide();
+        else
+            outlineVisual?.ShowValid();
         HoverEndEvent?.Invoke();
     }
 
@@ -130,7 +133,7 @@ public class IngredientCardController : MonoBehaviour,
     {
         if (_IsHeld || (IsDraggable == false && IsClickable == false))
             return;
-        
+
         outlineVisual?.ShowHover(); //Outline visual 
         HoverStartEvent?.Invoke(_data);
     }
@@ -141,7 +144,10 @@ public class IngredientCardController : MonoBehaviour,
             return;
 
         //gameObject.transform.DOLocalMove(_dockedLocalPosition, 0.5f);
-        outlineVisual?.Hide(); //Outline visual 
+        if(outlineVisual?.IsValid == false)
+            outlineVisual?.Hide();
+        else
+            outlineVisual?.ShowValid(); //Outline visual 
         HoverEndEvent?.Invoke();
     }
 
@@ -170,6 +176,7 @@ public class IngredientCardController : MonoBehaviour,
     public void SetLastDock(CardDock dock) {_lastDock = dock;}
     public void SetCardView(CardDisplay view) {_view = view;}
     public CardData Data => _data;
+    public CardOutLineVisual OutlineVisual => outlineVisual;
 #endregion
 
 }
