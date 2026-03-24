@@ -220,8 +220,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 680, y: -346.4}
-  m_SizeDelta: {x: 300, y: 90}
+  m_AnchoredPosition: {x: 680, y: -303}
+  m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1363928
 MonoBehaviour:
@@ -242,7 +242,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 0.78756094, b: 0.5707547, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -252,8 +252,8 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 0ef9003a2d475a7429c5a3539902fea2, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: b3335b5d2f7c3b74692b942f882f6ba7, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -287,9 +287,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
+  m_Sprite: {fileID: 21300000, guid: c47b3d5b923e08a428456ee77649fcc1, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -11598,7 +11598,6 @@ MonoBehaviour:
   - {fileID: 1675031338}
   - {fileID: 1235069421}
   _drawOrigin: {fileID: 0}
-  _displayText: {fileID: 30841895}
   _onDrawSFX: {fileID: 0}
   _onShuffleSFX: {fileID: 0}
 --- !u!114 &750388253
@@ -22825,7 +22824,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DONE
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -30613,7 +30612,6 @@ MonoBehaviour:
   - {fileID: 1027541849}
   - {fileID: 1741790276}
   _drawOrigin: {fileID: 1419118996}
-  _displayText: {fileID: 1318984557}
   _onDrawSFX: {fileID: 11400000, guid: 49bce18dadf894f40ac05ed49fd239e7, type: 2}
   _onShuffleSFX: {fileID: 11400000, guid: 000e83abe200a554386de9ed2b7e9cc4, type: 2}
 --- !u!4 &1906621448 stripped
