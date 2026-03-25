@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CursorManager : MonoBehaviour
+
 {
     public enum CursorState
     {
