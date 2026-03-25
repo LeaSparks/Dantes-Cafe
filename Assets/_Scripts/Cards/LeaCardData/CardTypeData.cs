@@ -7,6 +7,7 @@ public class CardTypeData : ScriptableObject
 
     [Header("Visuals")]
     public Sprite typeSprite;
+    public Sprite valueSprite;
     public Color spriteTint = Color.white;
 
     [Header("Gameplay")]
