@@ -31869,7 +31869,7 @@ PrefabInstance:
     - target: {fileID: 741268693976485229, guid: 8fe738f52d730df48ac675f29a1dafb6, type: 3}
       propertyPath: cardData
       value: 
-      objectReference: {fileID: 11400000, guid: c9539677507939a4dac5ebfe37d7178d, type: 2}
+      objectReference: {fileID: 11400000, guid: 47185b9c069762d41a13f9de99bead22, type: 2}
     - target: {fileID: 3512385548184127918, guid: 8fe738f52d730df48ac675f29a1dafb6, type: 3}
       propertyPath: m_Name
       value: Poppup
