@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,7 +13,7 @@ public class Stack : CardDock
     [SerializeField] private Stack<IngredientCardController> _cards = new();
     private OrderCardData _associatedOrder;
     private List<CardIngredient> _requiredIngredients = new();
-
+    private bool _isOrdered = true;
     public UnityEvent<Stack, IngredientCardController> NewIngredientAdded;
 
     void OnDestroy()
@@ -141,7 +142,33 @@ public class Stack : CardDock
         if(card == null) return;
         _requiredIngredients.Clear();
         _requiredIngredients.AddRange(card.IngredientList);
+
+        _requiredIngredients = _requiredIngredients.Except(_cards.Select(c => c.GetCardData().ingredient)).ToList();
+        //remove any ingredients already in the stack from the required list
     }
+
+    public bool IsOrdered()
+    { int j = 0;
+        for(int i = _cards.Count - 1; i >= 0; i--)
+        {
+
+            if(i > _associatedOrder.IngredientList.Count - 1) return false;
+
+
+            if(_cards.ElementAt(i).GetCardData().ingredient != _associatedOrder.IngredientList[j])
+                return false;
+
+            j++;
+        }
+        
+        return true;
+    }
+    public bool WouldBeOrdered(CardData card)
+    {
+        if(_cards.Count >= _associatedOrder.IngredientList.Count) return false;
+
+        return IsOrdered() && card.ingredient == _associatedOrder.IngredientList[_cards.Count];
+    } 
 
     public Stack<IngredientCardController> Cards => _cards;
     public List<CardIngredient> RequiredIngredients => _requiredIngredients;

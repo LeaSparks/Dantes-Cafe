@@ -95,4 +95,5 @@ public class Hand : CardDock
 #endregion
 
     public List<IngredientCardController> GetCards => _cards;
+    public int HandSizeLimit => _handSizeLimit;
 }

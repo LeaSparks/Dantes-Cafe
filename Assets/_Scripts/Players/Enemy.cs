@@ -1,48 +1,76 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Enemy : Competitor
 {
-    private List<Tuple<IngredientCardController, CardDock>> _validActions = new(); 
+    private List<Tuple<IngredientCardController, CardDock, float>> _validActions = new(); 
+
+    [Header("Card Selection Constants")]
+    [Range(0,1)]
+    [SerializeField] private int c_requiredIngredient = 1;
+    [Range(0,1)]
+    [SerializeField] private int c_ingredientRarity = 1;
+
+    [Header("Action Selection Constants")]
+    [Range(0,1)]
+    [SerializeField] private int c_orderedCards = 1;
+    [Range(0,1)]
+    [SerializeField] private int c_requiredForStack = 1;
+    [Range(0,1)]
+    [SerializeField] private int c_handSizeImportance = 1;
+    [SerializeField] private int c_discardBaseScore = 1;     //if card is not in a stack, how likely are you to discard it?        
+    
+
+    [Header("Intelligence")]
+    [Range(0,1)]
+    [SerializeField] private float _choiceThreshold = 0.5f;
 
     protected override void Start()
     {
         base.Start();
-        foreach(var stack in _stacks)
-        {
-            stack.NewIngredientAdded.AddListener(ReviewAddedStackCard);
-        }
-        _hand.NewIngredientAdded.AddListener(ReviewAddedHandCard);
-    }
-
-    protected void OnDestroy()
-    {
-        foreach(var stack in _stacks)
-        {
-            stack.NewIngredientAdded.RemoveListener(ReviewAddedStackCard);
-        } 
-        _hand.NewIngredientAdded.RemoveListener(ReviewAddedHandCard);
     }
 
     public IngredientCardController ChooseCard()
     {
-        int i = UnityEngine.Random.Range(0, GameplayManager.Instance.DrawPanel.GetSelectableCards().Count);
-        return GameplayManager.Instance.DrawPanel.GetSelectableCards()[i];
+        var choices =  new List<Tuple<IngredientCardController, float>>();
+        var cards = GameplayManager.Instance.DrawPanel.GetSelectableCards();
+
+        float topScore = 0;
+        float score = 0;
+        
+        for (int i = 0; i < cards.Count; i++)
+        {            
+            score = 0;
+
+            if (IsRequiredIngredient(cards[i].GetCardData()))
+                score += c_requiredIngredient;
+
+            score += c_ingredientRarity * CardDatabase.GetDesirabilityOfType(choices[i].Item1.GetCardData().type);
+            if(score > topScore)
+                topScore = score;
+
+            choices[i] = new Tuple<IngredientCardController, float>(cards[i], score);
+        }
+
+        var finalChoices = choices.Where(c => c.Item2 >= topScore * _choiceThreshold).ToList();
+        
+        int choiceIndex = UnityEngine.Random.Range(0, finalChoices.Count);
+        
+        return finalChoices[choiceIndex].Item1;
     }
 
     public void ChooseActionSequence(int maxActions)
     {
         int maxCount = Math.Min(maxActions, _validActions.Count);
         int actionCount = UnityEngine.Random.Range(0, maxCount+1);
-        // foreach(var a in _validActions)
-        //     Debug.Log($"Action: {a.Item1.GetCardData().Name}: {a.Item1.LastDock} -> {a.Item2}"); 
-
-        // Debug.Log($"Action: ---------"); 
+        EvaluateAllActions();
 
         ChooseNewActionAndAnimate(actionCount);
-
-
     }
 
     public void ChooseNewActionAndAnimate(int counter)
@@ -55,7 +83,8 @@ public class Enemy : Competitor
 
         int actionIndex = UnityEngine.Random.Range(0, _validActions.Count);
         var tuple = _validActions[actionIndex];
-        Debug.Log($"Chose Action: {tuple.Item1.GetCardData().ingredient} from {tuple.Item1.LastDock} to {tuple.Item2}");
+        
+        Debug.Log($"Chose Action: {tuple.Item1.GetCardData().ingredient} from {tuple.Item1.LastDock} to {tuple.Item2} with score {tuple.Item3}");
 
         _validActions.Remove(tuple);
 
@@ -67,31 +96,77 @@ public class Enemy : Competitor
         }, 0.7f);
     }
 
-    private void ReviewAddedStackCard(Stack stack, IngredientCardController ing)
-    {
-        //for now: we can move ingredients from stack to stack that share wanted ingredients
-        // foreach(Stack s in _stacks)
-        // {
-        //     if(s == stack) continue;
-
-        //     if (s.RequiredIngredients.Contains(ing.GetCardData()))
-        //     {
-        //         _validActions.Add(new Tuple<IngredientCardController, CardDock>(ing, s));
-        //     }
-        // }
-
-        // REMOVED FOR NOW, INGREDIENTS THAT WERE NOT AT THE TOP OF THE STACK WERE BEING MOVED
-    }
-
-    private void ReviewAddedHandCard(IngredientCardController ing)
+    private bool IsRequiredIngredient(CardData ing)
     {
         foreach(Stack s in _stacks)
         {
+            if (s.RequiredIngredients.Contains(ing.ingredient))
+            return true;
+        }
+        return false;
+    }
 
-            if (s.RequiredIngredients.Contains(ing.GetCardData().ingredient))
+    private void EvaluateAllActions()
+    {
+        _validActions.Clear();
+        float score = 0;
+        float topScore = 0;
+
+        //A. Moving from hand
+        foreach(var card in _hand.GetCards)
+        {
+            foreach(var stack in _stacks)
             {
-                _validActions.Add(new Tuple<IngredientCardController, CardDock>(ing, s));
+                bool isRequired = stack.RequiredIngredients.Contains(card.GetCardData().ingredient);
+                //1. Hand -> Stack
+                if (isRequired)
+                {
+                    score = c_requiredForStack 
+                        + (c_orderedCards * (stack.WouldBeOrdered(card.GetCardData()) ? 1 : 0)) 
+                        + (c_handSizeImportance * (_hand.GetCards.Count / _hand.HandSizeLimit));
+                    
+                    _validActions.Add(new Tuple<IngredientCardController, CardDock, float>(card, stack, score));
+
+                    if(score > topScore) topScore = score;
+                }
+                //2. Hand -> Discard
+                score = c_discardBaseScore * (isRequired ? 0 : 1)
+                    + (c_handSizeImportance * (_hand.GetCards.Count / _hand.HandSizeLimit));
+                    
+                //_validActions.Add(new Tuple<IngredientCardController, CardDock, float>(card, GameplayManager.Instance.DiscardPile, score));
+                if(score > topScore) topScore = score;
             }
         }
+
+        //B. moving from stack
+        foreach(var stack in _stacks)
+        {
+            foreach(var card in stack.Cards)
+            {
+                bool isRequired = stack.RequiredIngredients.Contains(card.GetCardData().ingredient);
+                
+                //1. Stack -> Stack
+                if (stack.RequiredIngredients.Contains(card.GetCardData().ingredient))
+                {
+                    score = c_requiredForStack 
+                        + (c_orderedCards * (stack.WouldBeOrdered(card.GetCardData()) ? 1 : 0));
+
+                    _validActions.Add(new Tuple<IngredientCardController, CardDock, float>(card, stack, score));
+                    if(score > topScore) topScore = score;
+
+                }
+                //2. Stack -> Hand
+                //TODO: if the card underneath the top card is in order and the card in your hand is next
+
+                //3. Stack -> Discard
+                score = c_discardBaseScore * (isRequired ? 0 : 1)
+                    + (c_handSizeImportance * (_hand.GetCards.Count / _hand.HandSizeLimit));
+                //_validActions.Add(new Tuple<IngredientCardController, CardDock, float>(card, GameplayManager.Instance.DiscardPile, score));
+                if(score > topScore) topScore = score;
+
+            }
+        }
+
+        _validActions = _validActions.Where(c => c.Item3 >= topScore * _choiceThreshold).ToList();
     }
 }

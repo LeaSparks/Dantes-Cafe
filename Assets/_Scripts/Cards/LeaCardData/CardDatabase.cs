@@ -16,4 +16,25 @@ public class CardDatabase : Singleton<CardDatabase>
     {
         return ingredientData.Find(i => i.ingredient == ingredient);
     }
+
+    public static float GetDesirabilityOfType(CardType type)
+    {
+        switch(type)
+        {
+            case CardType.Rotten:
+                return 0;
+            case CardType.Basic:
+                return 0.25f;
+            case CardType.Silver:
+                return 0.5f;
+            case CardType.Gold:
+                return 0.75f;
+            case CardType.Diamond:
+                return 1f;
+            case CardType.Burning:
+                return 0.75f;
+            default:
+                return 0;
+        }
+    }
 }
