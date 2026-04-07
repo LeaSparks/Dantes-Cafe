@@ -17,11 +17,13 @@ public class DiscardPile : CardDock
     {
         droppedCard.LastDock?.RemoveCardFromCollection(droppedCard);
         AddCardToCollection(droppedCard);
-        NextLocalDock.y += _heightOffset;
+        NextLocalDock.z += _heightOffset;
     }
     protected override void AddCardToCollection(IngredientCardController card)
     {
         card.transform.SetParent(transform);
+        card.transform.localPosition = NextLocalDock;
+        card.transform.localRotation = Quaternion.identity;
         
         _cards.Add(card);
         card.SetLastDock(this);

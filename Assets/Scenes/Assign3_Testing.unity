@@ -32880,6 +32880,10 @@ PrefabInstance:
       propertyPath: _drawPhasePanel
       value: 
       objectReference: {fileID: 1902625384}
+    - target: {fileID: 3466431482454231275, guid: 5a2d016a7e794784a9ff1514720b980e, type: 3}
+      propertyPath: _heightOffset
+      value: -0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 4104257353252415507, guid: 5a2d016a7e794784a9ff1514720b980e, type: 3}
       propertyPath: m_Name
       value: '[ Gameplay Manager ]'

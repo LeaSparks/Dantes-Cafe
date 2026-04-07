@@ -67,11 +67,9 @@ public class Enemy : Competitor
 
     public void ChooseActionSequence(int maxActions)
     {
+        EvaluateAllActions();
         int maxCount = Math.Min(maxActions, _validActions.Count);
         int actionCount = UnityEngine.Random.Range(0, maxCount+1);
-        
-        if(actionCount > 0)
-            EvaluateAllActions();
 
         ChooseNewActionAndAnimate(actionCount);
     }
@@ -136,7 +134,7 @@ public class Enemy : Competitor
                 score = c_discardBaseScore * (isRequired ? 0 : 1)
                     + (c_handSizeImportance * (_hand.GetCards.Count / _hand.HandSizeLimit));
                     
-                _validActions.Add(new Tuple<IngredientCardController, CardDock, float>(card, null, score));
+                _validActions.Add(new Tuple<IngredientCardController, CardDock, float>(card, GameplayManager.Instance.DiscardPile, score));
                 if(score > topScore) topScore = score;
             }
         }
@@ -164,7 +162,7 @@ public class Enemy : Competitor
                 //3. Stack -> Discard
                 score = c_discardBaseScore * (isRequired ? 0 : 1)
                     + (c_handSizeImportance * (_hand.GetCards.Count / _hand.HandSizeLimit));
-                _validActions.Add(new Tuple<IngredientCardController, CardDock, float>(card, null, score));
+                _validActions.Add(new Tuple<IngredientCardController, CardDock, float>(card, GameplayManager.Instance.DiscardPile, score));
                 if(score > topScore) topScore = score;
 
             }

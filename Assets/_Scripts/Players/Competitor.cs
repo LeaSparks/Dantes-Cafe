@@ -126,10 +126,12 @@ public abstract class Competitor : MonoBehaviour
         //Vector3 offset = Vector3.up;
         //offset *= this is Player ? -500 : 500; 
         
-        foreach(var card in stack.Cards)
+        while(stack.Cards.Count > 0)
         {
+            var card = stack.Cards.Peek();
             card.IsClickable = false;
             card.IsDraggable = false;
+            card.OutlineVisual.Hide();
             //card.transform.DOLocalMove(card.transform.localPosition + offset, DISCARD_DELAY);
             CardManager.Instance.AnimateMoveCardToDock(card.gameObject, GameplayManager.Instance.DiscardPile, null, DISCARD_DELAY);
             yield return new WaitForSeconds(DISCARD_DELAY);
