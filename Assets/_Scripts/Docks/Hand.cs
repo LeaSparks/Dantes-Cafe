@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,6 +12,7 @@ public class Hand : CardDock
     [SerializeField] float _minimumSpacing = 0.01f;
     private List<IngredientCardController> _cards = new();
 
+    public event Action OnActionTaken; 
     // [Header("Debugging")]
     // [SerializeField] List<IngredientCardData> _startingHand = new();
     // [SerializeField] GameObject _ingredientCardPrefab;
@@ -91,6 +93,8 @@ public class Hand : CardDock
             _cards.Remove(card);
         card.SetLastDock(null);
         RefreshCardPositions();
+
+        OnActionTaken?.Invoke();
     }
 #endregion
 

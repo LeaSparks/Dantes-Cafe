@@ -36,7 +36,6 @@ public class EnemyPhase : IState
 
         GameplayManager.Instance.DrawPanel.MoveToHand(card, GameplayManager.Instance.Enemy.Hand, 1f);
         GameplayManager.Instance.ChangeCameraToView(2);
-
     }
 
     private float GetRandomDelay()

@@ -95,7 +95,7 @@ public abstract class Competitor : MonoBehaviour
             StartCoroutine(GameplayManager.Instance.Player.AnimateDiscard(_stacks.IndexOf(stack)));
         }
 
-        StartCoroutine(AnimateDiscard(stack));
+        StartCoroutine(AnimateStackDiscard(stack));
         GameplayManager.Instance.OrderPanel.RemoveOrderFromSpot(_stacks.IndexOf(stack));
 
         //check for win
@@ -120,32 +120,33 @@ public abstract class Competitor : MonoBehaviour
         _scoreText.text = $"Score: {_score}";
     }
 
-    public IEnumerator AnimateDiscard(Stack stack)
+    public IEnumerator AnimateStackDiscard(Stack stack)
     {
         yield return new WaitForSeconds(1f);
-        Vector3 offset = Vector3.up;
-        offset *= this is Player ? -500 : 500; 
+        //Vector3 offset = Vector3.up;
+        //offset *= this is Player ? -500 : 500; 
         
         foreach(var card in stack.Cards)
         {
-            card.transform.DOLocalMove(card.transform.localPosition + offset, DISCARD_DELAY);
+            card.IsClickable = false;
+            card.IsDraggable = false;
+            //card.transform.DOLocalMove(card.transform.localPosition + offset, DISCARD_DELAY);
+            CardManager.Instance.AnimateMoveCardToDock(card.gameObject, GameplayManager.Instance.DiscardPile, null, DISCARD_DELAY);
             yield return new WaitForSeconds(DISCARD_DELAY);
-
-            GameplayManager.Instance.DiscardIngredient(card.GetCardData());
         }
 
-        while (stack.Cards.Count > 0)
-        {
-            var c = stack.Cards.Peek();
-            stack.RemoveCardFromCollection(c);
-            CardManager.Instance.ReturnIngredientCardToPool(c);
-        }
+        // while (stack.Cards.Count > 0)
+        // {
+        //     var c = stack.Cards.Peek();
+        //     stack.RemoveCardFromCollection(c);
+        //     CardManager.Instance.ReturnIngredientCardToPool(c);
+        // }
 
     }
 
     public IEnumerator AnimateDiscard(int stackIndex)
     {
-        yield return AnimateDiscard(_stacks[stackIndex]);
+        yield return AnimateStackDiscard(_stacks[stackIndex]);
     }
 
     private void HideAllHighlights(Stack stack)

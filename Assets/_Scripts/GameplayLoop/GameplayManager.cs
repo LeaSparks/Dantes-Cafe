@@ -21,7 +21,7 @@ public class GameplayManager : Singleton<GameplayManager>
     [SerializeField] private List<CardData> _ingredientsDeck = new();
     private List<CardData> _backupDeck;         //THIS IS FOR TESTING
     [SerializeField] private List<OrderCardData> _orderDeck = new();
-    private List<CardData> _ingredientsDiscard = new();
+    //private List<CardData> _ingredientsDiscard = new();
 
     [Header("UI Elements")]
     [SerializeField] private DrawnCardsPanel _drawPhasePanel;
@@ -30,6 +30,7 @@ public class GameplayManager : Singleton<GameplayManager>
     [Header("Other stuff that really shouldnt be in here")]
     public Camera Camera;
     [SerializeField] TextMeshProUGUI _infoText;
+    [SerializeField] DiscardPile _discardPile;
 
 
     //States
@@ -43,6 +44,7 @@ public class GameplayManager : Singleton<GameplayManager>
     public OrderPanel OrderPanel => _orderPanel;
     public TurnController TurnController => _turnController;
     public TextMeshProUGUI InfoText => _infoText;
+    public DiscardPile DiscardPile => _discardPile;
 
     public Player Player => _player;
     public Enemy Enemy => _enemy;
@@ -105,23 +107,18 @@ public class GameplayManager : Singleton<GameplayManager>
         }
 
         //if there are no more cards in the deck
-        if(_ingredientsDiscard.Count == 0 && _ingredientsDiscard.Count == 0)
+        if(_discardPile.GetPileCount() == 0)
         {
             Debug.LogWarning("There are no available ingredient cards to draw from! Using random card from backup deck");
             return _backupDeck[Random.Range(0, _backupDeck.Count)];
         }
 
         //add discarded ingredients back into deck and try again
-        _ingredientsDeck.AddRange(_ingredientsDiscard);
-        _ingredientsDiscard.Clear();
+        _ingredientsDeck.AddRange(_discardPile.Cards);
+        StartCoroutine(_discardPile.ClearPile());
         
         return DrawNewIngredientCard();
         
-    }
-
-    public void DiscardIngredient(CardData card)
-    {
-        _ingredientsDiscard.Add(card);
     }
 
     public void AssignOrderToStacks(int stackIndex)

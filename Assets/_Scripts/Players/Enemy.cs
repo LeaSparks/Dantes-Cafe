@@ -12,18 +12,18 @@ public class Enemy : Competitor
 
     [Header("Card Selection Constants")]
     [Range(0,1)]
-    [SerializeField] private int c_requiredIngredient = 1;
+    [SerializeField] private float c_requiredIngredient = 1;
     [Range(0,1)]
-    [SerializeField] private int c_ingredientRarity = 1;
+    [SerializeField] private float c_ingredientRarity = 1;
 
     [Header("Action Selection Constants")]
     [Range(0,1)]
-    [SerializeField] private int c_orderedCards = 1;
+    [SerializeField] private float c_orderedCards = 1;
     [Range(0,1)]
-    [SerializeField] private int c_requiredForStack = 1;
+    [SerializeField] private float c_requiredForStack = 1;
     [Range(0,1)]
-    [SerializeField] private int c_handSizeImportance = 1;
-    [SerializeField] private int c_discardBaseScore = 1;     //if card is not in a stack, how likely are you to discard it?        
+    [SerializeField] private float c_handSizeImportance = 1;
+    [SerializeField] private float c_discardBaseScore = 1;     //if card is not in a stack, how likely are you to discard it?        
     
 
     [Header("Intelligence")]
@@ -42,25 +42,26 @@ public class Enemy : Competitor
 
         float topScore = 0;
         float score = 0;
-        
+        Debug.Log("Scoring cards: " +  cards.Count);
         for (int i = 0; i < cards.Count; i++)
         {            
             score = 0;
-
-            if (IsRequiredIngredient(cards[i].GetCardData()))
+             if (IsRequiredIngredient(cards[i].GetCardData()))
                 score += c_requiredIngredient;
 
-            score += c_ingredientRarity * CardDatabase.GetDesirabilityOfType(choices[i].Item1.GetCardData().type);
+            score += c_ingredientRarity * CardDatabase.GetDesirabilityOfType(cards[i].GetCardData().type);
             if(score > topScore)
                 topScore = score;
 
-            choices[i] = new Tuple<IngredientCardController, float>(cards[i], score);
-        }
+            choices.Add(new Tuple<IngredientCardController, float>(cards[i], score));
+            Debug.Log("Score: " + score);
 
+        }
         var finalChoices = choices.Where(c => c.Item2 >= topScore * _choiceThreshold).ToList();
         
         int choiceIndex = UnityEngine.Random.Range(0, finalChoices.Count);
-        
+        Debug.Log("Chose a card: " + finalChoices[choiceIndex].Item1.name);
+
         return finalChoices[choiceIndex].Item1;
     }
 
@@ -68,7 +69,9 @@ public class Enemy : Competitor
     {
         int maxCount = Math.Min(maxActions, _validActions.Count);
         int actionCount = UnityEngine.Random.Range(0, maxCount+1);
-        EvaluateAllActions();
+        
+        if(actionCount > 0)
+            EvaluateAllActions();
 
         ChooseNewActionAndAnimate(actionCount);
     }
@@ -133,7 +136,7 @@ public class Enemy : Competitor
                 score = c_discardBaseScore * (isRequired ? 0 : 1)
                     + (c_handSizeImportance * (_hand.GetCards.Count / _hand.HandSizeLimit));
                     
-                //_validActions.Add(new Tuple<IngredientCardController, CardDock, float>(card, GameplayManager.Instance.DiscardPile, score));
+                _validActions.Add(new Tuple<IngredientCardController, CardDock, float>(card, null, score));
                 if(score > topScore) topScore = score;
             }
         }
@@ -161,7 +164,7 @@ public class Enemy : Competitor
                 //3. Stack -> Discard
                 score = c_discardBaseScore * (isRequired ? 0 : 1)
                     + (c_handSizeImportance * (_hand.GetCards.Count / _hand.HandSizeLimit));
-                //_validActions.Add(new Tuple<IngredientCardController, CardDock, float>(card, GameplayManager.Instance.DiscardPile, score));
+                _validActions.Add(new Tuple<IngredientCardController, CardDock, float>(card, null, score));
                 if(score > topScore) topScore = score;
 
             }

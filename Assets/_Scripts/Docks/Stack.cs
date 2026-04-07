@@ -14,7 +14,9 @@ public class Stack : CardDock
     private OrderCardData _associatedOrder;
     private List<CardIngredient> _requiredIngredients = new();
     private bool _isOrdered = true;
+    
     public UnityEvent<Stack, IngredientCardController> NewIngredientAdded;
+    public event Action OnActionTaken;
 
     void OnDestroy()
     {
@@ -93,6 +95,7 @@ public class Stack : CardDock
         }
         RefreshCardPositions();
         _requiredIngredients.Remove(card.GetCardData().ingredient);
+        OnActionTaken?.Invoke();
     }
     #endregion
 
@@ -100,7 +103,8 @@ public class Stack : CardDock
 
     public override void OnStartHoveringOver(IngredientCardController hoveringCard)
     {
-        _oscillationRoutine = StartCoroutine(OscillateBorder());
+        if(_isTargetable)
+            _oscillationRoutine = StartCoroutine(OscillateBorder());
     }
 
     public override void OnEndHoveringOver()

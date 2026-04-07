@@ -1,19 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class DrawnCardsPanel : MonoBehaviour
 {
     [SerializeField] List<IngredientCardController> _ingredientCards = new();
     [SerializeField] Transform _drawOrigin;
     private List<Vector3> _cardPositions = new();
-    //[SerializeField] TextMeshProUGUI _displayText;
+    
     [SerializeField]  SoundEffect _onDrawSFX;
     [SerializeField]  SoundEffect _onShuffleSFX;
-    //[SerializeField] int _drawnCardsAmount = 4;
 
     public int DrawnCardsAmount => _ingredientCards.Count;
 
@@ -48,8 +45,9 @@ public class DrawnCardsPanel : MonoBehaviour
         foreach (var card in _ingredientCards)
         {
             card.OutlineVisual.Hide();
-            card.IsClickable = playerTurn;
         }
+
+        SetSelectionInteractability(playerTurn);
 
         UpdateText(playerTurn);
     }
@@ -86,6 +84,8 @@ public class DrawnCardsPanel : MonoBehaviour
 
     public void MoveToHand(IngredientCardController card, Hand targetHand, float duration)
     {
+        SetSelectionInteractability(false);
+
         var newCard = CardManager.Instance.GetPooledIngredient();
         newCard.transform.position = card.transform.position;
         newCard.transform.rotation = card.transform.rotation;
@@ -98,6 +98,7 @@ public class DrawnCardsPanel : MonoBehaviour
         
         CardManager.Instance.AnimateMoveCardToDock(newCard, targetHand, null, duration);
         AudioManager.Instance.PlaySFX(_onDrawSFX);
+
     }
 
     public List<IngredientCardController> GetSelectableCards()
@@ -124,6 +125,15 @@ public class DrawnCardsPanel : MonoBehaviour
             
             CardManager.Instance.AnimateMoveCardToPosition(_ingredientCards[i].gameObject, _cardPositions[i], del);
             yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+    public void SetSelectionInteractability(bool isInteractable)
+    {
+        foreach (var card in _ingredientCards)
+        {
+            card.IsClickable = isInteractable;
+            card.IsDraggable = isInteractable;
         }
     }
 }

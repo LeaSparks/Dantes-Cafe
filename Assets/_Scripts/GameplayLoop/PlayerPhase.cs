@@ -28,6 +28,7 @@ public class PlayerPhase : IState
         if(_cardChosen && GameplayManager.Instance.Player.ActionsCount >= ACTIONS_LIMIT)
         {
             GameplayManager.Instance.Player.SetDoneButtonVisibility(false);
+            AudioManager.Instance.PlaySFX(_onDoneSFX); 
             GameplayManager.Instance.ProceedToNextPhase();
         }
     }
