@@ -8,7 +8,7 @@ public class ScoreBubble : MonoBehaviour
     public float minValue = -9f;
     public float maxValue = 36f;
     
-    [Range(-9f, 36f)]
+    [Range(6f, 36f)]
     [SerializeField] private float currentValue = 0f;
 
     [Header("UI References")]
