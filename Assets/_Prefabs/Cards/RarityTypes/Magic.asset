@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 786e0b46a99cb16468abfa8fd70b0a30, type: 3}
-  m_Name: Burning
+  m_Name: Magic
   m_EditorClassIdentifier: Assembly-CSharp::CardTypeData
-  type: 4
-  typeSprite: {fileID: 21300000, guid: 7aa4daf68f967004a8abc6c900135d49, type: 3}
-  valueSprite: {fileID: -859710825, guid: c45639750abb0904a96fb6de76c2b52a, type: 3}
+  type: 7
+  typeSprite: {fileID: 21300000, guid: 1bcf6fd4137dcda4a9f0b73a5ee14eb5, type: 3}
+  valueSprite: {fileID: 1664587929, guid: c45639750abb0904a96fb6de76c2b52a, type: 3}
   spriteGradient:
     serializedVersion: 2
-    key0: {r: 1, g: 0.40227598, b: 0, a: 1}
-    key1: {r: 1, g: 0, b: 0, a: 1}
-    key2: {r: 1, g: 0.6679427, b: 0, a: 0}
+    key0: {r: 0.31338632, g: 0, b: 0.4811321, a: 1}
+    key1: {r: 0.78839684, g: 0, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 33346
-    ctime2: 65535
+    ctime1: 65535
+    ctime2: 0
     ctime3: 0
     ctime4: 0
     ctime5: 0
@@ -43,9 +43,9 @@ MonoBehaviour:
     atime7: 0
     m_Mode: 0
     m_ColorSpace: -1
-    m_NumColorKeys: 3
+    m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   pointValue: 0
-  isBurning: 1
+  isBurning: 0
   isWild: 0
-  isMagic: 0
+  isMagic: 1

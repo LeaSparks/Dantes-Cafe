@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 [ExecuteAlways]
 public class CardDisplay : MonoBehaviour
@@ -13,18 +14,23 @@ public class CardDisplay : MonoBehaviour
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI descriptionText;
 
-    //[Header("Data")]
-    //public CardDatabase database;
-
     [Header("Card")]
     public CardData cardData;
+
+    [Header("Gradient Settings")]
+    [Range(16, 512)]
+    public int gradientResolution = 128;
+
+    [Tooltip("True = Vertical (top-bottom), False = Horizontal (left-right)")]
+    public bool verticalGradient = true;
+
+    // 🔥 Cache so we don’t regenerate identical gradients constantly
+    private static Dictionary<Gradient, Texture2D> gradientCache = new Dictionary<Gradient, Texture2D>();
 
     void OnValidate()
     {
         if (!Application.isPlaying)
-        {
             ApplyCardSafe();
-        }
     }
 
     void Start()
@@ -41,7 +47,6 @@ public class CardDisplay : MonoBehaviour
     void ApplyCardSafe()
     {
         if (cardData == null || CardDatabase.Instance == null) return;
-
         ApplyCard(cardData);
     }
 
@@ -55,10 +60,16 @@ public class CardDisplay : MonoBehaviour
             if (typeData.typeSprite != null)
                 borderRenderer.sprite = typeData.typeSprite;
 
-            keyArtRenderer.color = typeData.spriteTint;
+            if (typeData.spriteGradient != null && keyArtRenderer != null)
+            {
+                Texture2D gradientTex = GetOrCreateGradientTexture(typeData.spriteGradient);
 
-            // if (typeData.isBurning)
-            //     Debug.Log("Special Card!");
+                // IMPORTANT: use material instance so you don’t overwrite shared material
+                keyArtRenderer.material = new Material(keyArtRenderer.sharedMaterial);
+
+                keyArtRenderer.material.SetTexture("_GradientTex", gradientTex);
+                keyArtRenderer.material.SetFloat("_Vertical", verticalGradient ? 1f : 0f);
+            }
         }
 
         // ===== INGREDIENT =====
@@ -69,11 +80,32 @@ public class CardDisplay : MonoBehaviour
             if (ingredientData.icon != null)
                 keyArtRenderer.sprite = ingredientData.icon;
 
-         
             colourPanel.color = ingredientData.panelColor;
 
             titleText.text = ingredientData.title;
             descriptionText.text = ingredientData.description;
         }
+    }
+
+    // ===== GRADIENT TEXTURE GENERATION =====
+    Texture2D GetOrCreateGradientTexture(Gradient gradient)
+    {
+        if (gradientCache.TryGetValue(gradient, out Texture2D cachedTex))
+            return cachedTex;
+
+        Texture2D tex = new Texture2D(gradientResolution, 1, TextureFormat.RGBA32, false);
+        tex.wrapMode = TextureWrapMode.Clamp;
+
+        for (int i = 0; i < gradientResolution; i++)
+        {
+            float t = i / (gradientResolution - 1f);
+            Color col = gradient.Evaluate(t);
+            tex.SetPixel(i, 0, col);
+        }
+
+        tex.Apply();
+
+        gradientCache[gradient] = tex;
+        return tex;
     }
 }

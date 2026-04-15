@@ -7,7 +7,7 @@ public enum CardIngredient
 
 public enum CardType
 {
-    Rotten, Basic, Silver, Gold, Diamond, Burning
+    Rotten, Basic, Silver, Gold, Diamond, Burning, Wild, Magic
 }
 
 public class Enum_Ingredients : MonoBehaviour

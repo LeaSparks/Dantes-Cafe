@@ -8,10 +8,12 @@ public class CardTypeData : ScriptableObject
     [Header("Visuals")]
     public Sprite typeSprite;
     public Sprite valueSprite;
-    public Color spriteTint = Color.white;
+    public Gradient  spriteGradient;
 
     [Header("Gameplay")]
     public int pointValue;
 
     public bool isBurning;
+    public bool isWild;
+    public bool isMagic;
 }

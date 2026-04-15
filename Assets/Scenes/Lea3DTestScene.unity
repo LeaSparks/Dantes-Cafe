@@ -3366,6 +3366,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5301753252674674948, guid: 576f5dcc464ccc146a8b357a789fcb99, type: 3}
   m_PrefabInstance: {fileID: 177308986}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &178214066 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4104257353252415507, guid: 5a2d016a7e794784a9ff1514720b980e, type: 3}
+  m_PrefabInstance: {fileID: 3856618771107998853}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &178214070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178214066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1750eae5982a5f49843127ce85d50f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TooltipController
+  tooltipName: Ingredient Card Popup
+  uiElement: {fileID: 709646001}
+  canvas: {fileID: 1492693179}
+  offset: {x: 0, y: 0}
 --- !u!4 &179091895 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000011876092544, guid: 4fe93d642100bf04884a10eba3b5e298, type: 3}
@@ -9784,6 +9805,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64ff0ffc72443a647bf9ca6ff3e3cfce, type: 3}
+--- !u!1 &689180249 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3512385548184127918, guid: 8fe738f52d730df48ac675f29a1dafb6, type: 3}
+  m_PrefabInstance: {fileID: 709646000}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &694119779
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10205,17 +10231,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1492693180}
     m_Modifications:
+    - target: {fileID: 417497117225076361, guid: 8fe738f52d730df48ac675f29a1dafb6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -859710825, guid: c45639750abb0904a96fb6de76c2b52a, type: 3}
+    - target: {fileID: 741268693976485229, guid: 8fe738f52d730df48ac675f29a1dafb6, type: 3}
+      propertyPath: cardData
+      value: 
+      objectReference: {fileID: 11400000, guid: 35be3cfce79115f4ba72f1f2959765ee, type: 2}
+    - target: {fileID: 741268693976485229, guid: 8fe738f52d730df48ac675f29a1dafb6, type: 3}
+      propertyPath: gradientPosition
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3512385548184127918, guid: 8fe738f52d730df48ac675f29a1dafb6, type: 3}
       propertyPath: m_Name
       value: Poppup
       objectReference: {fileID: 0}
+    - target: {fileID: 7216450491660920278, guid: 8fe738f52d730df48ac675f29a1dafb6, type: 3}
+      propertyPath: m_text
+      value: Vodka
+      objectReference: {fileID: 0}
     - target: {fileID: 7852776127808662774, guid: 8fe738f52d730df48ac675f29a1dafb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -180.37317
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7852776127808662774, guid: 8fe738f52d730df48ac675f29a1dafb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -597.43616
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7852776127808662774, guid: 8fe738f52d730df48ac675f29a1dafb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10249,6 +10291,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8816377685451889351, guid: 8fe738f52d730df48ac675f29a1dafb6, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816377685451889351, guid: 8fe738f52d730df48ac675f29a1dafb6, type: 3}
+      propertyPath: m_Color.g
+      value: 0.012513012
+      objectReference: {fileID: 0}
+    - target: {fileID: 8824342237658702093, guid: 8fe738f52d730df48ac675f29a1dafb6, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8824342237658702093, guid: 8fe738f52d730df48ac675f29a1dafb6, type: 3}
+      propertyPath: m_Color.g
+      value: 0.9992148
+      objectReference: {fileID: 0}
+    - target: {fileID: 8824342237658702093, guid: 8fe738f52d730df48ac675f29a1dafb6, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9198113
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10257,28 +10319,37 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 709646003}
   m_SourcePrefab: {fileID: 100100000, guid: 8fe738f52d730df48ac675f29a1dafb6, type: 3}
---- !u!4 &709646001 stripped
-Transform:
+--- !u!224 &709646001 stripped
+RectTransform:
   m_CorrespondingSourceObject: {fileID: 7852776127808662774, guid: 8fe738f52d730df48ac675f29a1dafb6, type: 3}
   m_PrefabInstance: {fileID: 709646000}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &709646002 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3512385548184127918, guid: 8fe738f52d730df48ac675f29a1dafb6, type: 3}
+--- !u!114 &709646002 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 741268693976485229, guid: 8fe738f52d730df48ac675f29a1dafb6, type: 3}
   m_PrefabInstance: {fileID: 709646000}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689180249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a897047862073c4ba4fcc29bb245e91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PoppupDisplay
 --- !u!114 &709646003
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 709646002}
+  m_GameObject: {fileID: 689180249}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1750eae5982a5f49843127ce85d50f1, type: 3}
+  m_Script: {fileID: 11500000, guid: aec5f46e6c1337147bcb0e6ce3d082bd, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TooltipController
+  m_EditorClassIdentifier: Assembly-CSharp::CardCombinationCycler
+  popupDisplay: {fileID: 709646002}
+  cycleInterval: 0.2
+  autoCycle: 1
 --- !u!4 &716999054 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012308956894, guid: c1e9f15f0cced6749b1913478bceb00f, type: 3}
@@ -32424,12 +32495,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bcb43fbbee01c7488b3bb98cfe1d98d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TooltipSystem
-  cam: {fileID: 0}
-  tooltipObject: {fileID: 0}
-  offset: {x: 15, y: -15}
-  hoverLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!4 &2092766799710618932
 Transform:
   m_ObjectHideFlags: 0
@@ -33085,7 +33150,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4104257353252415507, guid: 5a2d016a7e794784a9ff1514720b980e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 178214070}
   m_SourcePrefab: {fileID: 100100000, guid: 5a2d016a7e794784a9ff1514720b980e, type: 3}
 --- !u!1 &4141968815416593589
 GameObject:

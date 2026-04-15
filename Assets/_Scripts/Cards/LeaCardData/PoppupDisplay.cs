@@ -19,6 +19,10 @@ public class PoppupDisplay : MonoBehaviour
     [Header("Card")]
     public CardData cardData;
 
+    [Header("Gradient Settings")]
+    [Range(0f, 1f)]
+    public float gradientPosition = 0.5f; // Where we sample the gradient
+
     void OnValidate()
     {
         if (!Application.isPlaying)
@@ -51,11 +55,16 @@ public class PoppupDisplay : MonoBehaviour
 
         if (typeData != null)
         {
-            if (typeData.typeSprite != null)
+            // Set icon sprite
+            if (typeData.valueSprite != null)
                 iconRenderer.sprite = typeData.valueSprite;
 
-            pointerRenderer.color = typeData.spriteTint;
-
+            // Apply gradient (converted to color)
+            if (typeData.spriteGradient != null)
+            {
+                Color gradientColor = typeData.spriteGradient.Evaluate(gradientPosition);
+                pointerRenderer.color = gradientColor;
+            }
         }
 
         var ingredientData = database.GetIngredientData(card.ingredient);
@@ -64,7 +73,6 @@ public class PoppupDisplay : MonoBehaviour
         {
             ingredientNameText.text = ingredientData.title;
             clipRenderer.color = ingredientData.panelColor;
-
         }
     }
 }

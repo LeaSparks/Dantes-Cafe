@@ -12,9 +12,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 786e0b46a99cb16468abfa8fd70b0a30, type: 3}
   m_Name: Rotten
   m_EditorClassIdentifier: Assembly-CSharp::CardTypeData
-  type: 5
+  type: 0
   typeSprite: {fileID: 21300000, guid: 6904e542feae4594b873b49debe57be9, type: 3}
   valueSprite: {fileID: 56686606, guid: c45639750abb0904a96fb6de76c2b52a, type: 3}
-  spriteTint: {r: 0.24857341, g: 0.4245283, b: 0.21426664, a: 1}
+  spriteGradient:
+    serializedVersion: 2
+    key0: {r: 0.17795478, g: 0.2924528, b: 0.1930203, a: 1}
+    key1: {r: 0.26824492, g: 0.41509432, b: 0.28534248, a: 1}
+    key2: {r: 0.41229087, g: 0.8018868, b: 0.47073027, a: 0}
+    key3: {r: 0.1333333, g: 0.5450981, b: 0.1333333, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 16769
+    ctime2: 46067
+    ctime3: 65535
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 4
+    m_NumAlphaKeys: 2
   pointValue: -1
   isBurning: 0
+  isWild: 0
+  isMagic: 0

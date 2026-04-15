@@ -420,3 +420,4 @@ MonoBehaviour:
   ingredientNameText: {fileID: 7216450491660920278}
   database: {fileID: 11400000, guid: 8a1538511adc61d459e7b9fbafd9e46d, type: 2}
   cardData: {fileID: 11400000, guid: c94cbd02776d40c4abce9ef0cc2bac6d, type: 2}
+  gradientPosition: 0
