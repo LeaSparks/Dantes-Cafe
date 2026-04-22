@@ -9,7 +9,9 @@ public class CardDatabase : Singleton<CardDatabase>
 
     public CardTypeData GetTypeData(CardType type)
     {
-        return typeData.Find(t => t.type == type);
+        var found = typeData.Find(t => t.type == type);
+        if(found == null) Debug.Log($"COULD NOT FIND TYPE DATA FOR TYPE {type}!!");
+        return found;
     }
 
     public CardIngredientData GetIngredientData(CardIngredient ingredient)

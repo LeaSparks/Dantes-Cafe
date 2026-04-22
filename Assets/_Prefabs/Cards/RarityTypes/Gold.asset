@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 786e0b46a99cb16468abfa8fd70b0a30, type: 3}
   m_Name: Gold
   m_EditorClassIdentifier: Assembly-CSharp::CardTypeData
-  type: 2
+  type: 3
   typeSprite: {fileID: 21300000, guid: db4890e5c85a85b44b307d0361bfc7f4, type: 3}
   valueSprite: {fileID: -1388415674, guid: c45639750abb0904a96fb6de76c2b52a, type: 3}
   spriteGradient:

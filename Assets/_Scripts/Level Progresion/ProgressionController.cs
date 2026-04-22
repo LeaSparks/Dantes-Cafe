@@ -21,7 +21,7 @@ public class ProgressionController : Singleton<ProgressionController>
     [SerializeField] TextMeshProUGUI _multiplierText;
 
     private int _highestRoomReached;
-    private PerkPopup _perkPopup;
+    [SerializeField] PerkPopup _perkPopup;
 
     public override void Awake()
     {
@@ -50,14 +50,13 @@ public class ProgressionController : Singleton<ProgressionController>
         //2. Set wall color
 
         var wallsParent = GameObject.Find("PlayRoomWalls"); 
-
         if (wallsParent != null)
         {
             Renderer[] childRenderers = wallsParent.GetComponentsInChildren<Renderer>(true);
-
+            
             foreach (Renderer child in childRenderers)
             {
-                child.material.SetColor("Base Color", roomData.WallColor);
+                child.material.SetColor("_BaseColor", roomData.WallColor);
             }
         } 
         else 
@@ -66,6 +65,7 @@ public class ProgressionController : Singleton<ProgressionController>
 
     public void OnRoomComplete()
     {
+        Debug.Log($"[ProgressionController] Moving onto Next room");
         if(_roomIndex == RoomSequence.Count - 1)
         {
             //TODO: WINNER !!

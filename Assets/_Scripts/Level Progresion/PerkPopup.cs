@@ -13,6 +13,7 @@ public class PerkPopup : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this);
+        gameObject.SetActive(false);
     }
 
     void Start()

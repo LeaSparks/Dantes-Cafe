@@ -47,7 +47,7 @@ public abstract class Competitor : MonoBehaviour
         for(int i = 0; i < stackList.Count && i < stack.GetAssociatedOrder().IngredientList.Count; i++)
         {
             var card = stackList[i].GetCardData();
-            
+            Debug.Log($"[Stack Checking] Compairing {card.ingredient}: {i+1} of {stackList.Count}");
             if (comparisonList.Contains(card.ingredient))
             {
 
@@ -68,6 +68,7 @@ public abstract class Competitor : MonoBehaviour
             } 
             else
             {
+                Debug.Log($"[Stack Checking] order is invalid.");
                 HideAllHighlights(stack);
                 return;
             }

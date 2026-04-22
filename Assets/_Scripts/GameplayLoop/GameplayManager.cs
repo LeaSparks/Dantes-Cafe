@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 
@@ -32,6 +33,7 @@ public class GameplayManager : Singleton<GameplayManager>
     [SerializeField] TextMeshProUGUI _infoText;
     [SerializeField] DiscardPile _discardPile;
 
+    private bool _roundOver = false;
 
     //States
     private DrawPhase _drawPhase = new DrawPhase();
@@ -69,6 +71,7 @@ public class GameplayManager : Singleton<GameplayManager>
 
     public void ChangeState(IState state)
     {
+        if(_roundOver) return;
         Debug.Log($"Changing to phase: {state}");
         _currentState?.Exit();
         _currentState = state;
@@ -149,14 +152,17 @@ public class GameplayManager : Singleton<GameplayManager>
 
     public void GameOver()
     {
+        _roundOver = true;
         if(Player.Score > Enemy.Score)
         {
             //PLayer wins, show win screen
-            Debug.Log("CONGRATULATIONS, YOU WON!");
+            //Debug.Log("CONGRATULATIONS, YOU WON!");
+            ProgressionController.Instance.OnRoomComplete();
         } else
         {
             //Enemy wins, show lose screen
-            Debug.Log("YOU LOST!");
+            //Debug.Log("YOU LOST!");
+            ProgressionController.Instance.OnRoomFailed();
         }
     }
 
