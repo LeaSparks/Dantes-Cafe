@@ -13,7 +13,7 @@ public class Stack : CardDock
     [SerializeField] private Stack<IngredientCardController> _cards = new();
     private OrderCardData _associatedOrder;
     private List<CardIngredient> _requiredIngredients = new();
-    private bool _isOrdered = true;
+    //private bool _isOrdered = true;
     
     public UnityEvent<Stack, IngredientCardController> NewIngredientAdded;
     public event Action OnActionTaken;

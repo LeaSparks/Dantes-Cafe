@@ -2,6 +2,8 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Events;
 using System;
+using Unity.VisualScripting;
+using UnityEngine.EventSystems;
 
 public class CardManager : Singleton<CardManager>
 {
@@ -20,10 +22,12 @@ public class CardManager : Singleton<CardManager>
 
     public UnityEvent OnCardReachedTarget = new();
 
-    private void Start()
+    public override void Awake()
     {
+        base.Awake();
         _ingredientPool = new ObjectPool(_ingredientPrefab, _ingredentPoolAmt, _cardParent);
         _orderPool = new ObjectPool(_orderPrefab, _orderPoolAmt, _cardParent);
+        Debug.Log("Making order pools");
     }
 
     public GameObject GetPooledIngredient() => _ingredientPool.GetActivePooledObject();

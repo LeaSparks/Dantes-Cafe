@@ -31,7 +31,7 @@ public abstract class Competitor : MonoBehaviour
     public int ActionsCount => _actionsCount;
     public void SetActionsCount(int amount) => _actionsCount = amount;
     public Stack GetStackAtIndex(int index) => _stacks[index];
-    private bool _isStackOrdered = false;
+    //private bool _isStackOrdered = false;
 
     public void CheckStackForScore(Stack stack)
     {
@@ -99,7 +99,7 @@ public abstract class Competitor : MonoBehaviour
         GameplayManager.Instance.OrderPanel.RemoveOrderFromSpot(_stacks.IndexOf(stack));
 
         //check for win
-        if(_score > GameplayManager.WINNING_SCORE || GameplayManager.Instance.RemainingOrders <= 0)
+        if(_score >= ProgressionController.Instance.CurrentRoomData.PointsToWin || GameplayManager.Instance.RemainingOrders <= 0)
         {
             GameplayManager.Instance.GameOver();
         }
@@ -117,7 +117,7 @@ public abstract class Competitor : MonoBehaviour
         EffectsController.Instance.ShowScoreIndicator(score, location);
         
         //update display
-        _scoreText.text = $"Score: {_score}";
+        _scoreText.text = $"Score: {_score} / {ProgressionController.Instance.CurrentRoomData.PointsToWin}";
     }
 
     public IEnumerator AnimateStackDiscard(Stack stack)
