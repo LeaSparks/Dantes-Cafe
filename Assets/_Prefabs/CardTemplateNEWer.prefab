@@ -394,7 +394,7 @@ MonoBehaviour:
   colourPanel: {fileID: 5920747424734705915}
   titleText: {fileID: 3165291460030737161}
   descriptionText: {fileID: 5908011140836677219}
-  cardData: {fileID: 11400000, guid: c94cbd02776d40c4abce9ef0cc2bac6d, type: 2}
+  cardData: {fileID: 0}
   gradientResolution: 128
   verticalGradient: 1
 --- !u!114 &5949215588733164653

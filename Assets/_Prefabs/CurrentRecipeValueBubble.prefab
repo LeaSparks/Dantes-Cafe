@@ -203,7 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ScoreBubble
   minValue: -9
   maxValue: 36
-  currentValue: -5
+  currentValue: 6
   mainImage: {fileID: 8358986823329853395}
   crackedOverlay: {fileID: 8643213723512655989}
   scoreText: {fileID: 3273627472217538609}

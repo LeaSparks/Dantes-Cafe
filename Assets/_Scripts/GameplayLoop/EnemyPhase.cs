@@ -1,3 +1,5 @@
+using System;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -11,7 +13,7 @@ public class EnemyPhase : IState
     public void Enter()
     {
         GameplayManager.Instance.DrawPanel.UpdateDrawPanel();
-        GameplayManager.Instance.ChangeCameraToView(3);
+        GameplayManager.Instance.ChangeCameraToView(1);
        
 
         /*
@@ -34,21 +36,27 @@ public class EnemyPhase : IState
         
         CardManager.Instance.OnCardReachedTarget.AddListener(OnCardReachedHand);
 
-        GameplayManager.Instance.DrawPanel.MoveToHand(card, GameplayManager.Instance.Enemy.Hand, 1f);
-        GameplayManager.Instance.ChangeCameraToView(2);
+        GameplayManager.Instance.DrawPanel.MoveToHand(card, GameplayManager.Instance.Enemy.Hand, 1f, true);
+        //GameplayManager.Instance.ChangeCameraToView(1);
     }
 
     private float GetRandomDelay()
     {
-        return Random.Range(MIN_CHOOSE_DELAY, MAX_CHOOSE_DELAY);
+        return UnityEngine.Random.Range(MIN_CHOOSE_DELAY, MAX_CHOOSE_DELAY);
     }
     private async void OnCardReachedHand()
     {
         CardManager.Instance.OnCardReachedTarget.RemoveListener(OnCardReachedHand);
         GameplayManager.Instance.InfoText.text = "Enemy is making actions...";
 
-
-        await Awaitable.WaitForSecondsAsync(0.2f);
-        GameplayManager.Instance.Enemy.ChooseActionSequence(ACTIONS_LIMIT);
+        using var cts = new CancellationTokenSource(System.TimeSpan.FromSeconds(7)); // 7s timeout
+        try 
+        {
+            await Awaitable.WaitForSecondsAsync(0.2f);
+            GameplayManager.Instance.Enemy.ChooseActionSequence(ACTIONS_LIMIT);
+        } catch (OperationCanceledException) 
+        {
+            Debug.Log("Enemy Actions Timed Out!");
+        }   
     }
 }

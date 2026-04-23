@@ -43,6 +43,7 @@ public class OrderPanel : MonoBehaviour
         _orders[index] = orderView;
 
         StartCoroutine(AnimateNewCard(index, orderView));
+        UpdateOrderIndicator(index, 0);
 
     }
 
@@ -85,5 +86,18 @@ public class OrderPanel : MonoBehaviour
         }
 
         orderView.transform.DOMove(_cardDocks[index].position, _timeToMove);
+    }
+
+    public void ClearOrderCards()
+    {
+        foreach(var card in _orders)
+        {
+            CardManager.Instance.ReturnOrderCardToPool(card);
+        }
+    }
+
+    public void UpdateOrderIndicator(int index, int score)
+    {
+        _orders[index].gameObject.GetComponentInChildren<ScoreBubble>()?.SetValue(score);
     }
 }
