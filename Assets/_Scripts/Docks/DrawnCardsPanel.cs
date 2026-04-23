@@ -136,4 +136,10 @@ public class DrawnCardsPanel : MonoBehaviour
             card.IsDraggable = isInteractable;
         }
     }
+
+    public void ClearCards()
+    {
+        foreach(var card in _ingredientCards)
+            CardManager.Instance.ReturnIngredientCardToPool(card);
+    }
 }

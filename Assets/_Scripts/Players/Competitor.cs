@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -68,7 +67,7 @@ public abstract class Competitor : MonoBehaviour
             } 
             else
             {
-                Debug.Log($"[Stack Checking] order is invalid.");
+                //Debug.Log($"[Stack Checking] order is invalid.");
                 HideAllHighlights(stack);
                 return;
             }
@@ -81,6 +80,9 @@ public abstract class Competitor : MonoBehaviour
         //update score
         if(isInOrder)
             score += GameplayManager.IN_ORDER_MODIFIER;
+
+        if(this is Player)
+            score = (int)(score * ProgressionController.Instance.ScoreMultiplier);
 
         
         AddToScore(score, stack.transform.position);
@@ -100,9 +102,13 @@ public abstract class Competitor : MonoBehaviour
         GameplayManager.Instance.OrderPanel.RemoveOrderFromSpot(_stacks.IndexOf(stack));
 
         //check for win
-        if(_score >= ProgressionController.Instance.CurrentRoomData.PointsToWin || GameplayManager.Instance.RemainingOrders <= 0)
+        if( GameplayManager.Instance.RemainingOrders <= 0)
         {
-            GameplayManager.Instance.GameOver();
+            GameplayManager.Instance.GameOver(GameplayManager.Instance.Player.Score >= GameplayManager.Instance.Enemy.Score);
+        }
+        else if(_score >= ProgressionController.Instance.CurrentRoomData.PointsToWin)
+        {
+            GameplayManager.Instance.GameOver(this is Player);
         }
         else
         {
@@ -158,6 +164,27 @@ public abstract class Competitor : MonoBehaviour
         for(int i = 0; i < stack.Cards.Count; i++)
         {
             stackList[i].OutlineVisual.Hide();
+        }
+    }
+
+    public void SetScore(int score)
+    {
+        _score = score;
+    }
+
+    public void ClearAllStacks()
+    {
+        foreach(var stack in _stacks)
+        {
+            while(stack.Cards.Count > 0)
+            {
+                var card = stack.Cards.Peek();
+                card.IsClickable = false;
+                card.IsDraggable = false;
+                card.OutlineVisual.Hide();
+
+                CardManager.Instance.ReturnIngredientCardToPool(card);
+            }
         }
     }
 }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 
@@ -21,6 +20,7 @@ public class GameplayManager : Singleton<GameplayManager>
     [Header("Decks")]
     [SerializeField] private List<CardData> _ingredientsDeck = new();
     private List<CardData> _backupDeck;         //THIS IS FOR TESTING
+    private List<OrderCardData> _orderBackup;         //THIS IS FOR TESTING
     [SerializeField] private List<OrderCardData> _orderDeck = new();
     //private List<CardData> _ingredientsDiscard = new();
 
@@ -53,20 +53,44 @@ public class GameplayManager : Singleton<GameplayManager>
     // ----------------------------------------------------
     void Start()
     {
+        Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         _turnController = gameObject.GetComponent<TurnController>();
 
         _backupDeck = new List<CardData>(_ingredientsDeck);
+        _orderBackup = new List<OrderCardData>(_orderDeck);
         RemainingOrders = _orderDeck.Count;
 
+        //StartRound();
+    }
+    public void StartRound()
+    {
         for(int i = 0; i < 3; i++)
             AssignOrderToStacks(i);
-
-        ChangeState(_drawPhase);
+            ChangeState(_drawPhase);
     }
 
     void Update()
     {
         _currentState?.Update();
+    }
+
+    public void ResetScene()
+    {
+        _player.SetScore(0);
+        _enemy.SetScore(0);
+        
+        _player.ClearAllStacks();
+        _enemy.ClearAllStacks();
+
+        _ingredientsDeck.Clear();
+        _ingredientsDeck = _backupDeck;
+        _orderDeck.Clear();
+        _orderDeck = _orderBackup;
+
+        _drawPhasePanel.ClearCards();
+        _orderPanel.ClearOrderCards();
+        _discardPile.ClearPile();
+
     }
 
     public void ChangeState(IState state)
@@ -150,14 +174,15 @@ public class GameplayManager : Singleton<GameplayManager>
 
     #endregion
 
-    public void GameOver()
+    public void GameOver(bool playerWon)
     {
         _roundOver = true;
-        if(Player.Score > Enemy.Score)
+        if(playerWon)
         {
             //PLayer wins, show win screen
             //Debug.Log("CONGRATULATIONS, YOU WON!");
             ProgressionController.Instance.OnRoomComplete();
+
         } else
         {
             //Enemy wins, show lose screen

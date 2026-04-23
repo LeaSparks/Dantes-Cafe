@@ -9,24 +9,21 @@ public class PerkPopup : MonoBehaviour
     [SerializeField] Button _multiplierUpgradeBtn;
     [SerializeField] TextMeshProUGUI _multiplierPerkText;
 
-    
-    void Awake()
-    {
-        DontDestroyOnLoad(this);
-        gameObject.SetActive(false);
-    }
-
     void Start()
     {
         var progController = ProgressionController.Instance;
         _rarityUpgradeBtn?.onClick.AddListener(progController.UpgradeRarityPerk);
+        _rarityUpgradeBtn?.onClick.AddListener(() => gameObject.SetActive(false));
         _rarityUpgradeBtn?.onClick.AddListener(progController.ContinueToNextRoom);
        
         _multiplierUpgradeBtn?.onClick.AddListener(progController.UpgradeMultiplierPerk);
+        _multiplierUpgradeBtn?.onClick.AddListener(() => gameObject.SetActive(false));
         _multiplierUpgradeBtn?.onClick.AddListener(progController.ContinueToNextRoom);
+
+        gameObject.SetActive(false);
     }
 
-    void OnDestroy()
+    public void OnDestroy()
     {
         _rarityUpgradeBtn?.onClick.RemoveAllListeners();
         _multiplierUpgradeBtn?.onClick.RemoveAllListeners();

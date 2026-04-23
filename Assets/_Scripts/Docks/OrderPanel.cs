@@ -86,4 +86,12 @@ public class OrderPanel : MonoBehaviour
 
         orderView.transform.DOMove(_cardDocks[index].position, _timeToMove);
     }
+
+    public void ClearOrderCards()
+    {
+        foreach(var card in _orders)
+        {
+            CardManager.Instance.ReturnOrderCardToPool(card);
+        }
+    }
 }

@@ -1,6 +1,10 @@
 using UnityEngine;
+public abstract class SingletonBase : MonoBehaviour
+{
+    public bool ShouldDieOnReload = true;
 
-public class Singleton<T> : MonoBehaviour where T : Component
+}
+public class Singleton<T> : SingletonBase where T : Component
 {
     public static T Instance { get; private set; }
 
@@ -9,7 +13,8 @@ public class Singleton<T> : MonoBehaviour where T : Component
         if (Instance == null)
         {
             Instance = this as T;
-            //DontDestroyOnLoad(gameObject);  
+            Debug.Log($"[Singleton] Creating Instance of {typeof(T).Name}");
+
         }
         else
         {
@@ -20,6 +25,9 @@ public class Singleton<T> : MonoBehaviour where T : Component
     public virtual void OnDestroy()
     {
         if (Instance == this)
+        {
+            Debug.Log($"[Singleton] Destroying Instance of {typeof(T).Name}");
             Instance = null;
+        }
     }
 }
