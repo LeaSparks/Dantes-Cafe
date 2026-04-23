@@ -53,7 +53,6 @@ public class GameplayManager : Singleton<GameplayManager>
     // ----------------------------------------------------
     void Start()
     {
-        Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         _turnController = gameObject.GetComponent<TurnController>();
 
         _backupDeck = new List<CardData>(_ingredientsDeck);

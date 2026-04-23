@@ -1199,6 +1199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fc8a83ae635ed940a9b36b646eb70bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProgressionUI
+  ShouldDieOnReload: 1
   ProgressScreen: {fileID: 5491300272729909483}
   PerkPopup: {fileID: 4038437796254477938}
   ScoreText: {fileID: 5205715365459980902}
@@ -1223,7 +1224,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &6196967032501959941
 MonoBehaviour:

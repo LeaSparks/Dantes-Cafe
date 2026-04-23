@@ -29,12 +29,6 @@ public class ProgressionController : Singleton<ProgressionController>
     [SerializeField] int _roomIndex = 0;
 
     private int _highestRoomReached;
-    bool isReloaded = false;
-    
-    //PerkPopup _perkPopup;
-    //RoomProgressionScreen _progressScreen;
-    //TextMeshProUGUI _multiplierText;
-
 
     private void Update()   //FOR DEBUGGING< TO DELETE
     {
@@ -94,7 +88,6 @@ public class ProgressionController : Singleton<ProgressionController>
 
         //3. Other UI stuff
         ProgressionUI.Instance.ScoreText.text = $"{ScoreMultiplier}x";
-        isReloaded = false;
 
         var num = CurrentRoomData.FloorNumber;
         switch (transitionType)

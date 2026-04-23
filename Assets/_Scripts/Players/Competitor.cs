@@ -8,8 +8,10 @@ public abstract class Competitor : MonoBehaviour
 {
     public static float DISCARD_DELAY = 0.5f;
     protected Hand _hand;
-    [SerializeField] protected List<Stack> _stacks;
+    [SerializeField] public List<Stack> _stacks;
     [SerializeField] protected TextMeshProUGUI _scoreText;
+    
+    public List<GameObject> UsedBurnCards;
 
     protected int _actionsCount;
     protected int _score;
@@ -24,6 +26,7 @@ public abstract class Competitor : MonoBehaviour
         foreach(var stack in _stacks)
         {
             stack.NewIngredientAdded.AddListener((s, ing) => CheckStackForScore(s));
+            stack.Parent = this;    //yeah ik this is bad whatever
         }
     }
 
@@ -90,15 +93,9 @@ public abstract class Competitor : MonoBehaviour
 
 
         //animate cards being discarded
-        if(this is Player)
-        {
-            StartCoroutine(GameplayManager.Instance.Enemy.AnimateDiscard(_stacks.IndexOf(stack)));      //get rid of opposing players stacks too!
-        } else
-        {
-            StartCoroutine(GameplayManager.Instance.Player.AnimateDiscard(_stacks.IndexOf(stack)));
-        }
+        StartCoroutine(GameplayManager.Instance.Enemy.AnimateDiscard(_stacks.IndexOf(stack)));      //get rid of opposing players stacks too!
+        StartCoroutine(GameplayManager.Instance.Player.AnimateDiscard(_stacks.IndexOf(stack)));
 
-        StartCoroutine(AnimateStackDiscard(stack));
         GameplayManager.Instance.OrderPanel.RemoveOrderFromSpot(_stacks.IndexOf(stack));
 
         //check for win
@@ -135,12 +132,7 @@ public abstract class Competitor : MonoBehaviour
         
         while(stack.Cards.Count > 0)
         {
-            var card = stack.Cards.Peek();
-            card.IsClickable = false;
-            card.IsDraggable = false;
-            card.OutlineVisual.Hide();
-            //card.transform.DOLocalMove(card.transform.localPosition + offset, DISCARD_DELAY);
-            CardManager.Instance.AnimateMoveCardToDock(card.gameObject, GameplayManager.Instance.DiscardPile, null, DISCARD_DELAY);
+            stack.AnimateSingleDiscard(DISCARD_DELAY);
             yield return new WaitForSeconds(DISCARD_DELAY);
         }
 
