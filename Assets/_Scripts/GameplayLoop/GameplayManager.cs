@@ -33,6 +33,9 @@ public class GameplayManager : Singleton<GameplayManager>
     [SerializeField] TextMeshProUGUI _infoText;
     [SerializeField] DiscardPile _discardPile;
 
+    [Header("Sounds Effects that also shouldnt be here")]
+    public SoundEffect FireSFX;
+
     private bool _roundOver = false;
 
     //States

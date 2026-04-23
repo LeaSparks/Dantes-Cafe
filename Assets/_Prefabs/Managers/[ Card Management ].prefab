@@ -100,10 +100,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DrawnCardsPanel
   _ingredientCards:
-  - {fileID: 3112555873179254616}
-  - {fileID: 1233251535008552054}
-  - {fileID: 5881409760810289804}
-  - {fileID: 953354512359493321}
+  - {fileID: 1774006804422080975}
+  - {fileID: 2505696391370759739}
+  - {fileID: 1145540088818746292}
+  - {fileID: 261516432019332679}
   _drawOrigin: {fileID: 5776620817568353413}
   _onDrawSFX: {fileID: 11400000, guid: 49bce18dadf894f40ac05ed49fd239e7, type: 2}
   _onShuffleSFX: {fileID: 11400000, guid: 000e83abe200a554386de9ed2b7e9cc4, type: 2}
@@ -229,10 +229,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3394763793491606262}
-  - {fileID: 1527838480861286872}
-  - {fileID: 6174555728189574946}
-  - {fileID: 654258196289882983}
+  - {fileID: 72154312482304125}
+  - {fileID: 4276409371536185225}
+  - {fileID: 1619915537120479750}
+  - {fileID: 1891452410463885301}
   m_Father: {fileID: 6642160604510941867}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &6964940775084466422
@@ -347,7 +347,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e169d9a08c0a05e40930c8ee385fb6ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardManager
-  _ingredientPrefab: {fileID: 5603572069581696092, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+  ShouldDieOnReload: 1
+  _ingredientPrefab: {fileID: 3768626631487975096, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
   _ingredentPoolAmt: 10
   _orderPrefab: {fileID: 4800909544132006759, guid: f8a047123dd1baa44bf240d808ee4699, type: 3}
   _orderPoolAmt: 6
@@ -367,6 +368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 223cffd2f1a5a724e877820824cbdd0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardDatabase
+  ShouldDieOnReload: 1
   typeData:
   - {fileID: 11400000, guid: 9be5f691c7b9e254f8e1affe9680d733, type: 2}
   - {fileID: 11400000, guid: 663fb09c1482a394f9282c264f282417, type: 2}
@@ -465,7 +467,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6458098057406185223, guid: b9f59739e34f5d74b95e6b5ead75e86c, type: 3}
   m_PrefabInstance: {fileID: 315911379119442001}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &2051129781265707824
+--- !u!1001 &5337141337405531554
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -473,67 +475,64 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 213707786395387257}
     m_Modifications:
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 3768626631487975096, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
+      propertyPath: m_Name
+      value: CardTemplateNEWer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.139
+      value: -0.13899994
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.056
+      value: -1.0559999
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0
+      value: 0.00000011920929
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3982614426836962408, guid: aab719f898263eb419d8993a31877d0a, type: 3}
-      propertyPath: IsClickable
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3982614426836962408, guid: aab719f898263eb419d8993a31877d0a, type: 3}
-      propertyPath: IsDraggable
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5603572069581696092, guid: aab719f898263eb419d8993a31877d0a, type: 3}
-      propertyPath: m_Name
-      value: IngredientCard_World
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: aab719f898263eb419d8993a31877d0a, type: 3}
---- !u!114 &3112555873179254616 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
+--- !u!4 &72154312482304125 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
+  m_PrefabInstance: {fileID: 5337141337405531554}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1774006804422080975 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3982614426836962408, guid: aab719f898263eb419d8993a31877d0a, type: 3}
-  m_PrefabInstance: {fileID: 2051129781265707824}
+  m_CorrespondingSourceObject: {fileID: 5949215588733164653, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
+  m_PrefabInstance: {fileID: 5337141337405531554}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -541,12 +540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ebe5e7d9fad9e4b87a41418808a00d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IngredientCardController
---- !u!4 &3394763793491606262 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
-  m_PrefabInstance: {fileID: 2051129781265707824}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &2763087034688296990
+--- !u!1001 &5849836999881032234
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -554,67 +548,59 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 213707786395387257}
     m_Modifications:
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 3768626631487975096, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
+      propertyPath: m_Name
+      value: CardTemplateNEWer (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.139
+      value: 0.314
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.676
+      value: -1.635
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3982614426836962408, guid: aab719f898263eb419d8993a31877d0a, type: 3}
-      propertyPath: IsClickable
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3982614426836962408, guid: aab719f898263eb419d8993a31877d0a, type: 3}
-      propertyPath: IsDraggable
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5603572069581696092, guid: aab719f898263eb419d8993a31877d0a, type: 3}
-      propertyPath: m_Name
-      value: IngredientCard_World (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: aab719f898263eb419d8993a31877d0a, type: 3}
---- !u!114 &1233251535008552054 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
+--- !u!114 &261516432019332679 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3982614426836962408, guid: aab719f898263eb419d8993a31877d0a, type: 3}
-  m_PrefabInstance: {fileID: 2763087034688296990}
+  m_CorrespondingSourceObject: {fileID: 5949215588733164653, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
+  m_PrefabInstance: {fileID: 5849836999881032234}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -622,12 +608,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ebe5e7d9fad9e4b87a41418808a00d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IngredientCardController
---- !u!4 &1527838480861286872 stripped
+--- !u!4 &1891452410463885301 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
-  m_PrefabInstance: {fileID: 2763087034688296990}
+  m_CorrespondingSourceObject: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
+  m_PrefabInstance: {fileID: 5849836999881032234}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &4215343244432802465
+--- !u!1001 &6731221914610229209
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -635,72 +621,59 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 213707786395387257}
     m_Modifications:
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 3768626631487975096, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
+      propertyPath: m_Name
+      value: CardTemplateNEWer (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.305
+      value: 0.314
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.678
+      value: -1.0559999
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0
+      value: 0.00000011920929
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3982614426836962408, guid: aab719f898263eb419d8993a31877d0a, type: 3}
-      propertyPath: IsClickable
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3982614426836962408, guid: aab719f898263eb419d8993a31877d0a, type: 3}
-      propertyPath: IsDraggable
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5603572069581696092, guid: aab719f898263eb419d8993a31877d0a, type: 3}
-      propertyPath: m_Name
-      value: IngredientCard_World (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: aab719f898263eb419d8993a31877d0a, type: 3}
---- !u!4 &654258196289882983 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
-  m_PrefabInstance: {fileID: 4215343244432802465}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &953354512359493321 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
+--- !u!114 &1145540088818746292 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3982614426836962408, guid: aab719f898263eb419d8993a31877d0a, type: 3}
-  m_PrefabInstance: {fileID: 4215343244432802465}
+  m_CorrespondingSourceObject: {fileID: 5949215588733164653, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
+  m_PrefabInstance: {fileID: 6731221914610229209}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -708,7 +681,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ebe5e7d9fad9e4b87a41418808a00d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IngredientCardController
---- !u!1001 &7411765810939184868
+--- !u!4 &1619915537120479750 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
+  m_PrefabInstance: {fileID: 6731221914610229209}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8091237458178064982
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -716,67 +694,59 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 213707786395387257}
     m_Modifications:
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 3768626631487975096, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
+      propertyPath: m_Name
+      value: CardTemplateNEWer (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.305
+      value: -0.13899994
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.048
+      value: -1.635
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
+    - target: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3982614426836962408, guid: aab719f898263eb419d8993a31877d0a, type: 3}
-      propertyPath: IsClickable
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3982614426836962408, guid: aab719f898263eb419d8993a31877d0a, type: 3}
-      propertyPath: IsDraggable
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5603572069581696092, guid: aab719f898263eb419d8993a31877d0a, type: 3}
-      propertyPath: m_Name
-      value: IngredientCard_World (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: aab719f898263eb419d8993a31877d0a, type: 3}
---- !u!114 &5881409760810289804 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
+--- !u!114 &2505696391370759739 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3982614426836962408, guid: aab719f898263eb419d8993a31877d0a, type: 3}
-  m_PrefabInstance: {fileID: 7411765810939184868}
+  m_CorrespondingSourceObject: {fileID: 5949215588733164653, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
+  m_PrefabInstance: {fileID: 8091237458178064982}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -784,8 +754,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ebe5e7d9fad9e4b87a41418808a00d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IngredientCardController
---- !u!4 &6174555728189574946 stripped
+--- !u!4 &4276409371536185225 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 3705209067921050054, guid: aab719f898263eb419d8993a31877d0a, type: 3}
-  m_PrefabInstance: {fileID: 7411765810939184868}
+  m_CorrespondingSourceObject: {fileID: 5409107049149175263, guid: 69e70fc1dc8ee3c4abcaecb616a1be3a, type: 3}
+  m_PrefabInstance: {fileID: 8091237458178064982}
   m_PrefabAsset: {fileID: 0}

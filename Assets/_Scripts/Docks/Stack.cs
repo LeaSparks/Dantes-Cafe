@@ -191,7 +191,7 @@ public class Stack : CardDock
             GameplayManager.Instance.Player.GetStackAtIndex(index);
         
         opposingStack.AnimateSingleDiscard(0.5f);
-        //AudioManager.Instance.PlaySFX();
+        AudioManager.Instance.PlaySFX(GameplayManager.Instance.FireSFX);
     }
 
     public void AnimateSingleDiscard(float animTime)
