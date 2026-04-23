@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework;
 using TMPro;
 using UnityEngine;
 
@@ -26,6 +27,7 @@ public abstract class Competitor : MonoBehaviour
         foreach(var stack in _stacks)
         {
             stack.NewIngredientAdded.AddListener((s, ing) => CheckStackForScore(s));
+            stack.IngredientRemoved.AddListener(CheckStackForScore);
             stack.Parent = this;    //yeah ik this is bad whatever
         }
     }
@@ -71,10 +73,15 @@ public abstract class Competitor : MonoBehaviour
             else
             {
                 //Debug.Log($"[Stack Checking] order is invalid.");
+                isInOrder = false;
                 HideAllHighlights(stack);
+                if(this is Player)
+                    GameplayManager.Instance.OrderPanel.UpdateOrderIndicator(_stacks.IndexOf(stack), 0);
                 return;
             }
         }
+         if(this is Player)
+            GameplayManager.Instance.OrderPanel.UpdateOrderIndicator(_stacks.IndexOf(stack), score);
 
          if(stack.Cards.Count != stack.GetAssociatedOrder().IngredientList.Count) return;
 

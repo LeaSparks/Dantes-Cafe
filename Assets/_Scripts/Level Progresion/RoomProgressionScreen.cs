@@ -12,6 +12,7 @@ public class RoomProgressionScreen : MonoBehaviour
     [SerializeField] TextMeshProUGUI _nextFloorText;
     [SerializeField] TextMeshProUGUI _currentFloorText;
     [SerializeField] TextMeshProUGUI _previousFloorText;
+    public TextMeshProUGUI WinText;
 
     [Header("Animation")]
     [SerializeField] float _fadeInDuration;
@@ -99,7 +100,13 @@ public class RoomProgressionScreen : MonoBehaviour
         //OnTransitionComplete?.Invoke();
         gameObject.SetActive(false);
         GameplayManager.Instance.StartRound();
-        
+    }
+
+    public void VictoryText()
+    {
+        gameObject.SetActive(true);
+        _textPanel.gameObject.SetActive(false);
+        WinText.gameObject.SetActive(true);
     }
 
 }

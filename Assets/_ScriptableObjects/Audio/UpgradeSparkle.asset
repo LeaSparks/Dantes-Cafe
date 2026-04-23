@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: UpgradeSparkle
   m_EditorClassIdentifier: Assembly-CSharp::SoundEffect
   <Clip>k__BackingField: {fileID: 8300000, guid: 475a2db3333b70643baf6c5ce324a376, type: 3}
-  <Volume>k__BackingField: 0.897
+  <Volume>k__BackingField: 0.477
   <Pitch>k__BackingField: 1
   <Loop>k__BackingField: 0

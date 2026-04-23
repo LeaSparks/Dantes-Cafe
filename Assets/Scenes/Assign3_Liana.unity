@@ -10758,6 +10758,7 @@ MonoBehaviour:
   _drawOrigin: {fileID: 0}
   _onDrawSFX: {fileID: 0}
   _onShuffleSFX: {fileID: 0}
+  _onUpgradedSFX: {fileID: 0}
 --- !u!114 &750388253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32509,6 +32510,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4885121808673045077, guid: 38cd0af3eeff26d4a99f6593eb6dc215, type: 3}
+      propertyPath: _onUpgradedSFX
+      value: 
+      objectReference: {fileID: 11400000, guid: 2467afa3faf05784a978d7d70363c869, type: 2}
     - target: {fileID: 8776739970357374116, guid: 38cd0af3eeff26d4a99f6593eb6dc215, type: 3}
       propertyPath: m_Name
       value: '[ Card Management ]'

@@ -1,7 +1,6 @@
 
 using System;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -35,6 +34,9 @@ public class ProgressionController : Singleton<ProgressionController>
         if (Keyboard.current.pageUpKey.wasPressedThisFrame)
         {
             OnRoomComplete();
+        } else if (Keyboard.current.pageDownKey.wasPressedThisFrame)
+        {
+            OnRoomFailed();
         }
     }
     public override void Awake()
@@ -109,7 +111,8 @@ public class ProgressionController : Singleton<ProgressionController>
         Debug.Log($"[ProgressionController] Moving onto Next room");
         if(_roomIndex == RoomSequence.Count - 1)
         {
-            //TODO: WINNER !!
+            ProgressionUI.Instance.ProgressScreen?.VictoryText();
+
         } else 
         {
             _roomIndex++;
@@ -117,6 +120,9 @@ public class ProgressionController : Singleton<ProgressionController>
             {
                 _highestRoomReached++;
                 ProgressionUI.Instance.PerkPopup?.UpdateAndOpen(CardUpgradeChance + _cardUpgradeChanceIncrement, ScoreMultiplier + _scoreMultiplierIncrement);
+            } else
+            {
+                SetSceneData(RoomSequence[_roomIndex],TransitionType.Next);
             }
 
         }

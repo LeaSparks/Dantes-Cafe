@@ -17,6 +17,7 @@ public class Stack : CardDock
     //private bool _isOrdered = true;
     
     public UnityEvent<Stack, IngredientCardController> NewIngredientAdded;
+    public UnityEvent<Stack> IngredientRemoved;
     public Competitor Parent;
     public event Action OnActionTaken;
 
@@ -104,6 +105,7 @@ public class Stack : CardDock
         _requiredIngredients.Remove(card.GetCardData().ingredient);
         
         OnActionTaken?.Invoke();
+        IngredientRemoved?.Invoke(this);
     }
     #endregion
 

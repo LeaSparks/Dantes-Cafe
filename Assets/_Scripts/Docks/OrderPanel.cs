@@ -43,6 +43,7 @@ public class OrderPanel : MonoBehaviour
         _orders[index] = orderView;
 
         StartCoroutine(AnimateNewCard(index, orderView));
+        UpdateOrderIndicator(index, 0);
 
     }
 
@@ -93,5 +94,10 @@ public class OrderPanel : MonoBehaviour
         {
             CardManager.Instance.ReturnOrderCardToPool(card);
         }
+    }
+
+    public void UpdateOrderIndicator(int index, int score)
+    {
+        _orders[index].gameObject.GetComponentInChildren<ScoreBubble>()?.SetValue(score);
     }
 }
