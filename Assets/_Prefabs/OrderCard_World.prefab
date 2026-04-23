@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.07}
   m_SizeDelta: {x: 3.5, y: 4.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1447089857146884032
@@ -130,7 +130,7 @@ Transform:
   m_GameObject: {fileID: 3691976435748938802}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.04, y: -0.091, z: -0}
+  m_LocalPosition: {x: 0.04, y: -0.17, z: -0}
   m_LocalScale: {x: 0.25, y: 0.23759176, z: 0.25}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -236,7 +236,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
+  m_LocalScale: {x: 0.139, y: 0.139, z: 0.139}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2148620351371553921}
@@ -290,8 +290,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8ac8f3fed598ec94caba16f6bad0b56b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 241938aa845fca349881d974f427db6b, type: 3}
+  m_Color: {r: 0.76729554, g: 0.76729554, b: 0.76729554, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -349,7 +349,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.32, y: -0.25}
+  m_AnchoredPosition: {x: 0.68, y: -0.6}
   m_SizeDelta: {x: 2.3, y: 0.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4995837693680332638
@@ -446,7 +446,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -0.58158875, y: 0, z: 0.09931946, w: 0}
+  m_margin: {x: -1.1146911, y: -0.061998695, z: 0.09931946, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -566,7 +566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9221546090077016823, guid: ee0d112d718a71b428d6d19e006505be, type: 3}
       propertyPath: currentValue
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
