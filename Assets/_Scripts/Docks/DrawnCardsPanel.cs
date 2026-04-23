@@ -27,7 +27,7 @@ public class DrawnCardsPanel : MonoBehaviour
         //gameObject.SetActive(false);
         foreach (var card in _ingredientCards)
         {
-            card.OnClicked.AddListener(() =>  MoveToHand(card, GameplayManager.Instance.Player.Hand, 1f));
+            card.OnClicked.AddListener(() =>  MoveToHand(card, GameplayManager.Instance.Player.Hand, 1f, false));
             card.OnClicked.AddListener(() =>  GameplayManager.Instance.ChangeCameraToView(0));
         }
     }
@@ -82,7 +82,7 @@ public class DrawnCardsPanel : MonoBehaviour
     }
     
 
-    public void MoveToHand(IngredientCardController card, Hand targetHand, float duration)
+    public void MoveToHand(IngredientCardController card, Hand targetHand, float duration, bool isEnemy)
     {
         SetSelectionInteractability(false);
 
@@ -92,7 +92,10 @@ public class DrawnCardsPanel : MonoBehaviour
         newCard.transform.localScale = card.transform.localScale;
 
         //var data = newCard.GetComponent<>
-        newCard.GetComponent<IngredientCardController>().SetCardData(card.Data);
+        var controller = newCard.GetComponent<IngredientCardController>();
+        controller.SetCardData(card.Data);
+        controller.IsClickable = !isEnemy;
+        controller.IsDraggable = !isEnemy;
 
         card.gameObject.SetActive(false);   //So that the player/enemy cannot select this one until it resets
         

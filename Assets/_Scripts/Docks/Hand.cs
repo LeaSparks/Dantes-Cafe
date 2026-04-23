@@ -46,6 +46,7 @@ public class Hand : CardDock
             droppedCard.LastDock?.RemoveCardFromCollection(droppedCard);
 
             AddCardToCollection(droppedCard);
+            droppedCard.OutlineVisual.Hide();
         } 
     }
     

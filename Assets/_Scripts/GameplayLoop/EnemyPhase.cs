@@ -36,7 +36,7 @@ public class EnemyPhase : IState
         
         CardManager.Instance.OnCardReachedTarget.AddListener(OnCardReachedHand);
 
-        GameplayManager.Instance.DrawPanel.MoveToHand(card, GameplayManager.Instance.Enemy.Hand, 1f);
+        GameplayManager.Instance.DrawPanel.MoveToHand(card, GameplayManager.Instance.Enemy.Hand, 1f, true);
         GameplayManager.Instance.ChangeCameraToView(2);
     }
 

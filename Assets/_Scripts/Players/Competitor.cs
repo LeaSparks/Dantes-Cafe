@@ -59,7 +59,7 @@ public abstract class Competitor : MonoBehaviour
                     HideAllHighlights(stack);
 
 
-                } else
+                } else if(isInOrder)
                 {
                     stackList[i].OutlineVisual.ShowValid();
                 }
