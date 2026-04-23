@@ -17,6 +17,9 @@ public class WorldspaceCharacterController : MonoBehaviour
 
     [Header("Character")]
     public CharacterData currentCharacter;
+    
+    [Header("Startup")]
+    public float initialDialogueDelay = 2f;
 
     [Header("Breathing")]
     public float breatheSpeed = 2f;
@@ -93,6 +96,7 @@ public class WorldspaceCharacterController : MonoBehaviour
             Debug.LogWarning("Enter Play Mode first.");
     }
 
+
     public void ApplyCharacter(CharacterData newCharacter)
     {
         if (newCharacter == null) return;
@@ -105,12 +109,22 @@ public class WorldspaceCharacterController : MonoBehaviour
             StartCoroutine(BounceSprite(currentCharacter.sprites[Random.Range(0, currentCharacter.sprites.Count)]));
 
         if (currentCharacter.dialogueLines.Count > 0)
-            PlayDialogue(0);
+            StartCoroutine(InitialDialogueDelay());
 
         StartCoroutine(DialogueLoop());
         StartCoroutine(SpriteLoop());
     }
 
+    IEnumerator InitialDialogueDelay()
+    {
+        yield return new WaitForSeconds(initialDialogueDelay);
+
+        if (isEnding) yield break;
+
+        PlayDialogue(0);
+    }
+
+    
     void FaceCamera()
     {
         if (!playerCamera) return;
@@ -130,6 +144,7 @@ public class WorldspaceCharacterController : MonoBehaviour
         characterImage.localPosition = basePos + new Vector3(0, floatY, 0);
     }
 
+    
     IEnumerator SpriteLoop()
     {
         while (!isEnding)
@@ -173,6 +188,7 @@ public class WorldspaceCharacterController : MonoBehaviour
         isBouncing = false;
     }
 
+    
     IEnumerator DialogueLoop()
     {
         yield return new WaitForSeconds(Random.Range(dialogueInterval.x, dialogueInterval.y));
@@ -239,8 +255,9 @@ public class WorldspaceCharacterController : MonoBehaviour
         dialogueCanvasGroup.alpha = 0;
     }
 
-    // END SEQUENCE HERE THIS IS THE THING TO TRIGGER LIANA <3
-  
+
+    // END SEQUENCE HERE
+ 
     public void PlayEndSequence()
     {
         StopAllCoroutines();
