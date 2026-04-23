@@ -12,7 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fb10d29807fb064d95a19b82023691b, type: 3}
   m_Name: Goober
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
-  characterName: 
-  sprites: []
-  dialogueLines: []
-  blipSound: {fileID: 0}
+  characterName: Goober
+  sprites:
+  - {fileID: 2060744788, guid: 6e1a8ed7bfde2b54c9f7c8e4bb9a8f8b, type: 3}
+  - {fileID: 177573770, guid: 6e1a8ed7bfde2b54c9f7c8e4bb9a8f8b, type: 3}
+  - {fileID: 1674382336, guid: 6e1a8ed7bfde2b54c9f7c8e4bb9a8f8b, type: 3}
+  - {fileID: 756953503, guid: 6e1a8ed7bfde2b54c9f7c8e4bb9a8f8b, type: 3}
+  - {fileID: -708504714, guid: 6e1a8ed7bfde2b54c9f7c8e4bb9a8f8b, type: 3}
+  dialogueLines:
+  - You really thought YOU could stand a chance against mwah?
+  - Total Misplay.
+  - Your choice.
+  - Wow... seriously?
+  - This spot... You sure?
+  - Bad play.
+  - Nice topdeck.
+  - Lucky draw
+  - Huh? Hey, stop!
+  - OK...
+  - You sure?
+  - Enough!
+  - Stop that!
+  - Ack!
+  - Oh come on!
+  - Again?
+  blipSound: {fileID: 8300000, guid: 651ef6cbece067944a841d2ac318bbdd, type: 3}
+  finalDialogue: Bad... play...
+  finalTextSpeed: 0.06
+  finalPitch: 0.7
