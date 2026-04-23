@@ -11,7 +11,7 @@ public class PlayerPhase : IState
         _cardChosen = false;
        
         GameplayManager.Instance.DrawPanel.UpdateDrawPanel();
-        GameplayManager.Instance.ChangeCameraToView(3);
+        GameplayManager.Instance.ChangeCameraToView(0);
 
         CardManager.Instance.OnCardReachedTarget.AddListener(ActionPhaseStart);
 

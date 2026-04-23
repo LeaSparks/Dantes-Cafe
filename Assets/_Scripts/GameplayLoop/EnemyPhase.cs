@@ -13,7 +13,7 @@ public class EnemyPhase : IState
     public void Enter()
     {
         GameplayManager.Instance.DrawPanel.UpdateDrawPanel();
-        GameplayManager.Instance.ChangeCameraToView(3);
+        GameplayManager.Instance.ChangeCameraToView(1);
        
 
         /*
@@ -37,7 +37,7 @@ public class EnemyPhase : IState
         CardManager.Instance.OnCardReachedTarget.AddListener(OnCardReachedHand);
 
         GameplayManager.Instance.DrawPanel.MoveToHand(card, GameplayManager.Instance.Enemy.Hand, 1f, true);
-        GameplayManager.Instance.ChangeCameraToView(2);
+        //GameplayManager.Instance.ChangeCameraToView(1);
     }
 
     private float GetRandomDelay()
