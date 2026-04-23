@@ -39,4 +39,21 @@ public class CardDatabase : Singleton<CardDatabase>
                 return 0;
         }
     }
+
+    public static CardType GetUpgradedType(CardData data)
+    {
+        switch (data.type)
+        {
+            case CardType.Rotten:
+                return CardType.Basic;
+            case CardType.Basic:
+                return CardType.Silver;
+            case CardType.Silver:
+                return CardType.Gold;
+            case CardType.Gold:
+                return CardType.Diamond;
+            default:
+                return data.type;
+        }
+    }
 }

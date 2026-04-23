@@ -66,6 +66,9 @@ public class GameplayManager : Singleton<GameplayManager>
     }
     public void StartRound()
     {
+        _player.SetScore(0);
+        _enemy.SetScore(0);
+        
         for(int i = 0; i < 3; i++)
             AssignOrderToStacks(i);
             ChangeState(_drawPhase);

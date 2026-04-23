@@ -162,6 +162,7 @@ public abstract class Competitor : MonoBehaviour
     public void SetScore(int score)
     {
         _score = score;
+        _scoreText.text = $"Score: {_score} / {ProgressionController.Instance.CurrentRoomData.PointsToWin}";
     }
 
     public void ClearAllStacks()

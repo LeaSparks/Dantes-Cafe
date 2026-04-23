@@ -11,6 +11,7 @@ public class DrawnCardsPanel : MonoBehaviour
     
     [SerializeField]  SoundEffect _onDrawSFX;
     [SerializeField]  SoundEffect _onShuffleSFX;
+    [SerializeField]  SoundEffect _onUpgradedSFX;
 
     public int DrawnCardsAmount => _ingredientCards.Count;
 
@@ -100,6 +101,23 @@ public class DrawnCardsPanel : MonoBehaviour
         card.gameObject.SetActive(false);   //So that the player/enemy cannot select this one until it resets
         
         CardManager.Instance.AnimateMoveCardToDock(newCard, targetHand, null, duration);
+
+        //RandomUpgrade chance;
+        if (!isEnemy)
+        {
+            if(UnityEngine.Random.Range(0f, 1) <= ProgressionController.Instance.CardUpgradeChance)
+            {
+                CardData newData = card.Data;
+                var type = CardDatabase.GetUpgradedType(newData);
+                if(newData.type != type)
+                {
+                    newData.type = type;
+                    controller.SetCardData(newData);
+                    AudioManager.Instance.PlaySFX(_onUpgradedSFX);
+                    return;
+                }
+            }
+        }
         AudioManager.Instance.PlaySFX(_onDrawSFX);
 
     }
