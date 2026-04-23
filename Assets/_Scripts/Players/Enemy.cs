@@ -170,4 +170,9 @@ public class Enemy : Competitor
 
         _validActions = _validActions.Where(c => c.Item3 >= topScore * _choiceThreshold).ToList();
     }
+
+    public void SetAIThreshold(float newThreshold)
+    {
+        _choiceThreshold = Mathf.Clamp(newThreshold, 0, 1);
+    }
 }

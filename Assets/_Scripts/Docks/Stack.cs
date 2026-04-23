@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Unity.VisualScripting;
 
 public class Stack : CardDock
 {
@@ -13,9 +14,11 @@ public class Stack : CardDock
     [SerializeField] private Stack<IngredientCardController> _cards = new();
     private OrderCardData _associatedOrder;
     private List<CardIngredient> _requiredIngredients = new();
-    private bool _isOrdered = true;
+    //private bool _isOrdered = true;
     
     public UnityEvent<Stack, IngredientCardController> NewIngredientAdded;
+    public UnityEvent<Stack> IngredientRemoved;
+    public Competitor Parent;
     public event Action OnActionTaken;
 
     void OnDestroy()
@@ -32,6 +35,11 @@ public class Stack : CardDock
     {
         droppedCard.LastDock?.RemoveCardFromCollection(droppedCard);
         AddCardToCollection(droppedCard);
+
+        if(droppedCard.GetCardData().type == CardType.Burning && Parent.UsedBurnCards.Contains(droppedCard.gameObject) == false)
+        {
+            UseBurnCard(droppedCard.gameObject);    
+        }
     }
 
     public override void RefreshCardPositions()
@@ -95,7 +103,9 @@ public class Stack : CardDock
         }
         RefreshCardPositions();
         _requiredIngredients.Remove(card.GetCardData().ingredient);
+        
         OnActionTaken?.Invoke();
+        IngredientRemoved?.Invoke(this);
     }
     #endregion
 
@@ -173,6 +183,32 @@ public class Stack : CardDock
 
         return IsOrdered() && card.ingredient == _associatedOrder.IngredientList[_cards.Count];
     } 
+
+    private void UseBurnCard(GameObject card)
+    {
+        Parent.UsedBurnCards.Add(card);
+        int index = Parent._stacks.IndexOf(this);
+        var opposingStack = (Parent is Player) ? 
+            GameplayManager.Instance.Enemy.GetStackAtIndex(index) :
+            GameplayManager.Instance.Player.GetStackAtIndex(index);
+        
+        opposingStack.AnimateSingleDiscard(0.5f);
+        AudioManager.Instance.PlaySFX(GameplayManager.Instance.FireSFX);
+    }
+
+    public void AnimateSingleDiscard(float animTime)
+    {
+        if(_cards.Count <= 0) return;
+        var card = _cards.Peek();
+        card.IsClickable = false;
+        card.IsDraggable = false;
+        card.OutlineVisual.Hide();
+
+        if(card.GetCardData().type == CardType.Burning)
+            Parent.UsedBurnCards.Remove(card.gameObject);
+
+        CardManager.Instance.AnimateMoveCardToDock(card.gameObject, GameplayManager.Instance.DiscardPile, null, animTime);
+    }
 
     public Stack<IngredientCardController> Cards => _cards;
     public List<CardIngredient> RequiredIngredients => _requiredIngredients;

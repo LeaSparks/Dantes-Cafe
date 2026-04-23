@@ -11,6 +11,7 @@ public class DrawnCardsPanel : MonoBehaviour
     
     [SerializeField]  SoundEffect _onDrawSFX;
     [SerializeField]  SoundEffect _onShuffleSFX;
+    [SerializeField]  SoundEffect _onUpgradedSFX;
 
     public int DrawnCardsAmount => _ingredientCards.Count;
 
@@ -27,7 +28,7 @@ public class DrawnCardsPanel : MonoBehaviour
         //gameObject.SetActive(false);
         foreach (var card in _ingredientCards)
         {
-            card.OnClicked.AddListener(() =>  MoveToHand(card, GameplayManager.Instance.Player.Hand, 1f));
+            card.OnClicked.AddListener(() =>  MoveToHand(card, GameplayManager.Instance.Player.Hand, 1f, false));
             card.OnClicked.AddListener(() =>  GameplayManager.Instance.ChangeCameraToView(0));
         }
     }
@@ -82,7 +83,7 @@ public class DrawnCardsPanel : MonoBehaviour
     }
     
 
-    public void MoveToHand(IngredientCardController card, Hand targetHand, float duration)
+    public void MoveToHand(IngredientCardController card, Hand targetHand, float duration, bool isEnemy)
     {
         SetSelectionInteractability(false);
 
@@ -92,11 +93,31 @@ public class DrawnCardsPanel : MonoBehaviour
         newCard.transform.localScale = card.transform.localScale;
 
         //var data = newCard.GetComponent<>
-        newCard.GetComponent<IngredientCardController>().SetCardData(card.Data);
+        var controller = newCard.GetComponent<IngredientCardController>();
+        controller.SetCardData(card.Data);
+        controller.IsClickable = !isEnemy;
+        controller.IsDraggable = !isEnemy;
 
         card.gameObject.SetActive(false);   //So that the player/enemy cannot select this one until it resets
         
         CardManager.Instance.AnimateMoveCardToDock(newCard, targetHand, null, duration);
+
+        //RandomUpgrade chance;
+        if (!isEnemy)
+        {
+            if(UnityEngine.Random.Range(0f, 1) <= ProgressionController.Instance.CardUpgradeChance)
+            {
+                CardData newData = card.Data;
+                var type = CardDatabase.GetUpgradedType(newData);
+                if(newData.type != type)
+                {
+                    newData.type = type;
+                    controller.SetCardData(newData);
+                    AudioManager.Instance.PlaySFX(_onUpgradedSFX);
+                    return;
+                }
+            }
+        }
         AudioManager.Instance.PlaySFX(_onDrawSFX);
 
     }
@@ -135,5 +156,11 @@ public class DrawnCardsPanel : MonoBehaviour
             card.IsClickable = isInteractable;
             card.IsDraggable = isInteractable;
         }
+    }
+
+    public void ClearCards()
+    {
+        foreach(var card in _ingredientCards)
+            CardManager.Instance.ReturnIngredientCardToPool(card);
     }
 }

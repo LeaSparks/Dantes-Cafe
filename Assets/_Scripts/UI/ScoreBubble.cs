@@ -5,8 +5,8 @@ using TMPro;
 public class ScoreBubble : MonoBehaviour
 {
     [Header("Value Settings")]
-    public float minValue = -9f;
-    public float maxValue = 36f;
+    public int minValue = -9;
+    public int maxValue = 36;
     
     [Range(6f, 36f)]
     [SerializeField] private float currentValue = 0f;
@@ -38,7 +38,7 @@ public class ScoreBubble : MonoBehaviour
         UpdateVisuals(currentValue);
     }
 
-    public void SetValue(float value)
+    public void SetValue(int value)
     {
         currentValue = Mathf.Clamp(value, minValue, maxValue);
         UpdateVisuals(currentValue);

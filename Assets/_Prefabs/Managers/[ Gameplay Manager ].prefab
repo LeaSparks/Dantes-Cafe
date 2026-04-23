@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a6bee59225cf442955653e6a112b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameplayManager
+  ShouldDieOnReload: 1
   RemainingOrders: 0
   _player: {fileID: 0}
   _enemy: {fileID: 0}
@@ -178,6 +179,7 @@ MonoBehaviour:
   Camera: {fileID: 0}
   _infoText: {fileID: 0}
   _discardPile: {fileID: 3466431482454231275}
+  FireSFX: {fileID: 11400000, guid: a98b5eb76e087244e8a3dcafc603d2f4, type: 2}
 --- !u!1 &5053044137596278993
 GameObject:
   m_ObjectHideFlags: 0

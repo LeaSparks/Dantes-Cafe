@@ -9,7 +9,9 @@ public class CardDatabase : Singleton<CardDatabase>
 
     public CardTypeData GetTypeData(CardType type)
     {
-        return typeData.Find(t => t.type == type);
+        var found = typeData.Find(t => t.type == type);
+        if(found == null) Debug.Log($"COULD NOT FIND TYPE DATA FOR TYPE {type}!!");
+        return found;
     }
 
     public CardIngredientData GetIngredientData(CardIngredient ingredient)
@@ -35,6 +37,23 @@ public class CardDatabase : Singleton<CardDatabase>
                 return 0.75f;
             default:
                 return 0;
+        }
+    }
+
+    public static CardType GetUpgradedType(CardData data)
+    {
+        switch (data.type)
+        {
+            case CardType.Rotten:
+                return CardType.Basic;
+            case CardType.Basic:
+                return CardType.Silver;
+            case CardType.Silver:
+                return CardType.Gold;
+            case CardType.Gold:
+                return CardType.Diamond;
+            default:
+                return data.type;
         }
     }
 }

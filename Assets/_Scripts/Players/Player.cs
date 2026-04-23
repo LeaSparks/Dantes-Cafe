@@ -18,7 +18,9 @@ public class Player : Competitor
         SetDoneButtonVisibility(false);
         
         foreach(var stack in _stacks)
+        {
             stack.OnActionTaken += ActionTaken;
+        }
         _hand.OnActionTaken += ActionTaken;
     }
 

@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameplayManager : Singleton<GameplayManager>
 {
     public static int IN_ORDER_MODIFIER = 3;
-    public static int WINNING_SCORE = 10;
+    //public static int WINNING_SCORE = 10;
     public int RemainingOrders;
 
     private IState _currentState;
@@ -20,6 +20,7 @@ public class GameplayManager : Singleton<GameplayManager>
     [Header("Decks")]
     [SerializeField] private List<CardData> _ingredientsDeck = new();
     private List<CardData> _backupDeck;         //THIS IS FOR TESTING
+    private List<OrderCardData> _orderBackup;         //THIS IS FOR TESTING
     [SerializeField] private List<OrderCardData> _orderDeck = new();
     //private List<CardData> _ingredientsDiscard = new();
 
@@ -32,6 +33,10 @@ public class GameplayManager : Singleton<GameplayManager>
     [SerializeField] TextMeshProUGUI _infoText;
     [SerializeField] DiscardPile _discardPile;
 
+    [Header("Sounds Effects that also shouldnt be here")]
+    public SoundEffect FireSFX;
+
+    private bool _roundOver = false;
 
     //States
     private DrawPhase _drawPhase = new DrawPhase();
@@ -54,12 +59,19 @@ public class GameplayManager : Singleton<GameplayManager>
         _turnController = gameObject.GetComponent<TurnController>();
 
         _backupDeck = new List<CardData>(_ingredientsDeck);
+        _orderBackup = new List<OrderCardData>(_orderDeck);
         RemainingOrders = _orderDeck.Count;
 
+        //StartRound();
+    }
+    public void StartRound()
+    {
+        _player.SetScore(0);
+        _enemy.SetScore(0);
+        
         for(int i = 0; i < 3; i++)
             AssignOrderToStacks(i);
-
-        ChangeState(_drawPhase);
+            ChangeState(_drawPhase);
     }
 
     void Update()
@@ -67,8 +79,28 @@ public class GameplayManager : Singleton<GameplayManager>
         _currentState?.Update();
     }
 
+    public void ResetScene()
+    {
+        _player.SetScore(0);
+        _enemy.SetScore(0);
+        
+        _player.ClearAllStacks();
+        _enemy.ClearAllStacks();
+
+        _ingredientsDeck.Clear();
+        _ingredientsDeck = _backupDeck;
+        _orderDeck.Clear();
+        _orderDeck = _orderBackup;
+
+        _drawPhasePanel.ClearCards();
+        _orderPanel.ClearOrderCards();
+        _discardPile.ClearPile();
+
+    }
+
     public void ChangeState(IState state)
     {
+        if(_roundOver) return;
         Debug.Log($"Changing to phase: {state}");
         _currentState?.Exit();
         _currentState = state;
@@ -147,16 +179,20 @@ public class GameplayManager : Singleton<GameplayManager>
 
     #endregion
 
-    public void GameOver()
+    public void GameOver(bool playerWon)
     {
-        if(Player.Score > Enemy.Score)
+        _roundOver = true;
+        if(playerWon)
         {
             //PLayer wins, show win screen
-            Debug.Log("CONGRATULATIONS, YOU WON!");
+            //Debug.Log("CONGRATULATIONS, YOU WON!");
+            ProgressionController.Instance.OnRoomComplete();
+
         } else
         {
             //Enemy wins, show lose screen
-            Debug.Log("YOU LOST!");
+            //Debug.Log("YOU LOST!");
+            ProgressionController.Instance.OnRoomFailed();
         }
     }
 
